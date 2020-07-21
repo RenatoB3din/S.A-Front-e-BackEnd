@@ -1,0 +1,98 @@
+.novofornecedor-container {
+    width: 100%;
+    max-width: 1120px;
+    height: 100vh;
+    margin: 20px auto;
+}
+
+.novofornecedor-container .content {
+    width: 100%;
+    padding: 96px;
+    padding-top: 30px;
+    background: #f0f0f5;
+    box-shadow: 0 0 100px rgba(0,0,0, 0.1);
+    border-radius: 8px;
+    display: flex;
+}
+
+
+.novofornecedor-container .content section {
+    width: 100%;
+}
+
+.novofornecedor-container .content section h1 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-size: 32px;
+}
+
+.novofornecedor-container .content form, fieldset {
+    width: 100%;
+}
+
+.novofornecedor-container .content input, select, textarea {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.novofornecedor-container .content form .input-group{
+    display: flex;
+    width: 100%;
+}
+
+.novofornecedor-container .content form .input-group input + input{
+    margin-left: 8px
+}
+
+.novofornecedor-container .content form .input-group fieldset + fieldset{
+    margin-left: 8px
+}
+
+.novofornecedor-container .content form .input-group fieldset + fieldset + fieldset{
+    margin-left: 8px
+}
+
+.novofornecedor-container .content form .input-group fieldset{
+    border: 0;
+    margin-left: 8px;
+}
+
+.novofornecedor-container .content form .operacaoProduto{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.novofornecedor-container .content form .operacaoProduto button{
+    height: 40px;
+    margin-left: 8px;
+}
+
+.novofornecedor-container .content form fieldset{
+    border: 0;
+    margin-left: 8px;
+}
+
+h2 {
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+
+#btn_cep {
+    margin-top: 31px;
+    height: 47px;
+    width: 48px;
+    border-radius: 6px;
+    /* background-color: rgb(247, 245, 245); */
+    background-image: url(https://icon-icons.com/icons2/37/PNG/48/Search_find_4120.png);
+
+}
+
+#btn_cep:hover {
+    transition: 0.5s;
+    filter: brightness(70%);
+    margin-top: 33px;
+}
+
