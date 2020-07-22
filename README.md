@@ -6,7 +6,7 @@ USE sa_salesinventory_hmlg;
 <h6>OBS.: INSERIR SOMENTE APÓS RODAR O PROJETO</h6>
 INSERT INTO role(name) VALUES('ROLE_SALLESMAN');</br>
 INSERT INTO role(name) VALUES('ROLE_MANAGER');</br>
-INSERT INTO role(name) VALUES('ROLE_AuserDMIN');</br>
+INSERT INTO role(name) VALUES('ROLE_userADMIN');</br>
 
 
 <h5>#MODELO JSON</h5>
