@@ -11,14 +11,14 @@ INSERT INTO role(name) VALUES('ROLE_userADMIN');</br>
 
 <h5>#MODELO JSON</h5>
 
-CRIAR UM USUÁRIO >>  http://localhost:8080/api/users</br>
+CADASTRAR UM USUÁRIO >>  http://localhost:8080/api/auth/signup</br>
 
 {</br>
-	&emsp;&emsp;"nome":"NATO MO QUERIDO",</br>
-	&emsp;&emsp;"cpf": "99234567800",</br>
-	&emsp;&emsp;"login":"natao",</br>
-	&emsp;&emsp;"senha":"moquerido",</br>
-	&emsp;&emsp;"email":"nato@moquerido.CM.BR",</br>
-	&emsp;&emsp;"cargo":"donodaporratoda"</br>
+	&emsp;&emsp;"name":"Renato Bedin",</br>
+	&emsp;&emsp;"username": "rb3din",</br>
+	&emsp;&emsp;"email":"renatob3din@gmail.com",</br>
+	&emsp;&emsp;"password":"123456",</br>
+	&emsp;&emsp;"cpf":"10000778672",</br>
+	&emsp;&emsp;"role":["admin"]</br> // ["manager"] // ["diferenteDosDoisPrimerios"] = Perfil de usuário 
 }
 </p>
