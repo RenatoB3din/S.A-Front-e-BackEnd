@@ -25,6 +25,18 @@ public class SignupRequest {
     @Size(min = 4, max = 16)
     private String password;
 
+    @NotBlank
+    @Size(min = 4, max = 11)
+    private String cpf;
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getName() {
         return name;
     }

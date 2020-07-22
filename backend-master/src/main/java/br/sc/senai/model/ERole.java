@@ -3,5 +3,5 @@ package br.sc.senai.model;
 public enum ERole {
     ROLE_SALLESMAN,
     ROLE_MANAGER,
-    ROLE_ADMIN
+    ROLE_userADMIN
 }

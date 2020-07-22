@@ -46,11 +46,12 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String password, String name) {
+    public User(String username, String email, String password, String name, String cpf) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.name = name;
+        this.cpf = cpf;
     }
 
     public Integer getId() {
