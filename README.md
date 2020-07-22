@@ -14,11 +14,11 @@ INSERT INTO role(name) VALUES('ROLE_userADMIN');</br>
 CADASTRAR UM USUÁRIO >>  http://localhost:8080/api/auth/signup</br>
 
 {</br>
-	&emsp;&emsp;"name":"Renato Bedin",</br>
+	&emsp;&emsp;"name": "Renato Bedin",</br>
 	&emsp;&emsp;"username": "rb3din",</br>
-	&emsp;&emsp;"email":"renatob3din@gmail.com",</br>
-	&emsp;&emsp;"password":"123456",</br>
-	&emsp;&emsp;"cpf":"10000778672",</br>
-	&emsp;&emsp;"role":["admin"] // ["manager"] // ["diferenteDosDoisPrimerios"] = Perfil de usuário </br>
+	&emsp;&emsp;"email": "renatob3din@gmail.com",</br>
+	&emsp;&emsp;"password": "123456",</br>
+	&emsp;&emsp;"cpf": "10000778672",</br>
+	&emsp;&emsp;"role": ["admin"] // ["manager"] // ["diferenteDosDoisPrimerios"] = Perfil de usuário </br>
 }
 </p>
