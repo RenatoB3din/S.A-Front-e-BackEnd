@@ -25,13 +25,13 @@ CADASTRAR UM USUÁRIO >>  http://localhost:8080/api/auth/signup</br>
 
 
 <h5>#FRONTEND</h5>
-Logo ao clonar o projeto, dentro da pasta do frontend rodar o seguinte comando no terminal: </br>
+<h6>Logo ao clonar o projeto, dentro da pasta do frontend rodar o seguinte comando no terminal:</h6> </br>
 " npm install (--save "opcional") " </br></br>
 
-subir o projeto: </br>
+<h6>subir o projeto:</h6> </br>
 " npm start "</br>
 
-rotas: </br>
+<h6>rotas:</h6> </br>
 /                     [login]</br>
 /register             [cadastro usuário]</br>
 /novoproduto          [cadastro produto]</br>
