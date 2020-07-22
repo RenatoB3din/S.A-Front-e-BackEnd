@@ -19,6 +19,6 @@ CADASTRAR UM USUÁRIO >>  http://localhost:8080/api/auth/signup</br>
 	&emsp;&emsp;"email":"renatob3din@gmail.com",</br>
 	&emsp;&emsp;"password":"123456",</br>
 	&emsp;&emsp;"cpf":"10000778672",</br>
-	&emsp;&emsp;"role":["admin"]</br> // ["manager"] // ["diferenteDosDoisPrimerios"] = Perfil de usuário 
+	&emsp;&emsp;"role":["admin"] // ["manager"] // ["diferenteDosDoisPrimerios"] = Perfil de usuário </br>
 }
 </p>
