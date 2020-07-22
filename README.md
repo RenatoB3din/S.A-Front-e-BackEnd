@@ -11,7 +11,7 @@ INSERT INTO role(name) VALUES('ROLE_AuserDMIN');</br>
 
 <h5>#MODELO JSON</h5>
 
-POST >>  http://localhost:8080/api/users</br>
+CRIAR UM USUÁRIO >>  http://localhost:8080/api/users</br>
 
 {</br>
 	&emsp;&emsp;"nome":"NATO MO QUERIDO",</br>
