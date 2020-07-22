@@ -23,6 +23,14 @@ CADASTRAR UM USUÁRIO >>  http://localhost:8080/api/auth/signup</br>
 }
 </p>
 
+LOGIN >>  http://localhost:8080/api/auth/sigin</br>
+
+{</br>
+	&emsp;&emsp;"username": "rb3din",</br>
+	&emsp;&emsp;"password": "123456",</br>
+}
+</p>
+
 
 <h5>#FRONTEND</h5>
 <h6>Ao clonar o projeto, inserir no terminal:</h6> 
