@@ -22,3 +22,18 @@ CADASTRAR UM USUÁRIO >>  http://localhost:8080/api/auth/signup</br>
 	&emsp;&emsp;"role": ["admin"] // ["manager"] // ["diferenteDosDoisPrimerios"] = Perfil de usuário </br>
 }
 </p>
+
+
+<h5>#FRONTEND</h5>
+Logo ao clonar o projeto, dentro da pasta do frontend rodar o seguinte comando no terminal: 
+- npm install (--save "opcional")
+
+subir o projeto: 
+- npm start
+
+rotas: 
+/                     [login]
+/register             [cadastro usuário]
+/novoproduto          [cadastro produto]
+/novofornecedor       [cadastro fornecedor]
+/newinventory         [movimentação de inventário]
