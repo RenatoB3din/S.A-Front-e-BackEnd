@@ -26,10 +26,10 @@ CADASTRAR UM USUÁRIO >>  http://localhost:8080/api/auth/signup</br>
 
 <h5>#FRONTEND</h5>
 Logo ao clonar o projeto, dentro da pasta do frontend rodar o seguinte comando no terminal: </br>
-- npm install (--save "opcional")
+- npm install (--save "opcional") </br>
 
 subir o projeto: </br>
-- npm start
+- npm start >/br>
 
 rotas: </br>
 /                     [login]</br>
