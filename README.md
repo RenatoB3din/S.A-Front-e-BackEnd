@@ -1,12 +1,17 @@
-#SCRIPT BANCO DE DADOS
-
-CREATE DATABASE sa_salesinventory_hmlg;
-
+<h3>#SCRIPT BANCO DE DADOS</h3>
+<h5>#CRIAR E COLOCAR EM USO O BANCO DE DADOS</h5>
+CREATE DATABASE sa_salesinventory_hmlg;</br>
 USE sa_salesinventory_hmlg;
+<h5>#INSERIR ROLES NO BANCO DE DADOS</h5>
+<h6>OBS.: INSERIR SOMENTE APÓS RODAR O PROJETO</h6>
+INSERT INTO role(name) VALUES('ROLE_SALLESMAN');</br>
+INSERT INTO role(name) VALUES('ROLE_MANAGER');</br>
+INSERT INTO role(name) VALUES('ROLE_AuserDMIN');</br>
+
 
 #MODELO JSON
 
-POST >>  http://localhost:8080/usuario
+POST >>  http://localhost:8080/api/users
 
 {
 	"nome":"NATO MO QUERIDO",
