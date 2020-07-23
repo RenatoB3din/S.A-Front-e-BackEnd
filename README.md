@@ -21,30 +21,33 @@ CADASTRAR UM USUÁRIO >>  http://localhost:8080/api/auth/signup</br>
 	&emsp;&emsp;"cpf": "10000778672",</br>
 	&emsp;&emsp;"role": ["admin"] // ["manager"] // ["diferenteDosDoisPrimerios"] = Perfil de usuário </br>
 }
-</p>
+
 
 LOGIN >>  http://localhost:8080/api/auth/sigin</br>
 
 {</br>
 	&emsp;&emsp;"username": "rb3din",</br>
 	&emsp;&emsp;"password": "123456",</br>
-}
-</p>
+}</br>
 
-{
-	"nomeFantasia":"nomeFantasia",
-	"razaoSocial":"razaoSocial",
-	"cnpj":"cnpj",
-	"enderecos":[{
-			"cep":"cep",
-			"rua":"rua",
-			"numero":"numero",
-			"complemento":"complemento",
-			"bairro":"bairro",
-			"municipio":"municipio",
-			"uf":"uf"
-		}]
-}
+Fornecedor >> http://localhost:8080/provider/add </br>
+{</br>
+&emsp;&emsp"nomeFantasia":"nomeFantasia",</br>
+&emsp;&emsp"razaoSocial":"razaoSocial",</br>
+&emsp;&emsp"cnpj":"cnpj",</br>
+&emsp;&emsp"enderecos":[{</br>
+&emsp;&emsp&emsp;&emsp"cep":"cep",</br>
+&emsp;&emsp&emsp;&emsp"rua":"rua",</br>
+&emsp;&emsp&emsp;&emsp"numero":"numero",</br>
+&emsp;&emsp&emsp;&emsp"complemento":"complemento",</br>
+&emsp;&emsp&emsp;&emsp"bairro":"bairro",</br>
+&emsp;&emsp&emsp;&emsp"municipio":"municipio",</br>
+&emsp;&emsp&emsp;&emsp"uf":"uf"</br>
+&emsp;&emsp}]</br>
+}</br>
+
+
+</p>
 
 
 <h5>#FRONTEND</h5>
