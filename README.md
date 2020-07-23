@@ -31,6 +31,21 @@ LOGIN >>  http://localhost:8080/api/auth/sigin</br>
 }
 </p>
 
+{
+	"nomeFantasia":"nomeFantasia",
+	"razaoSocial":"razaoSocial",
+	"cnpj":"cnpj",
+	"enderecos":[{
+			"cep":"cep",
+			"rua":"rua",
+			"numero":"numero",
+			"complemento":"complemento",
+			"bairro":"bairro",
+			"municipio":"municipio",
+			"uf":"uf"
+		}]
+}
+
 
 <h5>#FRONTEND</h5>
 <h6>Ao clonar o projeto, inserir no terminal:</h6> 
