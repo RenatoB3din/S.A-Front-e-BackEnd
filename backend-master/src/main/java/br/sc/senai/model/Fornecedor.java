@@ -1,38 +1,43 @@
 package br.sc.senai.model;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "fornecedor")
+@Table(
+        name = "fornecedor",
+        uniqueConstraints = @UniqueConstraint(columnNames = "cnpj")
+)
 public class Fornecedor {
 
     @Id
     @Column(name = "id_fornecedor")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idFornecedor;
 
-    @Column(name = "razao_social", length = 150)
-    private String razaoSocial;
-
-    @Column(name = "nome_fantasia", length = 150)
+    @Column(name = "nome_fantasia")
     private String nomeFantasia;
 
-    @Column(name = "cpf_cnpj", length = 14)
+    @Column(name = "razao_social")
+    private String razaoSocial;
+
     private String cnpj;
 
-    @OneToMany(cascade = {CascadeType.ALL},
-            mappedBy = "fornecedorEndereco",
-            fetch = FetchType.LAZY)
-    private List<FornecedorEndereco> fornecedorEnderecos;
-
-    @OneToMany(cascade = {CascadeType.ALL},
-            mappedBy = "fornecedorContato",
-            fetch = FetchType.LAZY)
-    private List<FornecedorContato> fornecedorContatos;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "fornecedor_endereco",
+            joinColumns = @JoinColumn(name = "id_fornecedor"),
+            inverseJoinColumns = @JoinColumn(name = "id_endereco")
+    )
+    private Set<Endereco> enderecos;
 
     public Fornecedor() {
+    }
+
+    public Fornecedor(String nomeFantasia, String razaoSocial, String cnpj){
+        this.nomeFantasia = nomeFantasia;
+        this.razaoSocial = razaoSocial;
+        this.cnpj = cnpj;
     }
 
     public Integer getIdFornecedor() {
@@ -43,20 +48,20 @@ public class Fornecedor {
         this.idFornecedor = idFornecedor;
     }
 
-    public String getRazaoSocial() {
-        return razaoSocial;
-    }
-
-    public void setRazaoSocial(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
-    }
-
     public String getNomeFantasia() {
         return nomeFantasia;
     }
 
     public void setNomeFantasia(String nomeFantasia) {
         this.nomeFantasia = nomeFantasia;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
     }
 
     public String getCnpj() {
@@ -67,19 +72,11 @@ public class Fornecedor {
         this.cnpj = cnpj;
     }
 
-    public List<FornecedorEndereco> getFornecedorEnderecos() {
-        return fornecedorEnderecos;
+    public Set<Endereco> getEnderecos() {
+        return enderecos;
     }
 
-    public void setFornecedorEnderecos(List<FornecedorEndereco> fornecedorEnderecos) {
-        this.fornecedorEnderecos = fornecedorEnderecos;
-    }
-
-    public List<FornecedorContato> getFornecedorContatos() {
-        return fornecedorContatos;
-    }
-
-    public void setFornecedorContatos(List<FornecedorContato> fornecedorContatos) {
-        this.fornecedorContatos = fornecedorContatos;
+    public void setEnderecos(Set<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 }

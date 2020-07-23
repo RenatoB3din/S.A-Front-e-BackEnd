@@ -8,20 +8,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/fornecedor")
+@RequestMapping(path = "/provider")
 public class FornecedorController {
-
+    
     @Autowired
     private FornecedorRepository fornecedorRepository;
-
-    @PostMapping(path = "/cadastrar")
+    
+    @PostMapping(path = "/add")
     public @ResponseBody
-    ResponseEntity<Fornecedor> adicionarFornecedor(@RequestBody Fornecedor fornecedor){
+    ResponseEntity<Fornecedor> addFornecedor(@RequestBody Fornecedor fornecedor){
         try{
-            Fornecedor novoFornecedor = fornecedorRepository.save(fornecedor);
-            return new ResponseEntity<Fornecedor>(fornecedor, HttpStatus.CREATED);
+            Fornecedor newFornecedor = fornecedorRepository.save(fornecedor);
+            return new ResponseEntity<>(newFornecedor, HttpStatus.CREATED);
         }catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
         }
     }
+
+    // TODO: 23/07/2020 >> Fazer os demais CRUD (Alteração e Exclusão) 
+
+    // TODO: 23/07/2020 >> Tratar erros 
+    
 }
