@@ -32,18 +32,18 @@ LOGIN >>  http://localhost:8080/api/auth/sigin</br>
 
 Fornecedor >> http://localhost:8080/provider/add </br>
 {</br>
-&emsp;&emsp"nomeFantasia":"nomeFantasia",</br>
-&emsp;&emsp"razaoSocial":"razaoSocial",</br>
-&emsp;&emsp"cnpj":"cnpj",</br>
-&emsp;&emsp"enderecos":[{</br>
-&emsp;&emsp&emsp;&emsp"cep":"cep",</br>
-&emsp;&emsp&emsp;&emsp"rua":"rua",</br>
-&emsp;&emsp&emsp;&emsp"numero":"numero",</br>
-&emsp;&emsp&emsp;&emsp"complemento":"complemento",</br>
-&emsp;&emsp&emsp;&emsp"bairro":"bairro",</br>
-&emsp;&emsp&emsp;&emsp"municipio":"municipio",</br>
-&emsp;&emsp&emsp;&emsp"uf":"uf"</br>
-&emsp;&emsp}]</br>
+&emsp;&emsp;"nomeFantasia":"nomeFantasia",</br>
+&emsp;&emsp;"razaoSocial":"razaoSocial",</br>
+&emsp;&emsp;"cnpj":"cnpj",</br>
+&emsp;&emsp;"enderecos":[{</br>
+&emsp;&emsp;&emsp;&emsp;"cep":"cep",</br>
+&emsp;&emsp;&emsp;&emsp;"rua":"rua",</br>
+&emsp;&emsp;&emsp;&emsp;"numero":"numero",</br>
+&emsp;&emsp;&emsp;&emsp;"complemento":"complemento",</br>
+&emsp;&emsp;&emsp;&emsp;"bairro":"bairro",</br>
+&emsp;&emsp;&emsp;&emsp;"municipio":"municipio",</br>
+&emsp;&emsp;&emsp;&emsp;"uf":"uf"</br>
+&emsp;&emsp;}]</br>
 }</br>
 
 
