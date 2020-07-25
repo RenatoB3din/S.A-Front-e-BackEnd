@@ -60,7 +60,7 @@ export default function Register() {
         { label: 'Fornecedor', link: '/novofornecedor'},
         { label: 'Produtos', link: '/novoproduto'},     
         { label: 'Vendas', link: '#home' },
-        { label: 'Movimentação de Inventário', link: '/newinventory' },
+        { label: 'Movimentar Inventário', link: '/newinventory' },
         { label: 'Relatórios', link: '#contact-us' },
       ];
 

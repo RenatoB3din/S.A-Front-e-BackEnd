@@ -65,7 +65,7 @@ export default function CadastroProduto() {
         { label: 'Fornecedor', link: '/novofornecedor'},
         { label: 'Produtos', link: '/novoproduto', active: true},     
         { label: 'Vendas', link: '#home' },
-        { label: 'Movimentação de Inventário', link: '/newinventory' },
+        { label: 'Movimentar Inventário', link: '/newinventory' },
         { label: 'Relatórios', link: '#contact-us' },
       ];
 
@@ -136,7 +136,7 @@ export default function CadastroProduto() {
                 <div className="input-group">
                     <fieldset>
                         <legend>Imagem Produto</legend>
-                            <input id="arquivo" style={{ width: 450 }} type="file"  className="btn btn-success" onChange={onChangePicture} />  
+                            <input id="img_produto" style={{ width: 450 }} type="file"  className="btn btn-success" onChange={onChangePicture} />  
                     </fieldset>
 
 

@@ -6,6 +6,7 @@ import Logon from './pages/Logon';
 import CadastroProduto from './pages/CadastroProduto';
 import CadastroFornecedor from './pages/CadastroFornecedor';
 import InventoryMovement from './pages/InventoryMovement';
+import Venda from './pages/Venda';
 import Greeting from './pages/Greeting';
 
 export default function Routes() {
@@ -17,6 +18,7 @@ export default function Routes() {
                 <Route path="/novoproduto" component={CadastroProduto} />
                 <Route path="/novofornecedor" component={CadastroFornecedor} />
                 <Route path="/newinventory" component={InventoryMovement} />
+                <Route path="/venda" component={Venda} />
                 <Route path="/greeting" component={Greeting} />
             </Switch>
         </BrowserRouter>
