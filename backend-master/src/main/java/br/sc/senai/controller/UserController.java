@@ -26,20 +26,6 @@ public class UserController {
         }
     }
 
-//
-//
-//    //ROTA PARA ADICIONAR NOVOS USUÁRIOS
-//    @PostMapping(path = "/cadastrar")
-//    public @ResponseBody
-//    ResponseEntity<Usuario> adicionarUsuario(@Validated @RequestBody User user) {
-//        try{
-//            Usuario novoUsuario = userRepository.save(usuario);
-//            return new ResponseEntity<Usuario>(usuario, HttpStatus.CREATED);
-//        }catch (Exception e){
-//            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-//        }
-//    }
-//
 //    //ROTA PARA ALTERAR O USUARIO
 //    @PutMapping(path = "/{idUsuario}")
 //    public @ResponseBody

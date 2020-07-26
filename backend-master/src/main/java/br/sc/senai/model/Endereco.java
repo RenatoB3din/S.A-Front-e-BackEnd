@@ -1,19 +1,16 @@
 package br.sc.senai.model;
 
-import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-@Table(name = "endereco")
+@MappedSuperclass
 public class Endereco {
 
     @Id
-    @Column(name = "id_endereco")
-    private Integer idEndereco;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String cep;
     private String rua;
     private String numero;
@@ -22,24 +19,30 @@ public class Endereco {
     private String municipio;
     private String uf;
 
-    public Endereco() {
-    }
 
-    public Endereco(String cep, String rua, String numero, String bairro, String municipio, String uf ){
+    public Endereco(String cep, String rua, String numero, String complemento, String bairro, String municipio, String uf){}
+
+    public Endereco(Integer id, String cep, String rua, String numero, String complemento, String bairro, String municipio, String uf) {
+        this.id = id;
         this.cep = cep;
         this.rua = rua;
         this.numero = numero;
+        this.complemento = complemento;
         this.bairro = bairro;
         this.municipio = municipio;
         this.uf = uf;
     }
 
-    public Integer getIdEndereco() {
-        return idEndereco;
+    public Endereco() {
+
     }
 
-    public void setIdEndereco(Integer idEndereco) {
-        this.idEndereco = idEndereco;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCep() {
@@ -97,4 +100,5 @@ public class Endereco {
     public void setUf(String uf) {
         this.uf = uf;
     }
+
 }
