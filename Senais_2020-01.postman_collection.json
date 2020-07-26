@@ -1,0 +1,296 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Senais_2020/01",
+		"_postman_id": "76a8c473-4612-9373-21bb-6a60ca5a3e8c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "REGISTRAR_FORNECEDOR",
+			"request": {
+				"url": "http://localhost:8080/provider/register",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "accessToken",
+						"value": "",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia\",\n\t\"razaoSocial\":\"razaoSocial\",\n\t\"cnpj\":\"12345678900012\",\n\t\"fornecedorEnderecos\":[{\n\t\t\"cep\":\"cep\",\n\t\t\"rua\":\"rua\",\n\t\t\"numero\":\"numero\",\n\t\t\"complemento\":\"complemento\",\n\t\t\"bairro\":\"bairro\",\n\t\t\"municipio\":\"municipio\",\n\t\t\"uf\":\"uf\",\n\t\t\"tipoEndereco\":\"RESIDENCIAL\"\n\t}]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "REGISTRAR_FORNECEDOR_ENDERECO",
+			"request": {
+				"url": "http://localhost:8080/provider/adress/resgister",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "accessToken",
+						"value": "",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"cep\":\"cep\",\n\t\"rua\":\"rua\",\n\t\"numero\":\"numero\",\n\t\"complemento\":\"complemento\",\n\t\"bairro\":\"bairro\",\n\t\"municipio\":\"municipio\",\n\t\"uf\":\"uf\",\n\t\"tipoEndereco\":\"RESIDENCIAL\"\n\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "REGISTRAR_PRODUTO",
+			"request": {
+				"url": "http://localhost:8080/product/register",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3MzU4MTUsImV4cCI6MTU5NTgyMjIxNX0._n-vFAGFZVBO5KTlycZ7z65oGEPTJVakJz-hO7J1e2ZFyKsXOENPl8gCyOI4bbdTeCHCyj62t7q_UW8kShc_XQ",
+						"description": ""
+					},
+					{
+						"key": "accessToken",
+						"value": "",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia\",\n\t\"razaoSocial\":\"razaoSocial\",\n\t\"cnpj\":\"12345678900012\",\n\t\"fornecedorEnderecos\":[{\n\t\t\"cep\":\"cep\",\n\t\t\"rua\":\"rua\",\n\t\t\"numero\":\"numero\",\n\t\t\"complemento\":\"complemento\",\n\t\t\"bairro\":\"bairro\",\n\t\t\"municipio\":\"municipio\",\n\t\t\"uf\":\"uf\",\n\t\t\"tipoEndereco\":\"RESIDENCIAL\"\n\t}]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "REGISTRAR_USUARIO",
+			"request": {
+				"url": "http://localhost:8080/api/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\":\"Renato Bedin\",\r\n\t\"username\":\"rb3din\",\r\n\t\"email\":\"renatob3din@gmail.com\",\r\n\t\"password\":\"123456\",\r\n\t\"cpf\":\"10000778672\",\r\n\t\"role\":[\"ROLE_SALLESMAN\"]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "REGISTRAR_USUARIO_SIGNIN",
+			"request": {
+				"url": "http://localhost:8080/api/auth/signin",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\": \"rb3din\",\r\n\t\"password\": \"123456\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "REGISTRAR_USUARIO_SIGNUP",
+			"request": {
+				"url": "http://localhost:8080/api/auth/signup",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"Renato Bedin\",\r\n\t\"username\": \"rb3din\",\r\n\t\"email\": \"renatob3din@gmail.com\",\r\n\t\"password\": \"123456\",\r\n\t\"cpf\": \"10000778672\",\r\n\t\"role\": [\"ROLE_userADMIN\"]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "EDITAR_FORNECEDOR",
+			"request": {
+				"url": "http://localhost:8080/provider/register/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia\",\n\t\"razaoSocial\":\"razaoSocial\",\n\t\"cnpj\":\"12345678900013\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "EDITAR_FORNECEDOR_ENDERECO",
+			"request": {
+				"url": "http://localhost:8080/provider/adress/register/2",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"cep\":\"cep\",\n\t\"rua\":\"rua\",\n\t\"numero\":\"numero\",\n\t\"complemento\":\"complemento\",\n\t\"bairro\":\"bairro\",\n\t\"municipio\":\"municipio\",\n\t\"uf\":\"uf\",\n\t\"tipoEndereco\":\"ENTREGA\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "EDITAR_PRODUTO",
+			"request": {
+				"url": "http://localhost:8080/product/register",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3MzU4MTUsImV4cCI6MTU5NTgyMjIxNX0._n-vFAGFZVBO5KTlycZ7z65oGEPTJVakJz-hO7J1e2ZFyKsXOENPl8gCyOI4bbdTeCHCyj62t7q_UW8kShc_XQ",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "accessToken",
+						"value": "",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nomeProduto\":\"nomeProduto\",\n\t\"descricaoProduto\":\"descricaoProduto\",\n\t\"codBarras\":\"1234567890123\",\n\t\"unidade\":\"uni\",\n\t\"percentualSobreVenda\":1.15,\n\t\"imagemURL\":\"imagemURL\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE_FORNECEDOR",
+			"request": {
+				"url": "http://localhost:8080/provider/register/1",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE_FORNECEDOR_ENDERECO",
+			"request": {
+				"url": "http://localhost:8080/provider/adress/register/3",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETAR_PRODUTO",
+			"request": {
+				"url": "http://localhost:8080/product/register/1",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3MzU4MTUsImV4cCI6MTU5NTgyMjIxNX0._n-vFAGFZVBO5KTlycZ7z65oGEPTJVakJz-hO7J1e2ZFyKsXOENPl8gCyOI4bbdTeCHCyj62t7q_UW8kShc_XQ",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "accessToken",
+						"value": "",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nomeProduto\":\"nomeProduto\",\n\t\"descricaoProduto\":\"descricaoProduto\",\n\t\"codBarras\":\"1234567890123\",\n\t\"unidade\":\"uni\",\n\t\"percentualSobreVenda\":11.5,\n\t\"imagemURL\":\"imagemURL\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
