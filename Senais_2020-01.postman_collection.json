@@ -14,19 +14,19 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "Content-Type",
-						"value": "application/json",
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3NTczODksImV4cCI6MTU5NTg0Mzc4OX0.9DV7DTr0E-zLa5yXGZccg6S168q20xh2IWSakaOX-5kiTyp2cDUZPRzh0yH1XFtrfhbUGJ7Z3RvwyDR4bcDRHQ",
 						"description": ""
 					},
 					{
-						"key": "accessToken",
-						"value": "",
+						"key": "Content-Type",
+						"value": "application/json",
 						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia\",\n\t\"razaoSocial\":\"razaoSocial\",\n\t\"cnpj\":\"12345678900012\",\n\t\"fornecedorEnderecos\":[{\n\t\t\"cep\":\"cep\",\n\t\t\"rua\":\"rua\",\n\t\t\"numero\":\"numero\",\n\t\t\"complemento\":\"complemento\",\n\t\t\"bairro\":\"bairro\",\n\t\t\"municipio\":\"municipio\",\n\t\t\"uf\":\"uf\",\n\t\t\"tipoEndereco\":\"RESIDENCIAL\"\n\t}]\n}"
+					"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia\",\n\t\"razaoSocial\":\"razaoSocial\",\n\t\"cnpj\":\"12345678900012\",\n\t\"contato\":\"contato\",\n\t\"telefone\":\"telefone\",\n\t\"email\":\"email@eamil.com\",\n\t\"fornecedorEnderecos\":[{\n\t\t\"cep\":\"cep\",\n\t\t\"rua\":\"rua\",\n\t\t\"numero\":\"numero\",\n\t\t\"complemento\":\"complemento\",\n\t\t\"bairro\":\"bairro\",\n\t\t\"municipio\":\"municipio\",\n\t\t\"uf\":\"uf\",\n\t\t\"tipoEndereco\":\"RESIDENCIAL\"\n\t}]\n}"
 				},
 				"description": ""
 			},
@@ -70,7 +70,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3MzU4MTUsImV4cCI6MTU5NTgyMjIxNX0._n-vFAGFZVBO5KTlycZ7z65oGEPTJVakJz-hO7J1e2ZFyKsXOENPl8gCyOI4bbdTeCHCyj62t7q_UW8kShc_XQ",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3NTczODksImV4cCI6MTU5NTg0Mzc4OX0.9DV7DTr0E-zLa5yXGZccg6S168q20xh2IWSakaOX-5kiTyp2cDUZPRzh0yH1XFtrfhbUGJ7Z3RvwyDR4bcDRHQ",
 						"description": ""
 					},
 					{
@@ -82,7 +82,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia\",\n\t\"razaoSocial\":\"razaoSocial\",\n\t\"cnpj\":\"12345678900012\",\n\t\"fornecedorEnderecos\":[{\n\t\t\"cep\":\"cep\",\n\t\t\"rua\":\"rua\",\n\t\t\"numero\":\"numero\",\n\t\t\"complemento\":\"complemento\",\n\t\t\"bairro\":\"bairro\",\n\t\t\"municipio\":\"municipio\",\n\t\t\"uf\":\"uf\",\n\t\t\"tipoEndereco\":\"RESIDENCIAL\"\n\t}]\n}"
+					"raw": "{\n\t\"nomeProduto\":\"nomeProduto\",\n\t\"descricaoProduto\":\"descricaoProduto\",\n\t\"codBarras\": \"codBarras\",\n\t\"unidade\":\"unidade\",\n\t\"percentualSobreVenda\":1,\n\t\"imagemURL\":\"imagemURL\"\n}"
 				},
 				"description": ""
 			},
@@ -142,7 +142,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"name\": \"Renato Bedin\",\r\n\t\"username\": \"rb3din\",\r\n\t\"email\": \"renatob3din@gmail.com\",\r\n\t\"password\": \"123456\",\r\n\t\"cpf\": \"10000778672\",\r\n\t\"role\": [\"ROLE_userADMIN\"]\r\n}"
+					"raw": "{\r\n\t\"name\": \"Renato Bedin\",\r\n\t\"username\": \"rb3din\",\r\n\t\"email\": \"renatob3din@gmail.com\",\r\n\t\"password\": \"123456\",\r\n\t\"cpf\": \"10000778672\",\r\n\t\"role\": [\"ROLE_ADMIN\"]\r\n}"
 				},
 				"description": ""
 			},
