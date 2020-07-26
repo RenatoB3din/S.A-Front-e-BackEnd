@@ -1,9 +1,10 @@
 package br.sc.senai.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "produto")
+@Table(name = "cadproduto")
 public class Produto {
 
     @Id
@@ -11,16 +12,20 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProduto;
 
-    @Column(name = "nome_produto", length = 70)
+    @Column(name = "nome_produto")
+    @Size(max = 70)
     private String nomeProduto;
 
-    @Column(name = "descricao_produto", length = 150)
+    @Column(name = "descricao_produto")
+    @Size(max = 150)
     private String descricaoProduto;
 
-    @Column(name = "cod_barras", length = 13)
+    @Column(name = "cod_barras")
+    @Size(max = 13)
     private String codBarras;
 
-    @Column(name = "unidade", length = 15)
+    @Column(name = "unidade")
+    @Size(max = 15)
     private String unidade;
 
     @Column(name = "perc_sobre_venda")
@@ -37,6 +42,18 @@ public class Produto {
 
     @Column(name = "valor_compra", precision = 10)
     private double valorCompra;
+
+    public Produto() {
+    }
+
+    public Produto(String nomeProduto, String descricaoProduto, String codBarras, String unidade, Double percentualSobreVenda, String imagemURL) {
+        this.nomeProduto = nomeProduto;
+        this.descricaoProduto = descricaoProduto;
+        this.codBarras =  codBarras;
+        this.unidade = unidade;
+        this.percentualSobreVenda = percentualSobreVenda;
+        this.imagemURL = imagemURL;
+    }
 
     public Integer getIdProduto() {
         return idProduto;

@@ -1,94 +1,88 @@
 package br.sc.senai.controller;
 
 import br.sc.senai.model.Produto;
-import br.sc.senai.repository.ProdutoRepository;
+import br.sc.senai.repository.ProdutoRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
-@RequestMapping(path = "/produto")
+@RequestMapping("/product")
 public class ProdutoController {
 
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private ProdutoRespository produtoRespository;
 
-    @PostMapping(path = "/cadastrar")
+    @PostMapping("/register")
     public @ResponseBody
-    ResponseEntity<Produto> cadastrarProduto(@RequestBody Produto produto){
-        try{
-            Produto novoProduto = produtoRepository.save(produto);
+    ResponseEntity<Produto> addProduto(@RequestBody Produto produto){
 
-            return new ResponseEntity<Produto>(novoProduto, HttpStatus.CREATED);
+        try{
+
+            Produto novoProduto = produtoRespository.save(produto);
+
+            return new ResponseEntity<>(novoProduto, HttpStatus.CREATED);
+
         }catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.CREATED);
-        }
-    }
 
-    @PutMapping(path = "/editar/{id}")
-    public @ResponseBody ResponseEntity<Produto> editarProduto(@PathVariable("id") Integer idProduto,
-                                                               @RequestBody Produto produto){
+            System.out.println(e.getMessage());
 
-        Optional<Produto> produtoData = produtoRepository.findById(idProduto);
-
-        try{
-            if(produtoData.isPresent()){
-                Produto editarProduto = produtoData.get();
-                editarProduto.setNomeProduto(produto.getNomeProduto());
-                editarProduto.setDescricaoProduto(produto.getDescricaoProduto());
-                editarProduto.setCodBarras(produto.getCodBarras());
-                editarProduto.setUnidade(produto.getUnidade());
-                editarProduto.setPercentualSobreVenda(produto.getPercentualSobreVenda());
-                editarProduto.setImagemURL(produto.getImagemURL());
-                return new ResponseEntity<>(produtoRepository.save(editarProduto), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        }catch(Exception e){
             return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+
         }
     }
 
-    @DeleteMapping(path = "/excluir/{id}")
-    public @ResponseBody ResponseEntity<HttpStatus> removerProduto(@PathVariable ("id") Integer idProduto){
-        try {
-            produtoRepository.deleteById(idProduto);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-        }
-    }
+    @PutMapping("/register/{idProduto}")
+    public @ResponseBody
+    ResponseEntity<Produto> editPorduto(@PathVariable("idProduto") Integer idProduto,
+                                        @RequestBody Produto produto){
 
-    //PESQUISA DE PRODUTO
-    @GetMapping(path = "/")
-    public @ResponseBody ResponseEntity<Iterable<Produto>> getAllProdutos(){
-        try {
-            Iterable<Produto> produtos = produtoRepository.findAll();
-            if(((Collection<?>) produtos).size() == 0){
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        Optional<Produto> produtoData = produtoRespository.findById(idProduto);
+
+        try{
+            if (produtoData.isPresent()){
+
+                Produto editProduto = produtoData.get();
+                editProduto.setNomeProduto(produto.getNomeProduto());
+                editProduto.setDescricaoProduto(produto.getDescricaoProduto());
+                editProduto.setCodBarras(produto.getCodBarras());
+                editProduto.setPercentualSobreVenda(produto.getPercentualSobreVenda());
+                editProduto.setImagemURL(produto.getImagemURL());
+
+                return new ResponseEntity<>(produtoRespository.save(editProduto), HttpStatus.OK);
+
+            }else{
+
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+
             }
-            return new ResponseEntity<>(produtos, HttpStatus.OK);
-        } catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
-    @PostMapping(path = "/nomeProduto/{nome}")
-    public @ResponseBody ResponseEntity<Iterable<Produto>> findByName(@PathVariable("nome") String nome) {
-        try {
-            Iterable<Produto> produtos = produtoRepository.findAllByName(nome);
-            if(((Collection<?>) produtos).size() == 0){
 
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(produtos, HttpStatus.OK);
         }catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
+            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+
         }
     }
+
+    @DeleteMapping("/register/{idProduto}")
+    public @ResponseBody
+    ResponseEntity<HttpStatus> deleteProduto(@PathVariable("idProduto") Integer idProduto){
+
+        try {
+
+            produtoRespository.deleteById(idProduto);
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        }catch (Exception e){
+
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+    }
+
 }

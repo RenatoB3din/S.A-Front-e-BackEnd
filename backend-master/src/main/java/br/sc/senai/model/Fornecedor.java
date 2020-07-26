@@ -1,6 +1,7 @@
 package br.sc.senai.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +26,14 @@ public class Fornecedor {
     @Size(min = 11, max = 14)
     private String cnpj;
 
+    @Column(name = "nome_contato")
+    private String nomeContato;
+
+    private String telefone;
+
+    @Email
+    private String email;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "relfornecendereco",
@@ -38,11 +47,14 @@ public class Fornecedor {
 
     public Fornecedor(){}
 
-    public Fornecedor(Integer id, String nomeFantasia, String razaoSocial, String cnpj) {
+    public Fornecedor(Integer id, String nomeFantasia, String razaoSocial, String cnpj, String nomeContato, String telefone, String email) {
         this.id = id;
         this.nomeFantasia = nomeFantasia;
         this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;
+        this.nomeContato = nomeContato;
+        this.telefone = telefone;
+        this.email = email;
     }
 
     public Integer getId() {
@@ -75,6 +87,30 @@ public class Fornecedor {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public String getNomeContato() {
+        return nomeContato;
+    }
+
+    public void setNomeContato(String nomeContato) {
+        this.nomeContato = nomeContato;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Set<FornecedorEndereco> getFornecedorEnderecos() {
