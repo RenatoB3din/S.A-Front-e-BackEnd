@@ -8,7 +8,7 @@ import logoImg from '../../assets/logo.png';
 import projetoSaImg from '../../assets/projetosa.png';
 
 export default function Logon(){
-    const [user, setUser ] = useState('');
+    const [username, setUsername ] = useState('');
     const [password, setPassword ] = useState('');
     const history = useHistory();
 
@@ -16,10 +16,12 @@ export default function Logon(){
         e.preventDefault();
 
         try{
-          const response = await api.post('sessions', { user, password });
+          const response = await api.post('api/auth/signin', { username, password });
           
           localStorage.setItem('userId', response.data.id);
-          localStorage.setItem('userName', user);
+          localStorage.setItem('userName', username);
+          localStorage.setItem('token', response.data.accessToken);
+          localStorage.setItem('tokenType', response.data.tokenType);
 
           history.push('/newinventory');
         } catch (err) {
@@ -37,8 +39,8 @@ export default function Logon(){
 
                     <input 
                         placeholder="Usuário" 
-                        value={user}
-                        onChange={e => setUser(e.target.value)}
+                        value={username}
+                        onChange={e => setUsername(e.target.value)}
                     />
                     <input 
                         placeholder="Senha" 

@@ -70,7 +70,7 @@ export default function InventoryMovement() {
         { label: 'Fornecedor', link: '/novofornecedor'},
         { label: 'Produtos', link: '/novoproduto'},     
         { label: 'Vendas', link: '#home' },
-        { label: 'Movimentação de Inventário', link: '/newinventory', active: true },
+        { label: 'Movimentar Inventário', link: '/newinventory', active: true },
         { label: 'Relatórios', link: '#contact-us' },
       ];
 

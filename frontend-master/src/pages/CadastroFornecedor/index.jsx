@@ -102,7 +102,7 @@ export default function CadastroFornecedor() {
         { label: 'Fornecedor', link: '/novofornecedor', active: true},
         { label: 'Produtos', link: '/novoproduto'},     
         { label: 'Vendas', link: '#home' },
-        { label: 'Movimentação de Inventário', link: '/newinventory' },
+        { label: 'Movimentar Inventário', link: '/newinventory' },
         { label: 'Relatórios', link: '#contact-us' },
       ];
 

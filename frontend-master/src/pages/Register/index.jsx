@@ -11,43 +11,43 @@ import logo from '../../components/Header/logo.png';
 
 
 export default function Register() {
-    const [nomeCompleto, setNomeCompleto] = useState('');
-    const [login, setLogin] = useState('');
-    const [senha, setSenha] = useState('');
+    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [cpf, setCpf] = useState('');
-    const [idPerfil, setIdPerfil] = useState('');
+    const [role, setRole] = useState('');
 
     const history = useHistory();
 
     function reset() {
-        setNomeCompleto('');
-        setLogin('');
-        setSenha('');
+        setName('');
+        setUsername('');
+        setPassword('');
         setEmail('');
         setCpf('');
-        setIdPerfil('');
+        setRole('');
      }
 
     async function handleRegister(e) {
         e.preventDefault(); // Não atualiza a pág ao dar submit
 
         const data = {
-            nomeCompleto,
-            login,
-            senha,
+            name,
+            username,
             email,
+            password,
             cpf,
-            perfil: {idPerfil}
+            role:[role]
         };
 
         try{
-            const response = await api.post('usuario/cadastrar', data);
+            const response = await api.post('api/auth/signup', data);
 
             console.log(`Seu Usuário é: ${response.data.id}`);
 
 
-            history.push('/register');
+            history.push('/');
 
             reset();
          } catch (err) {
@@ -60,7 +60,7 @@ export default function Register() {
         { label: 'Fornecedor', link: '/novofornecedor'},
         { label: 'Produtos', link: '/novoproduto'},     
         { label: 'Vendas', link: '#home' },
-        { label: 'Movimentação de Inventário', link: '/newinventory' },
+        { label: 'Movimentar Inventário', link: '/newinventory' },
         { label: 'Relatórios', link: '#contact-us' },
       ];
 
@@ -82,19 +82,19 @@ export default function Register() {
                 <form onSubmit={handleRegister}>
                     <input 
                         placeholder="Nome Completo"
-                        value={nomeCompleto}
-                        onChange={e => setNomeCompleto(e.target.value)}
+                        value={name}
+                        onChange={e => setName(e.target.value)}
                     />
                     <input 
                         placeholder="Usuário"
-                        value={login}
-                        onChange={e => setLogin(e.target.value)}
+                        value={username}
+                        onChange={e => setUsername(e.target.value)}
                     />
                     <input 
                         type="password" 
                         placeholder="Senha"
-                        value={senha}
-                        onChange={e => setSenha(e.target.value)}
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
                     />
                     <input 
                         type="email" 
@@ -112,22 +112,22 @@ export default function Register() {
                         <select 
                             name="perfil" 
                             style={{ width: 180 }}
-                            value={idPerfil}
-                            onChange={e => setIdPerfil(e.target.value)}
+                            value={role}
+                            onChange={e => setRole(e.target.value)}
                         >
 
                             <option value="" disabled ></option>
 
                             <option
-                                value="1"
+                                value="admin"
                             >Admin</option>
 
                             <option                  
-                                value="2"
+                                value="manager"
                             >Gerente</option>
 
                             <option                  
-                                value="3"
+                                value="role_sallesman"
                             >Vendedor</option>
                         </select>
                     </div>
