@@ -37,11 +37,11 @@ Fornecedor >> http://localhost:8080/provider/register </br>
 &emsp;&emsp;"cnpj":"cnpj",</br>
 &emsp;&emsp;"fornecedorEnderecos":[{</br>
 &emsp;&emsp;&emsp;&emsp;"cep":"cep",</br>
-&emsp;&emsp;&emsp;&emsp;"rua":"rua",</br>
-&emsp;&emsp;&emsp;&emsp;"numero":"numero",</br>
-&emsp;&emsp;&emsp;&emsp;"complemento":"complemento",</br>
+&emsp;&emsp;&emsp;&emsp;"logradouro":"rua",</br>
+&emsp;&emsp;&emsp;&emsp;"complemento":"numero",</br>
+&emsp;&emsp;&emsp;&emsp;"outroComplemento":"complemento",</br>
 &emsp;&emsp;&emsp;&emsp;"bairro":"bairro",</br>
-&emsp;&emsp;&emsp;&emsp;"municipio":"municipio",</br>
+&emsp;&emsp;&emsp;&emsp;"localidade":"municipio",</br>
 &emsp;&emsp;&emsp;&emsp;"uf":"uf"</br>
 &emsp;&emsp;&emsp;&emsp;"tipoEndereco":"RESIDENCIAL"</br>
 &emsp;&emsp;}]</br>
