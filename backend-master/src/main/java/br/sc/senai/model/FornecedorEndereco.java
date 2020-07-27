@@ -21,8 +21,8 @@ public class FornecedorEndereco extends Endereco{
         super();
     }
 
-    public FornecedorEndereco(Integer id, String cep, String rua, String numero, String complemento, String bairro, String municipio, String uf) {
-        super(id, cep, rua, numero, complemento, bairro, municipio, uf);
+    public FornecedorEndereco(Integer id, String cep, String logradouro, String complemento, String outroComplemento, String bairro, String localidade, String uf) {
+        super(id, cep, logradouro, complemento, outroComplemento, bairro, localidade, uf);
     }
 
     public EEndereco getTipoEndereco() {

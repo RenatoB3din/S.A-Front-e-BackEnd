@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
-// import api from '../../services/api';
+import api from '../../services/api';
 import apiexterna from '../../services/apiexterna';
 import './styles.css';
 
 import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
 
+import { useHistory } from 'react-router-dom';
 
 
 export default function CadastroFornecedor() {
 
-    const [nomefantasia, setNomeFantasia] = useState('');
-    const [razaosocial, setRazaoSocial] = useState('');
+    const [nomeFantasia, setNomeFantasia] = useState('');
+    const [razaoSocial, setRazaoSocial] = useState('');
     const [cnpj, setCnpj] = useState('');
     const [cep, setCep] = useState('');
     const [logradouro, setLogradouro] = useState('');
@@ -21,13 +22,17 @@ export default function CadastroFornecedor() {
     const [localidade, setLocalidade] = useState('');
     const [uf, setUf] = useState('');
     const [outroComplemento, setOutroComplemento] = useState('');
-    const [nomeresponsavel, setNomeResponsavel] = useState('');
-    const [telefoneresponsavel, setTelefoneResponsavel] = useState('');
-    const [emailresponsavel, setEmailResponsavel] = useState('');
+    const [tipoEndereco, setTipoEndereco] = useState('');
+    const [nomeContato, setNomeContato] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [email, setEmail] = useState('');
     const [query, setQuery] = useState('');
     const [url, setUrl] = useState(
         `${query}/json/`,
     );
+
+    const history = useHistory();
+    const token = localStorage.getItem('token');
 
     function Reset() {
         setNomeFantasia('');
@@ -40,9 +45,9 @@ export default function CadastroFornecedor() {
         setLocalidade('');
         setUf('');
         setOutroComplemento('');
-        setNomeResponsavel('');
-        setTelefoneResponsavel('');
-        setEmailResponsavel('');
+        setNomeContato('');
+        setTelefone('');
+        setEmail('');
      }
 
         
@@ -63,7 +68,7 @@ export default function CadastroFornecedor() {
             }}, [url]);
         
 
-
+        
     
 
 
@@ -71,30 +76,39 @@ export default function CadastroFornecedor() {
         e.preventDefault();
 
         const data = {
-            nomefantasia,
-            razaosocial,
+            nomeFantasia,
+            razaoSocial,
             cnpj,
-            cep,
-            logradouro,
-            complemento,
-            bairro,
-            localidade,
-            uf,
-            outroComplemento,
-            nomeresponsavel,
-            telefoneresponsavel,
-            emailresponsavel
+            nomeContato,
+            telefone,
+            email,
+            fornecedorEnderecos: [{
+                cep,
+                logradouro,
+                complemento,
+                bairro,
+                localidade,
+                uf,
+                outroComplemento,
+                tipoEndereco 
+            }]
         };
 
         console.log(data)
+        console.log(token)
 
-        // try{
-        //     await api.post('CadastroFornecedor', data);      // POST na API com o ENDPOINT
+        try{
+            await api.post('provider/register', data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });      // POST na API com o ENDPOINT
 
+            history.push('/');
 
-        //  } catch (err) {
-        //     alert('Erro no cadastro, tente novamente.');
-        //  }
+         } catch (err) {
+            alert('Erro no cadastro, tente novamente.');
+         }
     }
 
     let links = [
@@ -125,7 +139,7 @@ export default function CadastroFornecedor() {
                         <input 
                             type="text"
                             placeholder="Nome Fantasia"
-                            value={nomefantasia}
+                            value={nomeFantasia}
                             onChange={e => setNomeFantasia(e.target.value)}
                         />  
                     </fieldset> 
@@ -135,7 +149,7 @@ export default function CadastroFornecedor() {
                         <input 
                             type="text"
                             placeholder="Razão Social"
-                            value={razaosocial}
+                            value={razaoSocial}
                             onChange={e => setRazaoSocial(e.target.value)}
                         />  
                     </fieldset> 
@@ -230,7 +244,8 @@ export default function CadastroFornecedor() {
                         />  
                     </fieldset> 
                     </div>
-
+                    
+                    <div className="input-group">
                     <fieldset>
                     <legend>Complemento</legend>
                         <input 
@@ -240,6 +255,38 @@ export default function CadastroFornecedor() {
                             onChange={e => setOutroComplemento(e.target.value)}
                         />  
                     </fieldset> 
+                    
+                    <fieldset style={{ width: 220 }}>
+                    <legend>Tipo de Endereço</legend>
+                        <select
+                            value={tipoEndereco}
+                            onChange={e => setTipoEndereco(e.target.value)}
+                        >
+                            <option                  
+                                value="RESIDENCIAL"
+                                >Residencial
+                            </option>
+
+                            <option
+                                value="COMERCIAL"
+                                >Comercial
+                            </option>
+                            <option
+                                value="FATURAMENTO"
+                                >Faturamento
+                            </option>
+                            <option
+                                value="COBRANCA"
+                                >Cobranca
+                            </option>
+                            <option
+                                value="ENTREGA"
+                                >Entrega
+                            </option>
+                        </select>
+                    </fieldset>
+
+                    </div>
 
                     <h2>Responsável</h2>
                     <fieldset>
@@ -247,8 +294,8 @@ export default function CadastroFornecedor() {
                         <input 
                             type="text"
                             placeholder="Nome do Responsável"
-                            value={nomeresponsavel}
-                            onChange={e => setNomeResponsavel(e.target.value)}
+                            value={nomeContato}
+                            onChange={e => setNomeContato(e.target.value)}
                         />  
                     </fieldset> 
 
@@ -258,8 +305,8 @@ export default function CadastroFornecedor() {
                         <input 
                             type="number"
                             placeholder="Telefone do Responsável"
-                            value={telefoneresponsavel}
-                            onChange={e => setTelefoneResponsavel(e.target.value)}
+                            value={telefone}
+                            onChange={e => setTelefone(e.target.value)}
                         />  
                     </fieldset> 
 
@@ -268,8 +315,8 @@ export default function CadastroFornecedor() {
                         <input 
                             type="email"
                             placeholder="E-mail do Responsável"
-                            value={emailresponsavel}
-                            onChange={e => setEmailResponsavel(e.target.value)}
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
                         />  
                     </fieldset> 
 

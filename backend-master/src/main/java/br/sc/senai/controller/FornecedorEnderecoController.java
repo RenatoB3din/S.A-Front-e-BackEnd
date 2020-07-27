@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(path = "/provider/adress")
 public class FornecedorEnderecoController {
@@ -37,11 +38,11 @@ public class FornecedorEnderecoController {
             if (enderecoData.isPresent()){
                 FornecedorEndereco editFornecedorEndereco = enderecoData.get();
                 editFornecedorEndereco.setCep(fornecedorEndereco.getCep());
-                editFornecedorEndereco.setRua(fornecedorEndereco.getRua());
-                editFornecedorEndereco.setNumero(fornecedorEndereco.getNumero());
+                editFornecedorEndereco.setLogradouro(fornecedorEndereco.getLogradouro());
                 editFornecedorEndereco.setComplemento(fornecedorEndereco.getComplemento());
+                editFornecedorEndereco.setOutroComplemento(fornecedorEndereco.getOutroComplemento());
                 editFornecedorEndereco.setBairro(fornecedorEndereco.getBairro());
-                editFornecedorEndereco.setMunicipio(fornecedorEndereco.getMunicipio());
+                editFornecedorEndereco.setLocalidade(fornecedorEndereco.getLocalidade());
                 editFornecedorEndereco.setUf(fornecedorEndereco.getUf());
                 editFornecedorEndereco.setTipoEndereco(fornecedorEndereco.getTipoEndereco());
 

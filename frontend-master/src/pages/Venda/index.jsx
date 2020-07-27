@@ -109,7 +109,7 @@ export default function Venda() {
                 </fieldset>
 
 
-                <fieldset style={{ width: 220 }}>
+                <fieldset style={{ width: 300 }}>
                 <legend>Tipo de Pagamento</legend>
                     <select
                         value={pagamento}

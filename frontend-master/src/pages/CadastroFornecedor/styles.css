@@ -94,7 +94,6 @@ h2 {
 
 #btn_cep:hover {
     transition: 0.5s;
-    filter: brightness(90%);
-    margin-top: 33px;
+    filter: brightness(95%);
 }
 
