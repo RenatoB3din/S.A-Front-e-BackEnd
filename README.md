@@ -30,12 +30,12 @@ LOGIN >>  http://localhost:8080/api/auth/sigin</br>
 	&emsp;&emsp;"password": "123456",</br>
 }</br>
 
-Fornecedor >> http://localhost:8080/provider/add </br>
+Fornecedor >> http://localhost:8080/provider/register </br>
 {</br>
 &emsp;&emsp;"nomeFantasia":"nomeFantasia",</br>
 &emsp;&emsp;"razaoSocial":"razaoSocial",</br>
 &emsp;&emsp;"cnpj":"cnpj",</br>
-&emsp;&emsp;"enderecos":[{</br>
+&emsp;&emsp;"fornecedorEnderecos":[{</br>
 &emsp;&emsp;&emsp;&emsp;"cep":"cep",</br>
 &emsp;&emsp;&emsp;&emsp;"rua":"rua",</br>
 &emsp;&emsp;&emsp;&emsp;"numero":"numero",</br>
@@ -43,6 +43,7 @@ Fornecedor >> http://localhost:8080/provider/add </br>
 &emsp;&emsp;&emsp;&emsp;"bairro":"bairro",</br>
 &emsp;&emsp;&emsp;&emsp;"municipio":"municipio",</br>
 &emsp;&emsp;&emsp;&emsp;"uf":"uf"</br>
+&emsp;&emsp;&emsp;&emsp;"tipoEndereco":"RESIDENCIAL"</br>
 &emsp;&emsp;}]</br>
 }</br>
 
