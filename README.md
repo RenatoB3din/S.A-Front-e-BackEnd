@@ -35,6 +35,9 @@ Fornecedor >> http://localhost:8080/provider/register </br>
 &emsp;&emsp;"nomeFantasia":"nomeFantasia",</br>
 &emsp;&emsp;"razaoSocial":"razaoSocial",</br>
 &emsp;&emsp;"cnpj":"cnpj",</br>
+&emsp;&emsp;"nomeContato":"nomeContato",</br>
+&emsp;&emsp;"telefone":"telefone",</br>
+&emsp;&emsp;"email":"email",</br>
 &emsp;&emsp;"fornecedorEnderecos":[{</br>
 &emsp;&emsp;&emsp;&emsp;"cep":"cep",</br>
 &emsp;&emsp;&emsp;&emsp;"logradouro":"rua",</br>
