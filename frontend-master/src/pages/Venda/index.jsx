@@ -72,7 +72,7 @@ export default function Venda() {
                 <legend>Nome do Cliente</legend>
                     <input 
                         type="text"
-                        placeholder="Insira seu Nome"
+                        placeholder="Nome do Cliente"
                         value={nomeCliente}
                         onChange={e => setNomeCliente(e.target.value)}
                     />  
@@ -82,7 +82,7 @@ export default function Venda() {
                 <legend>CPF/CNPJ</legend>
                     <input 
                         type="text"
-                        placeholder="Insira seu CPF"
+                        placeholder="CPF"
                         value={cpfCliente}
                         onChange={e => setCpfCliente(e.target.value)}
                     />  
@@ -95,7 +95,9 @@ export default function Venda() {
                     <select
                         value={vendedor}
                         onChange={e => setVendedor(e.target.value)}
-                    >
+                    >       
+                            <option value="" disabled ></option>
+                            
                             <option                  
                                 value="VendedorA"
                                 >Vendedor A

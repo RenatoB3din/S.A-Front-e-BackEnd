@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import './styles.css';
-
+import api from '../../services/api';
 import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
 
 export default function CadastroProduto() {
-    const [cdgBarras, setCdgBarras] = useState('');
-    const [nome, setNome] = useState('');
-    const [desc, setDesc] = useState('');
+    const [codBarras, setCodBarras] = useState('');
+    const [nomeProduto, setNomeProduto] = useState('');
+    const [descricaoProduto, setDescricaoProduto] = useState('');
     const [unidade, setUnidade] = useState('');
-    const [picture, setPicture] = useState(null);
+    const [imagemURL, setImagemURL] = useState(null);
     const [imgData, setImgData] = useState(null);
-    const [valorVenda, setValorVenda] = useState('');
+    const [percentualSobreVenda, setPercentualSobreVenda] = useState('');
 
+    const token = localStorage.getItem('token');
 
     const onChangePicture = e => {
         if (e.target.files[0]) {
-            setPicture(URL.createObjectURL(e.target.files[0]));
+            setImagemURL(URL.createObjectURL(e.target.files[0]));
             const reader = new FileReader();
             reader.addEventListener("load", () => {
             setImgData(reader.result);
@@ -30,41 +31,44 @@ export default function CadastroProduto() {
  
         
             const data = {
-                cdgBarras,
-                nome,
-                desc,
+                codBarras,
+                nomeProduto,
+                descricaoProduto,
                 unidade,
-                valorVenda,
-                picture,
-                imgData
+                percentualSobreVenda,
+                imagemURL
             };
 
             console.log(data);
 
             
-        // try{
-            //     await api.post('cadastroProduto', data);               // POST na API com o ENDPOINT
+            try{
+                await api.post('product/register', data, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                });               // POST na API com o ENDPOINT
             
             
-            //  } catch (err) {
-                //     alert('Erro no cadastro, tente novamente.');
-                //  }
+            } catch (err) {
+                    alert('Erro no cadastro, tente novamente.');
+                 }
             }
             
 
     function Reset() {
-        setCdgBarras('');
-        setNome('');
-        setDesc('');
+        setCodBarras('');
+        setNomeProduto('');
+        setDescricaoProduto('');
         setUnidade('');
-        setValorVenda('');
+        setPercentualSobreVenda('');
      }
 
     let links = [
         { label: 'Usuário', link: '/register' },
         { label: 'Fornecedor', link: '/novofornecedor'},
         { label: 'Produtos', link: '/novoproduto', active: true},     
-        { label: 'Vendas', link: '#home' },
+        { label: 'Vendas', link: '/venda' },
         { label: 'Movimentar Inventário', link: '/newinventory' },
         { label: 'Relatórios', link: '#contact-us' },
       ];
@@ -88,8 +92,8 @@ export default function CadastroProduto() {
                     <input 
                         type="text"
                         placeholder="Nome Produto "
-                        value={nome}
-                        onChange={e => setNome(e.target.value)}
+                        value={nomeProduto}
+                        onChange={e => setNomeProduto(e.target.value)}
                     />  
                 </fieldset> 
 
@@ -100,8 +104,8 @@ export default function CadastroProduto() {
                     <input 
                         type="number"
                         placeholder="Código de Barras"
-                        value={cdgBarras}
-                        onChange={e => setCdgBarras(e.target.value)}
+                        value={codBarras}
+                        onChange={e => setCodBarras(e.target.value)}
                     />  
                 </fieldset> 
 
@@ -111,6 +115,8 @@ export default function CadastroProduto() {
                         value={unidade}
                         onChange={e => setUnidade(e.target.value)}
                     >
+                            <option value="" disabled ></option>
+
                             <option                  
                                 value="UnidadeA"
                                 >Unidade A
@@ -128,8 +134,8 @@ export default function CadastroProduto() {
                 <fieldset>
                 <legend>Descrição do Produto</legend>
                     <textarea 
-                        value={desc}
-                        onChange={e => setDesc(e.target.value)}
+                        value={descricaoProduto}
+                        onChange={e => setDescricaoProduto(e.target.value)}
                     /> 
                 </fieldset>
 
@@ -145,15 +151,15 @@ export default function CadastroProduto() {
                         <input 
                             type="number"
                             placeholder="% Porcentagem sobre vendas"
-                            value={valorVenda}
-                            onChange={e => setValorVenda(e.target.value)}
+                            value={percentualSobreVenda}
+                            onChange={e => setPercentualSobreVenda(e.target.value)}
                         />  
                     </fieldset> 
                 </div>
 
-            <div className="previewProfilePic" >
+            {/* <div className="previewProfilePic" >
                 <img className="playerProfilePic_home_tile" alt="teste"  src={picture && picture}></img>
-              </div>
+              </div> */}
 
                     <div className="operacaoProduto">
                             <button id="btn_add" type="submit">Adicionar Produto</button>

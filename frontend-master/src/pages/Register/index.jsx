@@ -59,7 +59,7 @@ export default function Register() {
         { label: 'Usuário', link: '/register', active: true },
         { label: 'Fornecedor', link: '/novofornecedor'},
         { label: 'Produtos', link: '/novoproduto'},     
-        { label: 'Vendas', link: '#home' },
+        { label: 'Vendas', link: '/venda' },
         { label: 'Movimentar Inventário', link: '/newinventory' },
         { label: 'Relatórios', link: '#contact-us' },
       ];

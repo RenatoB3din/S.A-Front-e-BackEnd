@@ -104,7 +104,9 @@ export default function CadastroFornecedor() {
                 }
             });      // POST na API com o ENDPOINT
 
-            history.push('/');
+            history.push('/novofornecedor');
+
+            Reset();
 
          } catch (err) {
             alert('Erro no cadastro, tente novamente.');
@@ -115,7 +117,7 @@ export default function CadastroFornecedor() {
         { label: 'Usuário', link: '/register' },
         { label: 'Fornecedor', link: '/novofornecedor', active: true},
         { label: 'Produtos', link: '/novoproduto'},     
-        { label: 'Vendas', link: '#home' },
+        { label: 'Vendas', link: '/venda' },
         { label: 'Movimentar Inventário', link: '/newinventory' },
         { label: 'Relatórios', link: '#contact-us' },
       ];
@@ -262,6 +264,8 @@ export default function CadastroFornecedor() {
                             value={tipoEndereco}
                             onChange={e => setTipoEndereco(e.target.value)}
                         >
+                            <option value="" disabled ></option>
+                            
                             <option                  
                                 value="RESIDENCIAL"
                                 >Residencial
@@ -277,7 +281,7 @@ export default function CadastroFornecedor() {
                             </option>
                             <option
                                 value="COBRANCA"
-                                >Cobranca
+                                >Cobrança
                             </option>
                             <option
                                 value="ENTREGA"
