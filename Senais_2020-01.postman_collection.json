@@ -291,6 +291,31 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "REGISTRAR_MOVIMENTO_ESTOQUE",
+			"request": {
+				"url": "http://localhost:8080/stockMovement/register",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU4NDE2NzIsImV4cCI6MTU5NTkyODA3Mn0.FrcSw0m5sHBoWd73WpoBEc_s088PW5pUvwEKg7x4XVXznDNuHIl_S_7xzC_Xz3mGii4DtyVj9dFVFXotBl_Kxg",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idFornecedor\":1,\n\t\"nrNotaFiscal\":\"0000123\",\n\t\"dataNotaFiscal\":\"27/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

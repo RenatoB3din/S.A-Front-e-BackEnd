@@ -1,13 +1,12 @@
 package br.sc.senai.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "cadfornecendereco")
 public class FornecedorEndereco extends Endereco{
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "tipo_endereco")
     private EEndereco tipoEndereco;
 
