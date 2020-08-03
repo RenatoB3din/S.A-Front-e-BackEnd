@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "cadfornec")
+@Table(name = "fornecedor")
 public class Fornecedor {
 
     @Id
@@ -43,7 +43,9 @@ public class Fornecedor {
     private Set<FornecedorEndereco> fornecedorEnderecos = new HashSet<FornecedorEndereco>();
 
     // TODO: 25/07/2020 >>> Verificar uma forma para cadastrar o id do fornecedor em uma tabela sem ter a tabela de referência
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedor")
+
+    @OneToMany(mappedBy = "fornecedor")
+    private Set<MovimentoEstoque> movimentoEstoques;
 
     public Fornecedor(){}
 
@@ -119,5 +121,13 @@ public class Fornecedor {
 
     public void setFornecedorEnderecos(Set<FornecedorEndereco> fornecedorEnderecos) {
         this.fornecedorEnderecos = fornecedorEnderecos;
+    }
+
+    public Set<MovimentoEstoque> getMovimentoEstoques() {
+        return movimentoEstoques;
+    }
+
+    public void setMovimentoEstoques(Set<MovimentoEstoque> movimentoEstoques) {
+        this.movimentoEstoques = movimentoEstoques;
     }
 }

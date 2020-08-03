@@ -5,16 +5,17 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "momentoestoque")
+@Table(name = "momento_estoque")
 public class MovimentoEstoque {
 
     @Id
-    @Column(name = "id_movimentoestoque")
+    @Column(name = "id_movimento_estoque")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMovimentoEstoque;
 
-    @Column(name = "id_fonecedor")
-    private Integer idFornecedor;
+    @ManyToOne
+    @JoinColumn(name = "id_fornecedor")
+    private Fornecedor fornecedor;
 
     @Column(name = "nr_notafiscal")
     @Size(max = 15)
@@ -36,8 +37,8 @@ public class MovimentoEstoque {
     public MovimentoEstoque() {
     }
 
-    public MovimentoEstoque(Integer idFornecedor, String nrNotaFiscal, String dataNotaFiscal, String imgNotaFiscal, EMovimentaEstoque tipoMovimento){
-        this.idFornecedor = idFornecedor;
+    public MovimentoEstoque(Fornecedor fornecedor, String nrNotaFiscal, String dataNotaFiscal, String imgNotaFiscal, EMovimentaEstoque tipoMovimento){
+        this.fornecedor = fornecedor;
         this.nrNotaFiscal = nrNotaFiscal;
         this.dataNotaFiscal = dataNotaFiscal;
         this.imgNotaFiscal = imgNotaFiscal;
@@ -52,12 +53,12 @@ public class MovimentoEstoque {
         this.idMovimentoEstoque = idMovimentoEstoque;
     }
 
-    public Integer getIdFornecedor() {
-        return idFornecedor;
+    public Fornecedor getFornecedor() {
+        return fornecedor;
     }
 
-    public void setIdFornecedor(Integer idFornecedor) {
-        this.idFornecedor = idFornecedor;
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
     public String getNrNotaFiscal() {
@@ -99,4 +100,5 @@ public class MovimentoEstoque {
     public void setMovimentoEstoqueItem(Set<MovimentoEstoqueItem> movimentoEstoqueItem) {
         this.movimentoEstoqueItem = movimentoEstoqueItem;
     }
+
 }
