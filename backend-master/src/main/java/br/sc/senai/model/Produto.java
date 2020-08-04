@@ -5,13 +5,17 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "cadproduto")
+@Table(name = "produto")
 public class Produto {
 
     @Id
     @Column(name = "id_produto")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProduto;
+
+    @Column(name = "codigo_produto")
+    @Size(max = 20)
+    private String cdgProduto;
 
     @Column(name = "nome_produto")
     @Size(max = 70)
@@ -44,14 +48,15 @@ public class Produto {
     @Column(name = "valor_compra", precision = 10)
     private double valorCompra;
 
-    @OneToMany(mappedBy = "produtoEstoque")
+    @OneToMany(mappedBy = "produto")
     private Set<MovimentoEstoqueItem> movimentoEstoqueItem;
 
     public Produto() {
     }
 
-    public Produto(String nomeProduto, String descricaoProduto, String codBarras, String unidade, Double percentualSobreVenda, String imagemURL) {
+    public Produto(String nomeProduto, String cdgProduto, String descricaoProduto, String codBarras, String unidade, Double percentualSobreVenda, String imagemURL) {
         this.nomeProduto = nomeProduto;
+        this.cdgProduto = cdgProduto;
         this.descricaoProduto = descricaoProduto;
         this.codBarras =  codBarras;
         this.unidade = unidade;
@@ -67,6 +72,14 @@ public class Produto {
 
     public void setIdProduto(Integer idProduto) {
         this.idProduto = idProduto;
+    }
+
+    public String getCdgProduto() {
+        return cdgProduto;
+    }
+
+    public void setCdgProduto(String cdgProduto) {
+        this.cdgProduto = cdgProduto;
     }
 
     public String getNomeProduto() {
@@ -126,7 +139,7 @@ public class Produto {
     }
 
     public void setQtdEstoqueAtual(double qtdEstoqueAtual) {
-        this.qtdEstoqueAtual = qtdEstoqueAtual;
+        this.qtdEstoqueAtual = atualizaQuantidadeEstoque(qtdEstoqueAtual);
     }
 
     public double getValorVenda() {
@@ -156,5 +169,11 @@ public class Produto {
 
     public void setMovimentoEstoqueItem(Set<MovimentoEstoqueItem> movimentoEstoqueItem) {
         this.movimentoEstoqueItem = movimentoEstoqueItem;
+    }
+
+    //ATUALIZA QUANTIDADE ESTOQUE
+    public double atualizaQuantidadeEstoque(Double quantidadeMovimento){
+        return this.qtdEstoqueAtual = qtdEstoqueAtual + quantidadeMovimento;
+
     }
 }

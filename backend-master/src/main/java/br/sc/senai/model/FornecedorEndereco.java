@@ -3,18 +3,12 @@ package br.sc.senai.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cadfornecendereco")
+@Table(name = "fornecedor_endereco")
 public class FornecedorEndereco extends Endereco{
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "tipo_endereco")
     private EEndereco tipoEndereco;
-
-    // TODO: 25/07/2020 >>> criar uma forma de incluir apenas o id do fornecedor sem necessidade da tabela de relação
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id_fornecedor")
-//    private Fornecedor fornecedor;
-
 
     public FornecedorEndereco(){
         super();

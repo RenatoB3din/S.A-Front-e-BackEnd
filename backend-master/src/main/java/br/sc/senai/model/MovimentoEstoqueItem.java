@@ -1,34 +1,35 @@
 package br.sc.senai.model;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "relmovimentoestoqueitem")
+@Table(name = "movimento_estoque_item")
 public class MovimentoEstoqueItem {
 
     @Id
-    @Column(name = "id_movimentosestoqueitem")
+    @Column(name = "id_movimento_sestoque_item")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMovimentoEstoqueItem;
 
     @ManyToOne
-    @JoinColumn(name = "movimentoestoque_id")
+    @JoinColumn(name = "id_movimento_estoque")
     private MovimentoEstoque movimentoEstoque;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id")
-    private Produto produtoEstoque;
+    @JoinColumn(name = "id_produto")
+    private Produto produto;
 
-    private LocalDateTime registeredAt;
+    private Double valor;
+
+    private Double qtde;
 
     public MovimentoEstoqueItem() {
     }
 
-//    public MovimentoEstoqueItem(Double qtdMovimento, Double vlrUnitario){
-//        this.qtdMovimento = qtdMovimento;
-//        this.vlrUnitario = vlrUnitario;
-//    }
+    public MovimentoEstoqueItem(Double valor, Double qtde) {
+        this.valor = valor;
+        this.qtde = qtde;
+    }
 
     public Integer getIdMovimentoEstoqueItem() {
         return idMovimentoEstoqueItem;
@@ -46,36 +47,27 @@ public class MovimentoEstoqueItem {
         this.movimentoEstoque = movimentoEstoque;
     }
 
-//    public Double getQtdMovimento() {
-//        return qtdMovimento;
-//    }
-//
-//    public void setQtdMovimento(Double qtdMovimento) {
-//        this.qtdMovimento = qtdMovimento;
-//    }
-//
-//    public Double getVlrUnitario() {
-//        return vlrUnitario;
-//    }
-//
-//    public void setVlrUnitario(Double vlrUnitario) {
-//        this.vlrUnitario = vlrUnitario;
-//    }
-
-    public LocalDateTime getRegisteredAt() {
-        return registeredAt;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setRegisteredAt(LocalDateTime registeredAt) {
-        this.registeredAt = registeredAt;
-
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
-    public Produto getProdutoEstoque() {
-        return produtoEstoque;
+    public Double getValor() {
+        return valor;
     }
 
-    public void setProdutoEstoque(Produto produtoEstoque) {
-        this.produtoEstoque = produtoEstoque;
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public Double getQtde() {
+        return qtde;
+    }
+
+    public void setQtde(Double qtde) {
+        this.qtde = qtde;
     }
 }

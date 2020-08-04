@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/product")
 public class ProdutoController {
@@ -47,6 +47,7 @@ public class ProdutoController {
             if (produtoData.isPresent()){
 
                 Produto editProduto = produtoData.get();
+                editProduto.setCdgProduto(produtoData.get().getCdgProduto());
                 editProduto.setNomeProduto(produto.getNomeProduto());
                 editProduto.setDescricaoProduto(produto.getDescricaoProduto());
                 editProduto.setCodBarras(produto.getCodBarras());

@@ -23,14 +23,14 @@ CADASTRAR UM USUÁRIO >>  http://localhost:8080/api/auth/signup</br>
 }
 
 
-LOGIN >>  http://localhost:8080/api/auth/sigin</br>
+REALIZAR LOGIN >>  http://localhost:8080/api/auth/sigin</br>
 
 {</br>
 	&emsp;&emsp;"username": "rb3din",</br>
 	&emsp;&emsp;"password": "123456",</br>
 }</br>
 
-Fornecedor >> http://localhost:8080/provider/register </br>
+CADASTRO DE FORNECEDOR >> http://localhost:8080/provider/register </br>
 {</br>
 &emsp;&emsp;"nomeFantasia":"nomeFantasia",</br>
 &emsp;&emsp;"razaoSocial":"razaoSocial",</br>
@@ -48,6 +48,33 @@ Fornecedor >> http://localhost:8080/provider/register </br>
 &emsp;&emsp;&emsp;&emsp;"uf":"uf"</br>
 &emsp;&emsp;&emsp;&emsp;"tipoEndereco":"RESIDENCIAL"</br>
 &emsp;&emsp;}]</br>
+}</br>
+
+
+CADASTRO DE PRODUTO >> http://localhost:8080/product/register </br>
+{</br>
+&emsp;&emsp;"cdgProduto":"cdgProduto",</br>
+&emsp;&emsp;"nomeProduto":"nomeProduto",</br>
+&emsp;&emsp;"descricaoProduto":"descricaoProduto",</br>
+&emsp;&emsp;"codBarras":"codBarras",</br>
+&emsp;&emsp;"unidade":"unidade",</br>
+&emsp;&emsp;"percentualSobreVenda":1,</br>
+&emsp;&emsp;"imagemURL":"imagemURL"</br>
+}</br>
+
+CADASTRO DE MOVIMENTO ESTOQUE >> http://localhost:8080/stockMovement/register/provider/{idProvider}</br>
+{</br>
+&emsp;&emsp;"nrNotaFiscal":"0000005",</br>
+&emsp;&emsp;"dataNotaFiscal":"28/07/2020",</br>
+&emsp;&emsp;"imgNotaFiscal":"imgNotaFiscal",</br>
+&emsp;&emsp;"tipoMovimento":"MOV_COMPRA"</br>
+}</br>
+
+CADASTRO DE MOVIMENTO ESTOQUE ITEM >> http://localhost:8080/stockMovement/register/moviment/{idMoviment}/product/{idProduct}</br>
+Obs.: da forma que está hoje, cada vez que é inserido um item na movimentação, já incluí o mesmo no banco de dados.
+{</br>
+&emsp;&emsp;"valor":40,</br>
+&emsp;&emsp;"qtde":400</br>
 }</br>
 
 
