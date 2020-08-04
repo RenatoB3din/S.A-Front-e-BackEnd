@@ -1,35 +1,97 @@
 import React, { useState } from 'react';
-import './styles.css';
 import api from '../../services/api';
+import {storage} from '../../components/Firebase/firebaseConfig';
+import { BsUpload } from 'react-icons/bs'
+import { MdAddCircleOutline } from 'react-icons/md'
+
+import './styles.css';
 import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
 
 export default function CadastroProduto() {
     const [codBarras, setCodBarras] = useState('');
+    const [cont, setCont] = useState(0);
+    const [cdgProduto, setCdgProduto] = useState(0);
     const [nomeProduto, setNomeProduto] = useState('');
     const [descricaoProduto, setDescricaoProduto] = useState('');
     const [unidade, setUnidade] = useState('');
-    const [imagemURL, setImagemURL] = useState(null);
-    const [imgData, setImgData] = useState(null);
+    const [image, setImage] = useState(null);
+    const [imagemURL, setImagemUrl] = useState("");
+    const [progress, setProgress] = useState(0);
+    const [error, setError] = useState("");
     const [percentualSobreVenda, setPercentualSobreVenda] = useState('');
 
     const token = localStorage.getItem('token');
 
-    const onChangePicture = e => {
-        if (e.target.files[0]) {
-            setImagemURL(URL.createObjectURL(e.target.files[0]));
-            const reader = new FileReader();
-            reader.addEventListener("load", () => {
-            setImgData(reader.result);
-        });
-            reader.readAsDataURL(e.target.files[0]);
+
+    function gerarCodigo(e) {
+        e.preventDefault();
+        if (cont === 0) {
+            const btncdg = document.getElementById("btn_Cdg");
+            setCdgProduto(Math.floor(Math.random() * (10000000 - 1000000)) + 1000000);
+            btncdg.style.disabled = true;
+            setCont(1);
+        }
+    }
+
+    const handChange = e => {
+        const file = e.target.files[0];
+        if(file) {
+            const fileType = file["type"];
+            const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+            if (validImageTypes.includes(fileType)) {
+                setError("");
+                setImage(file);
+            } else {
+                setError("Favor selecionar uma imagem para Upload")
+            }
+        }
+    };
+
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        if(image) {
+            const uploadTask = storage.ref(`images/${image.name}`).put(image)
+
+            uploadTask.on(
+                "state_changed",
+                snapshot => {
+                    const progress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100 
+                    );
+                    setProgress(progress);
+                },
+                error => {
+                    setError(error);
+                },
+                () => {
+                    storage
+                        .ref("images")
+                        .child(image.name)
+                        .getDownloadURL().then(url => {
+                            setImagemUrl(url)
+                            setProgress(0);
+                    })
+                }
+                );
+        } else {
+            setError("Erro, favor escolher uma imagem para Upload");
         }
     };
     
+
+        // if(imagemURL === "") 
+        //     document.getElementById("imgproduto").setAttribute("hidden", "");
+        // else
+        //     document.getElementById("imgproduto").setAttribute("visible", "");
+
+    
+    
     async function lidarComCadastroProduto(e) {
         e.preventDefault();
- 
-        
+
+           
             const data = {
                 codBarras,
                 nomeProduto,
@@ -87,6 +149,7 @@ export default function CadastroProduto() {
 
                 <div>
 
+                <div className="input-group">
                 <fieldset >
                 <legend>Nome do Produto</legend>
                     <input 
@@ -97,9 +160,25 @@ export default function CadastroProduto() {
                     />  
                 </fieldset> 
 
+                <fieldset style={{ width: 225 }}>
+                <legend>Código do Produto</legend>
+                    <input 
+                        disabled
+                        type="text"
+                        placeholder="Gerar código"
+                        value={cdgProduto}
+                        onChange={e => setCdgProduto(e.target.value)}
+                    />  
+                </fieldset> 
+
+                <fieldset style={{ width: 0 }}>
+                        <button disabled id="btn_Cdg" type="" onMouseOver={gerarCodigo}><MdAddCircleOutline/></button> 
+                    </fieldset>
+                </div>
+
                 <div className="input-group">
 
-                <fieldset>
+                <fieldset >
                 <legend>Código de barras do Produto</legend>
                     <input 
                         type="number"
@@ -109,7 +188,7 @@ export default function CadastroProduto() {
                     />  
                 </fieldset> 
 
-                <fieldset style={{ width: 220 }}>
+                <fieldset style={{ width: 180 }}>
                 <legend>Unidade</legend>
                     <select
                         value={unidade}
@@ -131,35 +210,47 @@ export default function CadastroProduto() {
 
                 </div>
 
+                <div className="input-group">
                 <fieldset>
                 <legend>Descrição do Produto</legend>
                     <textarea 
+                        style={{ resize: "none" }} 
                         value={descricaoProduto}
                         onChange={e => setDescricaoProduto(e.target.value)}
                     /> 
                 </fieldset>
 
-                <div className="input-group">
-                    <fieldset>
-                        <legend>Imagem Produto</legend>
-                            <input id="img_produto" style={{ width: 450 }} type="file"  className="btn btn-success" onChange={onChangePicture} />  
-                    </fieldset>
-
-
-                    <fieldset>
-                    <legend>Porcentagem sobre as vendas</legend>
+                <fieldset style={{ width: 180 }}>
+                    <legend>Inflação do Produto</legend>
                         <input 
                             type="number"
-                            placeholder="% Porcentagem sobre vendas"
+                            placeholder="0.0%"
                             value={percentualSobreVenda}
                             onChange={e => setPercentualSobreVenda(e.target.value)}
                         />  
                     </fieldset> 
+                    </div>
+
+                <div className="input-img" >
+                    <fieldset>
+                        <legend>Imagem Produto</legend>
+                            <input id="img_produto" style={{ width: 500, height:55  }} type="file"  className="btn btn-success" onChange={handChange} /> 
+        
+                            <div style={{ height: "100px" }}>
+                                {progress > 0? <progress value={progress} max="100" /> : ""}
+                                <p style={{color: "red" }}>{error}</p>
+                            </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <button id="btn_upload" onClick={handleUpdate}> <BsUpload/> </button> 
+                    </fieldset>
+
                 </div>
 
-            {/* <div className="previewProfilePic" >
-                <img className="playerProfilePic_home_tile" alt="teste"  src={picture && picture}></img>
-              </div> */}
+                    <div className="imgproduto">
+                        <img id="imgdoproduto" src={imagemURL}></img>
+                    </div>
 
                     <div className="operacaoProduto">
                             <button id="btn_add" type="submit">Adicionar Produto</button>
