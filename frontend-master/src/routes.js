@@ -8,12 +8,14 @@ import CadastroFornecedor from './pages/CadastroFornecedor';
 import InventoryMovement from './pages/InventoryMovement';
 import Venda from './pages/Venda';
 import Greeting from './pages/Greeting';
+import RecuperarSenha from './pages/RecuperarSenha';
 
 export default function Routes() {
     return (
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={Logon} />
+                <Route path="/recsenha" component={RecuperarSenha} />
                 <Route path="/register" component={Register} />
                 <Route path="/novoproduto" component={CadastroProduto} />
                 <Route path="/novofornecedor" component={CadastroFornecedor} />

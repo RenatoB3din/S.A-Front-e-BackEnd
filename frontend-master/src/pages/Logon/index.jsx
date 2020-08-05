@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Iframe from 'react-iframe';
 import { Link, useHistory } from 'react-router-dom';
 import './styles.css';
 
@@ -11,6 +12,12 @@ export default function Logon(){
     const [username, setUsername ] = useState('');
     const [password, setPassword ] = useState('');
     const history = useHistory();
+
+    
+    function changeStuff(e) {
+        const myIframe = document.getElementById('myId');
+        myIframe.style.display = "block";
+    }
 
     async function handleLogin(e) {
         e.preventDefault();
@@ -33,6 +40,18 @@ export default function Logon(){
         <div className="logon-container">
             <section className="form">
                 <img src={logoImg} alt="logoSa" />
+                
+                <Iframe url="/recsenha"
+                    display="none"
+                    frameBorder="0"
+                    position="absolute"
+                    scrolling="no"
+                    width="100%"
+                    height="315px"
+                    id="myId"
+                    allow="fullscreen"
+                    className="myClassname"
+                />
 
                 <form onSubmit={handleLogin}>
                     <h1>Faça seu logon</h1>
@@ -50,7 +69,7 @@ export default function Logon(){
                     />
 
                     <div className="rec_senha">
-                        <Link className="back-link" to="/register">Esqueceu sua senha?</Link>
+                        <a className="back-link" onClick={changeStuff}>Esqueceu sua senha?</a>
                     </div>
                     <button className="button" type="submit">Entrar</button>
 
