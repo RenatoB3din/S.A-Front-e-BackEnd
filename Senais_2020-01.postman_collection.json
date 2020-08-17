@@ -8,314 +8,343 @@
 	},
 	"item": [
 		{
-			"name": "REGISTRAR_FORNECEDOR",
-			"request": {
-				"url": "http://localhost:8080/provider/register",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3NTczODksImV4cCI6MTU5NTg0Mzc4OX0.9DV7DTr0E-zLa5yXGZccg6S168q20xh2IWSakaOX-5kiTyp2cDUZPRzh0yH1XFtrfhbUGJ7Z3RvwyDR4bcDRHQ",
+			"name": "Usuário",
+			"description": "",
+			"item": [
+				{
+					"name": "REGISTRAR_USUARIO_SIGNUP",
+					"request": {
+						"url": "http://localhost:8080/api/auth/signup",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"Renato Bedin\",\r\n\t\"username\": \"rb3din\",\r\n\t\"email\": \"renatob3din@gmail.com\",\r\n\t\"password\": \"123456\",\r\n\t\"cpf\": \"10000778672\",\r\n\t\"role\": [\"ROLE_ADMIN\"]\r\n}"
+						},
 						"description": ""
 					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia\",\n\t\"razaoSocial\":\"razaoSocial\",\n\t\"cnpj\":\"12345678900012\",\n\t\"contato\":\"contato\",\n\t\"telefone\":\"telefone\",\n\t\"email\":\"email@eamil.com\",\n\t\"fornecedorEnderecos\":[{\n\t\t\"cep\":\"cep\",\n\t\t\"rua\":\"rua\",\n\t\t\"numero\":\"numero\",\n\t\t\"complemento\":\"complemento\",\n\t\t\"bairro\":\"bairro\",\n\t\t\"municipio\":\"municipio\",\n\t\t\"uf\":\"uf\",\n\t\t\"tipoEndereco\":\"RESIDENCIAL\"\n\t}]\n}"
+					"response": []
 				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "REGISTRAR_FORNECEDOR_ENDERECO",
-			"request": {
-				"url": "http://localhost:8080/provider/adress/resgister",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
+				{
+					"name": "REGISTRAR_USUARIO_SIGNIN",
+					"request": {
+						"url": "http://localhost:8080/api/auth/signin",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"rb3din\",\r\n\t\"password\": \"123456\"\r\n}"
+						},
 						"description": ""
 					},
-					{
-						"key": "accessToken",
-						"value": "",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"cep\":\"cep\",\n\t\"rua\":\"rua\",\n\t\"numero\":\"numero\",\n\t\"complemento\":\"complemento\",\n\t\"bairro\":\"bairro\",\n\t\"municipio\":\"municipio\",\n\t\"uf\":\"uf\",\n\t\"tipoEndereco\":\"RESIDENCIAL\"\n\n}"
-				},
-				"description": ""
-			},
-			"response": []
+					"response": []
+				}
+			]
 		},
 		{
-			"name": "REGISTRAR_PRODUTO",
-			"request": {
-				"url": "http://localhost:8080/product/register",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
+			"name": "Fornecedor",
+			"description": "",
+			"item": [
+				{
+					"name": "REGISTRAR_FORNECEDOR",
+					"request": {
+						"url": "http://localhost:8080/provider/register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTY0NTA4MTYsImV4cCI6MTU5NjUzNzIxNn0.Seth1jfSZdAZtKvljq-jmNBKJ856FfnQja1zJIV5LdpT0vmf1w5xs-aTwLvOykTWGHJG-rrMtJsoG7_KP_tdCg",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia 3\",\n\t\"razaoSocial\":\"razaoSocial 3\",\n\t\"cnpj\":\"12345678900013\",\n\t\"contato\":\"contato\",\n\t\"telefone\":\"telefone\",\n\t\"email\":\"email@eamil.com\",\n\t\"fornecedorEnderecos\":[{\n\t\t\"cep\":\"cep\",\n\t\t\"rua\":\"rua\",\n\t\t\"numero\":\"numero\",\n\t\t\"complemento\":\"complemento\",\n\t\t\"bairro\":\"bairro\",\n\t\t\"municipio\":\"municipio\",\n\t\t\"uf\":\"uf\",\n\t\t\"tipoEndereco\":\"RESIDENCIAL\"\n\t}]\n}\n\n"
+						},
 						"description": ""
 					},
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3NTczODksImV4cCI6MTU5NTg0Mzc4OX0.9DV7DTr0E-zLa5yXGZccg6S168q20xh2IWSakaOX-5kiTyp2cDUZPRzh0yH1XFtrfhbUGJ7Z3RvwyDR4bcDRHQ",
+					"response": []
+				},
+				{
+					"name": "REGISTRAR_FORNECEDOR_ENDERECO",
+					"request": {
+						"url": "http://localhost:8080/provider/adress/resgister",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "accessToken",
+								"value": "",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cep\":\"cep\",\n\t\"rua\":\"rua\",\n\t\"numero\":\"numero\",\n\t\"complemento\":\"complemento\",\n\t\"bairro\":\"bairro\",\n\t\"municipio\":\"municipio\",\n\t\"uf\":\"uf\",\n\t\"tipoEndereco\":\"RESIDENCIAL\"\n\n}"
+						},
 						"description": ""
 					},
-					{
-						"key": "accessToken",
-						"value": "",
-						"description": "",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"nomeProduto\":\"nomeProduto\",\n\t\"descricaoProduto\":\"descricaoProduto\",\n\t\"codBarras\": \"codBarras\",\n\t\"unidade\":\"unidade\",\n\t\"percentualSobreVenda\":1,\n\t\"imagemURL\":\"imagemURL\"\n}"
+					"response": []
 				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "REGISTRAR_USUARIO",
-			"request": {
-				"url": "http://localhost:8080/api/users",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"name\":\"Renato Bedin\",\r\n\t\"username\":\"rb3din\",\r\n\t\"email\":\"renatob3din@gmail.com\",\r\n\t\"password\":\"123456\",\r\n\t\"cpf\":\"10000778672\",\r\n\t\"role\":[\"ROLE_SALLESMAN\"]\r\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "REGISTRAR_USUARIO_SIGNIN",
-			"request": {
-				"url": "http://localhost:8080/api/auth/signin",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"username\": \"rb3din\",\r\n\t\"password\": \"123456\"\r\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "REGISTRAR_USUARIO_SIGNUP",
-			"request": {
-				"url": "http://localhost:8080/api/auth/signup",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"name\": \"Renato Bedin\",\r\n\t\"username\": \"rb3din\",\r\n\t\"email\": \"renatob3din@gmail.com\",\r\n\t\"password\": \"123456\",\r\n\t\"cpf\": \"10000778672\",\r\n\t\"role\": [\"ROLE_ADMIN\"]\r\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "EDITAR_FORNECEDOR",
-			"request": {
-				"url": "http://localhost:8080/provider/register/1",
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia\",\n\t\"razaoSocial\":\"razaoSocial\",\n\t\"cnpj\":\"12345678900013\"\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "EDITAR_FORNECEDOR_ENDERECO",
-			"request": {
-				"url": "http://localhost:8080/provider/adress/register/2",
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"cep\":\"cep\",\n\t\"rua\":\"rua\",\n\t\"numero\":\"numero\",\n\t\"complemento\":\"complemento\",\n\t\"bairro\":\"bairro\",\n\t\"municipio\":\"municipio\",\n\t\"uf\":\"uf\",\n\t\"tipoEndereco\":\"ENTREGA\"\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "EDITAR_PRODUTO",
-			"request": {
-				"url": "http://localhost:8080/product/register",
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
+				{
+					"name": "EDITAR_FORNECEDOR",
+					"request": {
+						"url": "http://localhost:8080/provider/register/1",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia\",\n\t\"razaoSocial\":\"razaoSocial\",\n\t\"cnpj\":\"12345678900013\"\n}"
+						},
 						"description": ""
 					},
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3MzU4MTUsImV4cCI6MTU5NTgyMjIxNX0._n-vFAGFZVBO5KTlycZ7z65oGEPTJVakJz-hO7J1e2ZFyKsXOENPl8gCyOI4bbdTeCHCyj62t7q_UW8kShc_XQ",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "accessToken",
-						"value": "",
-						"description": "",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"nomeProduto\":\"nomeProduto\",\n\t\"descricaoProduto\":\"descricaoProduto\",\n\t\"codBarras\":\"1234567890123\",\n\t\"unidade\":\"uni\",\n\t\"percentualSobreVenda\":1.15,\n\t\"imagemURL\":\"imagemURL\"\n}"
+					"response": []
 				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "DELETE_FORNECEDOR",
-			"request": {
-				"url": "http://localhost:8080/provider/register/1",
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "DELETE_FORNECEDOR_ENDERECO",
-			"request": {
-				"url": "http://localhost:8080/provider/adress/register/3",
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "DELETAR_PRODUTO",
-			"request": {
-				"url": "http://localhost:8080/product/register/1",
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
+				{
+					"name": "EDITAR_FORNECEDOR_ENDERECO",
+					"request": {
+						"url": "http://localhost:8080/provider/adress/register/2",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cep\":\"cep\",\n\t\"rua\":\"rua\",\n\t\"numero\":\"numero\",\n\t\"complemento\":\"complemento\",\n\t\"bairro\":\"bairro\",\n\t\"municipio\":\"municipio\",\n\t\"uf\":\"uf\",\n\t\"tipoEndereco\":\"ENTREGA\"\n}"
+						},
 						"description": ""
 					},
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3MzU4MTUsImV4cCI6MTU5NTgyMjIxNX0._n-vFAGFZVBO5KTlycZ7z65oGEPTJVakJz-hO7J1e2ZFyKsXOENPl8gCyOI4bbdTeCHCyj62t7q_UW8kShc_XQ",
-						"description": "",
-						"disabled": true
-					},
-					{
-						"key": "accessToken",
-						"value": "",
-						"description": "",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"nomeProduto\":\"nomeProduto\",\n\t\"descricaoProduto\":\"descricaoProduto\",\n\t\"codBarras\":\"1234567890123\",\n\t\"unidade\":\"uni\",\n\t\"percentualSobreVenda\":11.5,\n\t\"imagemURL\":\"imagemURL\"\n}"
+					"response": []
 				},
-				"description": ""
-			},
-			"response": []
+				{
+					"name": "DELETE_FORNECEDOR",
+					"request": {
+						"url": "http://localhost:8080/provider/register/1",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE_FORNECEDOR_ENDERECO",
+					"request": {
+						"url": "http://localhost:8080/provider/adress/register/3",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"name": "REGISTRAR_MOVIMENTO_ESTOQUE",
-			"request": {
-				"url": "http://localhost:8080/stockMovement/register",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU4NDE2NzIsImV4cCI6MTU5NTkyODA3Mn0.FrcSw0m5sHBoWd73WpoBEc_s088PW5pUvwEKg7x4XVXznDNuHIl_S_7xzC_Xz3mGii4DtyVj9dFVFXotBl_Kxg",
+			"name": "Produto",
+			"description": "",
+			"item": [
+				{
+					"name": "REGISTRAR_PRODUTO",
+					"request": {
+						"url": "http://localhost:8080/product/register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTY0NTA4MTYsImV4cCI6MTU5NjUzNzIxNn0.Seth1jfSZdAZtKvljq-jmNBKJ856FfnQja1zJIV5LdpT0vmf1w5xs-aTwLvOykTWGHJG-rrMtJsoG7_KP_tdCg",
+								"description": ""
+							},
+							{
+								"key": "accessToken",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cdgProduto\":\"cdgProduto\",\n\t\"nomeProduto\":\"nomeProduto 3\",\n\t\"descricaoProduto\":\"descricaoProduto 3\",\n\t\"codBarras\": \"codBarra 3\",\n\t\"unidade\":\"unidade\",\n\t\"percentualSobreVenda\":2,\n\t\"imagemURL\":\"imagemURL 2\"\n}"
+						},
 						"description": ""
 					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"idFornecedor\":1,\n\t\"nrNotaFiscal\":\"0000123\",\n\t\"dataNotaFiscal\":\"27/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+					"response": []
 				},
-				"description": ""
-			},
-			"response": []
+				{
+					"name": "EDITAR_PRODUTO",
+					"request": {
+						"url": "http://localhost:8080/product/register",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3MzU4MTUsImV4cCI6MTU5NTgyMjIxNX0._n-vFAGFZVBO5KTlycZ7z65oGEPTJVakJz-hO7J1e2ZFyKsXOENPl8gCyOI4bbdTeCHCyj62t7q_UW8kShc_XQ",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "accessToken",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nomeProduto\":\"nomeProduto\",\n\t\"descricaoProduto\":\"descricaoProduto\",\n\t\"codBarras\":\"1234567890123\",\n\t\"unidade\":\"uni\",\n\t\"percentualSobreVenda\":1.15,\n\t\"imagemURL\":\"imagemURL\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DELETAR_PRODUTO",
+					"request": {
+						"url": "http://localhost:8080/product/register/1",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3MzU4MTUsImV4cCI6MTU5NTgyMjIxNX0._n-vFAGFZVBO5KTlycZ7z65oGEPTJVakJz-hO7J1e2ZFyKsXOENPl8gCyOI4bbdTeCHCyj62t7q_UW8kShc_XQ",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "accessToken",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nomeProduto\":\"nomeProduto\",\n\t\"descricaoProduto\":\"descricaoProduto\",\n\t\"codBarras\":\"1234567890123\",\n\t\"unidade\":\"uni\",\n\t\"percentualSobreVenda\":11.5,\n\t\"imagemURL\":\"imagemURL\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MovimentoEstoque",
+			"description": "",
+			"item": [
+				{
+					"name": "REGISTRAR_MOVIMENTO_ESTOQUE",
+					"request": {
+						"url": "http://localhost:8080/stockMovement/register/provider/1",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTY0NTA4MTYsImV4cCI6MTU5NjUzNzIxNn0.Seth1jfSZdAZtKvljq-jmNBKJ856FfnQja1zJIV5LdpT0vmf1w5xs-aTwLvOykTWGHJG-rrMtJsoG7_KP_tdCg",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nrNotaFiscal\":\"0000005\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "REGISTRAR_MOVIMENTO_ESTOQUE_ITEM",
+					"request": {
+						"url": "http://localhost:8080/stockMovement/register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU5ODA5NTYsImV4cCI6MTU5NjA2NzM1Nn0.1yjg2Ou5fzvib9S5l5-OidBmMTj9RJ0qFPar6o3bJQCIk8cyLQ-AKVL5HK4mSJeD7DMiilIhVv63j7M02YUruw",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"idFornecedor\":1,\n\t\"nrNotaFiscal\":\"0000123\",\n\t\"dataNotaFiscal\":\"27/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
