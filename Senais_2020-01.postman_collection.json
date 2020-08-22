@@ -237,7 +237,7 @@
 				{
 					"name": "EDITAR_PRODUTO",
 					"request": {
-						"url": "http://localhost:8080/product/register/3",
+						"url": "http://localhost:8080/product/register/1",
 						"method": "PUT",
 						"header": [
 							{
@@ -247,7 +247,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjQ5MzksImV4cCI6MTU5ODE1MTMzOX0.msKK5jYUcElDg6DcCDcIqI3XxSv4nZrSKmw6fjOvc8VXke-ygPDzOqpvQKKYlAPndrXZMwOjJgzevk2-MEqkZQ",
 								"description": ""
 							},
 							{
@@ -259,7 +259,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nomeProduto\":\"nomeProduto 3\",\n\t\"descricaoProduto\":\"descricaoProduto 3\",\n\t\"codBarras\":\"1234567890003\",\n\t\"unidade\":\"uni\",\n\t\"percentualSobreVenda\":1.15,\n\t\"imagemURL\":\"imagemURL\"\n}"
+							"raw": "{\n\t\"nomeProduto\":\"nomeProduto 1\",\n\t\"descricaoProduto\":\"descricaoProduto 1\",\n\t\"codBarras\":\"1234567890001\",\n\t\"unidade\":\"uni\",\n\t\"percentualSobreVenda\":2,\n\t\"imagemURL\":\"imagemURL 1\"\n}"
 						},
 						"description": ""
 					},
@@ -303,7 +303,107 @@
 			"description": "",
 			"item": [
 				{
-					"name": "REGISTRAR_MOVIMENTO_ESTOQUE",
+					"name": "REGISTRAR_MOVIMENTO_ESTOQUE_MOV_VENDA",
+					"request": {
+						"url": "http://localhost:8080/stockMovement/register/provider/1",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nrNotaFiscal\":\"0000006\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "REGISTRAR_MOVIMENTO_ESTOQUE_MOV_COMPRA",
+					"request": {
+						"url": "http://localhost:8080/stockMovement/register/provider/1",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nrNotaFiscal\":\"0000006\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "REGISTRAR_MOVIMENTO_ESTOQUE_MOV_DEVOLUCAO_FORNECEDOR",
+					"request": {
+						"url": "http://localhost:8080/stockMovement/register/provider/1",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nrNotaFiscal\":\"0000006\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "REGISTRAR_MOVIMENTO_ESTOQUE_MOV_DEVOLUCAO_CLIENTE",
+					"request": {
+						"url": "http://localhost:8080/stockMovement/register/provider/1",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nrNotaFiscal\":\"0000006\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "REGISTRAR_MOVIMENTO_ESTOQUE_MOV_INVENTARIO_ESTOQUE",
 					"request": {
 						"url": "http://localhost:8080/stockMovement/register/provider/1",
 						"method": "POST",

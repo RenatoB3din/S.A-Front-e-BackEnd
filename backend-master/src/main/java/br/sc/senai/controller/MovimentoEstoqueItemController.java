@@ -42,6 +42,8 @@ public class MovimentoEstoqueItemController {
             Optional<MovimentoEstoque> movimentoEstoqueData = movimentoEstoqueRepository.findById(idMovimentoEstoque);
             Optional<Produto> produtoData = produtoRespository.findById(idProduto);
 
+            Enum tipoMovimento = movimentoEstoqueData.get().getTipoMovimento();
+
             if (movimentoEstoqueData.isPresent() && produtoData.isPresent()){
 
                 MovimentoEstoqueItem novoItem = new MovimentoEstoqueItem();
@@ -50,7 +52,7 @@ public class MovimentoEstoqueItemController {
                 novoItem.setQtde(movimentoEstoqueItem.getQtde());
                 novoItem.setValor(movimentoEstoqueItem.getValor());
 
-                produtoData.get().atualizaQuantidadeEstoque(movimentoEstoqueItem.getQtde());
+                produtoData.get().atualizaQuantidadeEstoque(movimentoEstoqueItem.getQtde(), tipoMovimento);
                 produtoData.get().setValorCompra(movimentoEstoqueItem.getValor());
                 produtoData.get().atualizaValorVenda(movimentoEstoqueItem.getValor());
 

@@ -1,6 +1,7 @@
 package br.sc.senai.model;
 
 import javax.persistence.*;
+import javax.print.DocFlavor;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -58,7 +59,7 @@ public class Produto {
         this.nomeProduto = nomeProduto;
         this.cdgProduto = cdgProduto;
         this.descricaoProduto = descricaoProduto;
-        this.codBarras =  codBarras;
+        this.codBarras = codBarras;
         this.unidade = unidade;
         this.percentualSobreVenda = percentualSobreVenda;
         this.imagemURL = imagemURL;
@@ -138,8 +139,8 @@ public class Produto {
         return qtdEstoqueAtual;
     }
 
-    public void setQtdEstoqueAtual(double qtdEstoqueAtual) {
-        this.qtdEstoqueAtual = atualizaQuantidadeEstoque(qtdEstoqueAtual);
+    public void setQtdEstoqueAtual(double qtdEstoqueAtual, Enum tipoMovimento) {
+        this.qtdEstoqueAtual = atualizaQuantidadeEstoque(qtdEstoqueAtual, tipoMovimento);
     }
 
     public double getValorVenda() {
@@ -158,8 +159,8 @@ public class Produto {
         this.valorCompra = valorCompra;
     }
 
-    public double atualizaValorVenda(double valorCompra){
-        this.valorVenda = valorCompra + ( valorCompra * 0.2 );
+    public double atualizaValorVenda(double valorCompra) {
+        this.valorVenda = valorCompra + (valorCompra * 0.2);
         return valorVenda;
     }
 
@@ -172,7 +173,40 @@ public class Produto {
     }
 
     //ATUALIZA QUANTIDADE ESTOQUE
-    public double atualizaQuantidadeEstoque(Double quantidadeMovimento){
-        return this.qtdEstoqueAtual = qtdEstoqueAtual + quantidadeMovimento;
+    public double atualizaQuantidadeEstoque(Double quantidadeMovimento, Enum tipoMovimento) {
+
+        String tpMovimentoEstoque = tipoMovimento.toString();
+
+        if ("MOV_VENDA".equals(tpMovimentoEstoque) || "MOV_DEVOLUCAO_FORNECEDOR".equals(tpMovimentoEstoque)) {
+
+            if (this.qtdEstoqueAtual >= quantidadeMovimento) {
+
+                this.qtdEstoqueAtual -= quantidadeMovimento;
+
+            } else {
+
+                // TODO: 22/08/2020 >> Colocar uma excessão
+                System.out.println("Estoque ficará negativo");
+
+            }
+
+        } else if ("MOV_COMPRA".equals(tpMovimentoEstoque) || "MOV_DEVOLUCAO_CLIENTE".equals(tpMovimentoEstoque)) {
+
+            this.qtdEstoqueAtual += quantidadeMovimento;
+
+        } else if ("MOV_INVENTARIO_ESTOQUE".equals(tpMovimentoEstoque)) {
+
+            this.qtdEstoqueAtual = quantidadeMovimento;
+
+        } else {
+
+            // TODO: 22/08/2020 >> Colocar uma excessão
+            System.out.println("Opção inválida");
+        }
+
+        return this.qtdEstoqueAtual;
+
     }
+
+
 }
