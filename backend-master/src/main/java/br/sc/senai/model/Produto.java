@@ -174,6 +174,5 @@ public class Produto {
     //ATUALIZA QUANTIDADE ESTOQUE
     public double atualizaQuantidadeEstoque(Double quantidadeMovimento){
         return this.qtdEstoqueAtual = qtdEstoqueAtual + quantidadeMovimento;
-
     }
 }

@@ -65,7 +65,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTY0NTA4MTYsImV4cCI6MTU5NjUzNzIxNn0.Seth1jfSZdAZtKvljq-jmNBKJ856FfnQja1zJIV5LdpT0vmf1w5xs-aTwLvOykTWGHJG-rrMtJsoG7_KP_tdCg",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
 								"description": ""
 							},
 							{
@@ -76,7 +76,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia 3\",\n\t\"razaoSocial\":\"razaoSocial 3\",\n\t\"cnpj\":\"12345678900013\",\n\t\"contato\":\"contato\",\n\t\"telefone\":\"telefone\",\n\t\"email\":\"email@eamil.com\",\n\t\"fornecedorEnderecos\":[{\n\t\t\"cep\":\"cep\",\n\t\t\"rua\":\"rua\",\n\t\t\"numero\":\"numero\",\n\t\t\"complemento\":\"complemento\",\n\t\t\"bairro\":\"bairro\",\n\t\t\"municipio\":\"municipio\",\n\t\t\"uf\":\"uf\",\n\t\t\"tipoEndereco\":\"RESIDENCIAL\"\n\t}]\n}\n\n"
+							"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia 3\",\n\t\"razaoSocial\":\"razaoSocial 3\",\n\t\"cnpj\":\"12345678900013\",\n\t\"contato\":\"contato\",\n\t\"telefone\":\"telefone\",\n\t\"email\":\"email@eamil.com\",\n\t\"fornecedorEnderecos\":[{\n\t\t\"cep\":\"cep\",\n\t\t\"logradouro\":\"rua\",\n\t\t\"numero\":\"numero\",\n\t\t\"complemento\":\"complemento\",\n\t\t\"outroComplemento\":\"outroComplemento\",\n\t\t\"bairro\":\"bairro\",\n\t\t\"localidade\":\"municipio\",\n\t\t\"uf\":\"uf\",\n\t\t\"tipoEndereco\":\"ENTREGA\"\n\t}]\n}\n\n"
 						},
 						"description": ""
 					},
@@ -117,11 +117,16 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"description": ""
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia\",\n\t\"razaoSocial\":\"razaoSocial\",\n\t\"cnpj\":\"12345678900013\"\n}"
+							"raw": "{\n\t\"nomeFantasia\":\"nomeFantasia\",\n\t\"razaoSocial\":\"razaoSocial\",\n\t\"cnpj\":\"12345678900015\"\n}"
 						},
 						"description": ""
 					},
@@ -130,18 +135,23 @@
 				{
 					"name": "EDITAR_FORNECEDOR_ENDERECO",
 					"request": {
-						"url": "http://localhost:8080/provider/adress/register/2",
+						"url": "http://localhost:8080/provider/adress/register/1",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"description": ""
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"cep\":\"cep\",\n\t\"rua\":\"rua\",\n\t\"numero\":\"numero\",\n\t\"complemento\":\"complemento\",\n\t\"bairro\":\"bairro\",\n\t\"municipio\":\"municipio\",\n\t\"uf\":\"uf\",\n\t\"tipoEndereco\":\"ENTREGA\"\n}"
+							"raw": "{\n\t\"cep\":\"cep\",\n\t\"logradouro\":\"rua\",\n\t\"numero\":\"numero\",\n\t\"complemento\":\"complemento\",\n\t\"outroComplemento\":\"outroComplemento\",\n\t\"bairro\":\"bairro\",\n\t\"localidade\":\"municipio\",\n\t\"uf\":\"uf\",\n\t\"tipoEndereco\":\"ENTREGA\"\n}"
 						},
 						"description": ""
 					},
@@ -206,7 +216,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTY0NTA4MTYsImV4cCI6MTU5NjUzNzIxNn0.Seth1jfSZdAZtKvljq-jmNBKJ856FfnQja1zJIV5LdpT0vmf1w5xs-aTwLvOykTWGHJG-rrMtJsoG7_KP_tdCg",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
 								"description": ""
 							},
 							{
@@ -218,7 +228,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"cdgProduto\":\"cdgProduto\",\n\t\"nomeProduto\":\"nomeProduto 3\",\n\t\"descricaoProduto\":\"descricaoProduto 3\",\n\t\"codBarras\": \"codBarra 3\",\n\t\"unidade\":\"unidade\",\n\t\"percentualSobreVenda\":2,\n\t\"imagemURL\":\"imagemURL 2\"\n}"
+							"raw": "{\n\t\"cdgProduto\":\"cdgProduto\",\n\t\"nomeProduto\":\"nomeProduto 4\",\n\t\"descricaoProduto\":\"descricaoProduto 4\",\n\t\"codBarras\": \"1234567890004\",\n\t\"unidade\":\"unidade\",\n\t\"percentualSobreVenda\":2,\n\t\"imagemURL\":\"imagemURL 2\"\n}"
 						},
 						"description": ""
 					},
@@ -227,7 +237,7 @@
 				{
 					"name": "EDITAR_PRODUTO",
 					"request": {
-						"url": "http://localhost:8080/product/register",
+						"url": "http://localhost:8080/product/register/3",
 						"method": "PUT",
 						"header": [
 							{
@@ -237,9 +247,8 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3MzU4MTUsImV4cCI6MTU5NTgyMjIxNX0._n-vFAGFZVBO5KTlycZ7z65oGEPTJVakJz-hO7J1e2ZFyKsXOENPl8gCyOI4bbdTeCHCyj62t7q_UW8kShc_XQ",
-								"description": "",
-								"disabled": true
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"description": ""
 							},
 							{
 								"key": "accessToken",
@@ -250,7 +259,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nomeProduto\":\"nomeProduto\",\n\t\"descricaoProduto\":\"descricaoProduto\",\n\t\"codBarras\":\"1234567890123\",\n\t\"unidade\":\"uni\",\n\t\"percentualSobreVenda\":1.15,\n\t\"imagemURL\":\"imagemURL\"\n}"
+							"raw": "{\n\t\"nomeProduto\":\"nomeProduto 3\",\n\t\"descricaoProduto\":\"descricaoProduto 3\",\n\t\"codBarras\":\"1234567890003\",\n\t\"unidade\":\"uni\",\n\t\"percentualSobreVenda\":1.15,\n\t\"imagemURL\":\"imagemURL\"\n}"
 						},
 						"description": ""
 					},
@@ -259,7 +268,7 @@
 				{
 					"name": "DELETAR_PRODUTO",
 					"request": {
-						"url": "http://localhost:8080/product/register/1",
+						"url": "http://localhost:8080/product/register/2",
 						"method": "DELETE",
 						"header": [
 							{
@@ -269,9 +278,8 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU3MzU4MTUsImV4cCI6MTU5NTgyMjIxNX0._n-vFAGFZVBO5KTlycZ7z65oGEPTJVakJz-hO7J1e2ZFyKsXOENPl8gCyOI4bbdTeCHCyj62t7q_UW8kShc_XQ",
-								"description": "",
-								"disabled": true
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"description": ""
 							},
 							{
 								"key": "accessToken",
@@ -302,7 +310,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTY0NTA4MTYsImV4cCI6MTU5NjUzNzIxNn0.Seth1jfSZdAZtKvljq-jmNBKJ856FfnQja1zJIV5LdpT0vmf1w5xs-aTwLvOykTWGHJG-rrMtJsoG7_KP_tdCg",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
 								"description": ""
 							},
 							{
@@ -313,7 +321,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nrNotaFiscal\":\"0000005\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+							"raw": "{\n\t\"nrNotaFiscal\":\"0000006\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
 						},
 						"description": ""
 					},
@@ -322,12 +330,12 @@
 				{
 					"name": "REGISTRAR_MOVIMENTO_ESTOQUE_ITEM",
 					"request": {
-						"url": "http://localhost:8080/stockMovement/register",
+						"url": "http://localhost:8080/stockMoviment/register/moviment/2/product/4",
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTU5ODA5NTYsImV4cCI6MTU5NjA2NzM1Nn0.1yjg2Ou5fzvib9S5l5-OidBmMTj9RJ0qFPar6o3bJQCIk8cyLQ-AKVL5HK4mSJeD7DMiilIhVv63j7M02YUruw",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
 								"description": ""
 							},
 							{
@@ -338,7 +346,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"idFornecedor\":1,\n\t\"nrNotaFiscal\":\"0000123\",\n\t\"dataNotaFiscal\":\"27/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+							"raw": "{\n    \"valor\":25.5,\n    \"qtde\":50\n}"
 						},
 						"description": ""
 					},

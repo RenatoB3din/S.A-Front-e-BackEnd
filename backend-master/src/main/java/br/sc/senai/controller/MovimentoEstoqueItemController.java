@@ -32,6 +32,11 @@ public class MovimentoEstoqueItemController {
     ResponseEntity<MovimentoEstoqueItem> addMovimentoEstoqueItem(@PathVariable("idMoviment") Integer idMovimentoEstoque,
                                                                  @PathVariable("idProduct") Integer idProduto,
                                                                  @RequestBody MovimentoEstoqueItem movimentoEstoqueItem){
+
+
+        System.out.println(idMovimentoEstoque);
+        System.out.println(idProduto);
+
         try{
 
             Optional<MovimentoEstoque> movimentoEstoqueData = movimentoEstoqueRepository.findById(idMovimentoEstoque);
@@ -42,8 +47,12 @@ public class MovimentoEstoqueItemController {
                 MovimentoEstoqueItem novoItem = new MovimentoEstoqueItem();
                 novoItem.setMovimentoEstoque(movimentoEstoqueData.get());
                 novoItem.setProduto(produtoData.get());
-                novoItem.setQtde(produtoData.get().atualizaQuantidadeEstoque(movimentoEstoqueItem.getQtde()));
+                novoItem.setQtde(movimentoEstoqueItem.getQtde());
                 novoItem.setValor(movimentoEstoqueItem.getValor());
+
+                produtoData.get().atualizaQuantidadeEstoque(movimentoEstoqueItem.getQtde());
+                produtoData.get().setValorCompra(movimentoEstoqueItem.getValor());
+                produtoData.get().atualizaValorVenda(movimentoEstoqueItem.getValor());
 
                 movimentoEstoqueItemRepository.save(novoItem);
 
