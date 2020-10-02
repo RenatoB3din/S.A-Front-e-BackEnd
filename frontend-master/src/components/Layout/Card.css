@@ -1,0 +1,48 @@
+.Card {
+    border: 3px solid;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+    max-width: 30px;
+}
+
+.Card .Title{
+    padding: 5px 0px;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.Card .Preco{
+    background-color: #fff;
+    padding: 0px 10px;
+    display: flex;
+}
+
+.Card .Preco h2{
+    margin-left: 10px;
+    font-size: 17px;
+}
+
+
+
+
+.Card .Url{
+    background-color: #fff;
+    margin: 0px;
+    padding-top: 5px;
+    display: flex;
+    border-bottom: 1px dotted black;
+}
+
+.Card .Url img {
+    height: 200px;
+    width: 200px;
+    margin: auto; 
+    border-radius: 30%;
+}
