@@ -37,6 +37,10 @@
     margin-left: 90px; 
 }
 
+.back-link {
+    border: 0px;
+}
+
 iframe{
     width: 500px;
     height: 500px;

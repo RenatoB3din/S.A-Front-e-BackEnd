@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { BsUpload } from 'react-icons/bs'
 
-// import TableInventory from '../../components/InventoryTable/TabelaProdutos'
 import api from '../../services/api';
 import './styles.css';
 
+import { storage } from '../../components/Firebase/firebaseConfig';
 import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
 
@@ -17,7 +18,80 @@ export default function InventoryMovement() {
     const [valor, setValor] = useState('');
     const [lote, setLote] = useState('');
     const [validade, setValidade] = useState('');
-    const [imagemnf, setImagemnf] = useState('');
+    const [image, setImage] = useState(null);
+    const [imagemURL, setImagemUrl] = useState("");
+    const [progress, setProgress] = useState(0);
+    const [error, setError] = useState("");
+
+
+
+    // useEffect(() => {
+    //     api.get('inventorytemporary')
+    //     .then(response => {
+    //         setProdutos(response.data);
+    //     })
+    // })
+
+    function Reset(e) {
+        e.preventDefault();
+        
+        setNf('');
+        setTipomovimento('');
+        setDatanf('');
+        setFornecedor('');
+        setProduto('');
+        setQuantidade('');
+        setValor('');
+        setLote('');
+        setValidade('');
+     }
+
+
+    const handChange = e => {
+        const file = e.target.files[0];
+        if(file) {
+            const fileType = file["type"];
+            const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+            if (validImageTypes.includes(fileType)) {
+                setError("");
+                setImage(file);
+            } else {
+                setError("Favor selecionar uma imagem para Upload")
+            }
+        }
+    };
+
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        if(image) {
+            const uploadTask = storage.ref(`images/${image.name}`).put(image)
+
+            uploadTask.on(
+                "state_changed",
+                snapshot => {
+                    const progress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100 
+                    );
+                    setProgress(progress);
+                },
+                error => {
+                    setError(error);
+                },
+                () => {
+                    storage
+                        .ref("images")
+                        .child(image.name)
+                        .getDownloadURL().then(url => {
+                            setImagemUrl(url)
+                            setProgress(0);
+                    })
+                }
+                );
+        } else {
+            setError("Erro, favor escolher uma imagem para Upload");
+        }
+    };
 
     async function handleInventory(e) {
         e.preventDefault();                 // Não atualiza a página ao dar submit
@@ -32,7 +106,7 @@ export default function InventoryMovement() {
             valor,
             lote,
             validade,
-            imagemnf
+            imagemURL
         };
 
         try{
@@ -44,34 +118,13 @@ export default function InventoryMovement() {
          }
     }
 
-
-    async function handleInventoryTemporary(e) {
-        e.preventDefault(); // Não atualiza a pág ao dar submit
-
-        const data = {
-            produto,
-            quantidade,
-            valor,
-            lote,
-            validade
-        };
-
-        try{
-            await api.post('inventorytemporary', data);
-
-
-         } catch (err) {
-            alert('Erro na listagem do produto, tente novamente.');
-         }
-    }
-
     let links = [
         { label: 'Usuário', link: '/register' },
         { label: 'Fornecedor', link: '/novofornecedor'},
         { label: 'Produtos', link: '/novoproduto'},     
         { label: 'Vendas', link: '/venda' },
         { label: 'Movimentar Inventário', link: '/newinventory', active: true },
-        { label: 'Relatórios', link: '#contact-us' },
+        { label: 'Relatórios', link: '/relatorio' },
       ];
 
     return (
@@ -86,15 +139,13 @@ export default function InventoryMovement() {
 
                 <form onSubmit={handleInventory}>
 
-                <div>
-
                 <fieldset>
                     <legend>Tipo de Movimento</legend>
                         <select 
                             value={tipomovimento}
                             onChange={e => setTipomovimento(e.target.value)}
                         >
-                            <option value="" data-default disabled selected></option>
+                            <option value="" disabled ></option>
 
                             <option                  
                                 value="Compra"
@@ -112,53 +163,50 @@ export default function InventoryMovement() {
                             </option>
                         </select>
                 </fieldset>
-
-                    </div>
                     
-                    <div className="input-group">
-                    
-                    <fieldset>
+                <div className="input-group">
+                    <fieldset style={{ width: 200 }}>
                         <legend>Número da NF</legend>
-
                             <input 
                                 type="number"
                                 placeholder="Nota Fiscal "
                                 value={nf}
                                 onChange={e => setNf(e.target.value)}
-                            />
-                            
+                            />       
                     </fieldset>
 
-                    <fieldset style={{ width: 280 }} >
+                    <fieldset style={{ width: 200 }} >
                         <legend>Data da NF</legend>
-
                             <input 
                                 type="date" 
                                 style={{ width: 280 }} 
                                 value={datanf}
                                 onChange={e => setDatanf(e.target.value)}
                             />
-
-                     </fieldset>
+                    </fieldset>
 
                     <fieldset>
                         <legend>Imagem NF</legend>
+                            <input id="img_nf" style={{ width: 500}} type="file" name="arquivos" onChange={handChange} /> 
 
-                            <input id="img_nf" style={{ width: 450 }} type="file" name="arquivos" class="btn btn-success"  accept="image/png, image/jpeg" value={imagemnf} onChange={e => setImagemnf(e.target.value)} multiple /> 
-                            
+                            <div style={{ height: "5px" }}>
+                                {progress > 0? <progress value={progress} max="100" /> : ""}
+                                <p style={{color: "red" }}>{error}</p>
+                            </div>
                     </fieldset>
 
-                    </div>
+                    <fieldset style={{ width: 0}}>
+                        <button id="btn_upload" onClick={handleUpdate}> <BsUpload/> </button> 
+                        </fieldset>
+                </div>
                         
-                    <div>
-
                     <fieldset>
                         <legend>Fornecedor</legend>
                         <select 
                             value={fornecedor}
                             onChange={e => setFornecedor(e.target.value)}
                         >
-                            <option value="" data-default disabled selected></option>
+                            <option value="" disabled ></option>
 
                             <option                  
                                 value="FornecedorA"
@@ -176,29 +224,15 @@ export default function InventoryMovement() {
                             </option>    
                         </select>
                     </fieldset>
-                        
-                    </div>
 
-                        <button id="realizarMovimento" className="button" type="submit">Realizar Movimento</button>
-
-                    </form>
-
-
-
-
-
-
-                    <div id="parteProduto">
-
-                    <form onSubmit={handleInventoryTemporary}>
-                    <div className="input-group">
+                <div className="input-group">
                     <fieldset>
                         <legend>Produto</legend>
                         <select 
                             value={produto}
                             onChange={e => setProduto(e.target.value)}
-                        >
-                        <option value="" data-default disabled selected></option>
+                            >
+                        <option value="" disabled ></option>
 
                         <option                  
                             value="ProdutoA"
@@ -218,62 +252,61 @@ export default function InventoryMovement() {
                         </select>
                     </fieldset>
 
-                    <fieldset style={{ width: 180 }} >
-                        <legend>Quantidade de Produtos</legend>
-                        <input 
-                            type="number" 
-                            style={{ width: 180 }} 
-                            placeholder="Quantidade"
-                            value={quantidade}
-                            onChange={e => setQuantidade(e.target.value)}
-                        />
-                    </fieldset>
-                        </div>
+                        <fieldset style={{ width: 180 }} >
+                            <legend>Quantidade de Produtos</legend>
+                            <input 
+                                type="number" 
+                                style={{ width: 180 }} 
+                                placeholder="Quantidade"
+                                value={quantidade}
+                                onChange={e => setQuantidade(e.target.value)}
+                                />
+                        </fieldset>
+                    </div>
                         
 
                     <div className="input-group">
-                    <fieldset>
-                        <legend>Valor Total</legend>
-                        <input 
-                            type="number" 
-                            placeholder="Valor: R$ 000,00"
-                            value={valor}
-                            onChange={e => setValor(e.target.value)}
-                        /> 
-                    </fieldset>
-
-                    <fieldset style={{ width: 220 }}>
-                        <legend>Lote</legend>
-                        <input 
-                            type="number"
-                            style={{ width: 220 }} 
-                            placeholder="Lote"
-                            value={lote}
-                            onChange={e => setLote(e.target.value)}
-                        />
-                    </fieldset>
-
-                    <fieldset style={{ width: 220 }} >
-                        <legend>Validade</legend>
+                        <fieldset>
+                            <legend>Valor Unitário</legend>
                             <input 
-                                type="date"
+                                type="number" 
+                                placeholder="Valor: R$ 000,00"
+                                value={valor}
+                                onChange={e => setValor(e.target.value)}
+                                /> 
+                        </fieldset>
+
+                        <fieldset style={{ width: 220 }}>
+                            <legend>Lote</legend>
+                            <input 
+                                type="number"
                                 style={{ width: 220 }} 
-                                value={validade}
-                                onChange={e => setValidade(e.target.value)}
-                            />
-                    </fieldset>
-                        </div>
+                                placeholder="Lote"
+                                value={lote}
+                                onChange={e => setLote(e.target.value)}
+                                />
+                        </fieldset>
 
-                        <div className="operacaoProduto">
-                            <button id="btn_add" type="submit">Adicionar Produto</button>
-
-                            <button id="btn_cancel" >Cancelar Operação</button>
-                        </div>
-                    </form>
-
-                    {/* <TableInventory></TableInventory> */}
+                        <fieldset style={{ width: 220 }} >
+                            <legend>Validade</legend>
+                                <input 
+                                    type="date"
+                                    style={{ width: 220 }} 
+                                    value={validade}
+                                    onChange={e => setValidade(e.target.value)}
+                                    />
+                        </fieldset>
+                        
 
                     </div>
+                        <div className="operacaoProduto">
+                            <button id="btn_add" type="submit">Movimentar Inventário</button>
+
+                            <button id="btn_cancel" onClick={Reset} >Cancelar Operação</button>
+                        </div>
+
+                </form>
+             
                 </section>
             </div>
         </div>

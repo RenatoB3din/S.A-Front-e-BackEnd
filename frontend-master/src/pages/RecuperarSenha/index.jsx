@@ -1,6 +1,5 @@
 import React from 'react';
 import { GrClose } from 'react-icons/gr'
-import { Link } from 'react-router-dom';
 
 import './styles.css';
 
@@ -14,8 +13,8 @@ export default function RecuperarSenha(){
 
     return(
         <div className="recSenha-container">  
-        <header>
-            <div classname="colorHeader"></div>
+        <header className="header_recSenha">
+            <div className="colorHeader"></div>
         </header>
         <div className="content">
             <section>

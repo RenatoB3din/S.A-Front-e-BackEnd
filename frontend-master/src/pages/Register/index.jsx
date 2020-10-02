@@ -61,7 +61,7 @@ export default function Register() {
         { label: 'Produtos', link: '/novoproduto'},     
         { label: 'Vendas', link: '/venda' },
         { label: 'Movimentar Inventário', link: '/newinventory' },
-        { label: 'Relatórios', link: '#contact-us' },
+        { label: 'Relatórios', link: '/relatorio' },
       ];
 
     return (

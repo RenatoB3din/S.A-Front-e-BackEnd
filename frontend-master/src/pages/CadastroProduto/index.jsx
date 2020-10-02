@@ -8,6 +8,8 @@ import './styles.css';
 import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
 
+import { useHistory } from 'react-router-dom';
+
 export default function CadastroProduto() {
     const [codBarras, setCodBarras] = useState('');
     const [cont, setCont] = useState(0);
@@ -21,6 +23,7 @@ export default function CadastroProduto() {
     const [error, setError] = useState("");
     const [percentualSobreVenda, setPercentualSobreVenda] = useState('');
 
+    const history = useHistory();
     const token = localStorage.getItem('token');
 
 
@@ -80,12 +83,17 @@ export default function CadastroProduto() {
         }
     };
     
-
-        // if(imagemURL === "") 
-        //     document.getElementById("imgproduto").setAttribute("hidden", "");
-        // else
-        //     document.getElementById("imgproduto").setAttribute("visible", "");
-
+    function Reset() {
+        setCodBarras('');
+        setNomeProduto('');
+        setDescricaoProduto('');
+        setUnidade('');
+        setPercentualSobreVenda('');
+        setCdgProduto('');
+        setImagemUrl('');
+        setImage(null);
+        setCont(0);
+     }
     
     
     async function lidarComCadastroProduto(e) {
@@ -98,7 +106,8 @@ export default function CadastroProduto() {
                 descricaoProduto,
                 unidade,
                 percentualSobreVenda,
-                imagemURL
+                imagemURL,
+                cdgProduto
             };
 
             console.log(data);
@@ -109,22 +118,20 @@ export default function CadastroProduto() {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     }
-                });               // POST na API com o ENDPOINT
-            
-            
+                });  
+                
+                history.push('/novoproduto');
+
+                Reset();
+
             } catch (err) {
                     alert('Erro no cadastro, tente novamente.');
-                 }
-            }
+             }
+
+             
+        }
             
 
-    function Reset() {
-        setCodBarras('');
-        setNomeProduto('');
-        setDescricaoProduto('');
-        setUnidade('');
-        setPercentualSobreVenda('');
-     }
 
     let links = [
         { label: 'Usuário', link: '/register' },
@@ -132,7 +139,7 @@ export default function CadastroProduto() {
         { label: 'Produtos', link: '/novoproduto', active: true},     
         { label: 'Vendas', link: '/venda' },
         { label: 'Movimentar Inventário', link: '/newinventory' },
-        { label: 'Relatórios', link: '#contact-us' },
+        { label: 'Relatórios', link: '/relatorio' },
       ];
 
     return (
@@ -165,7 +172,7 @@ export default function CadastroProduto() {
                     <input 
                         disabled
                         type="text"
-                        placeholder="Gerar código"
+                        placeholder=""
                         value={cdgProduto}
                         onChange={e => setCdgProduto(e.target.value)}
                     />  
@@ -249,7 +256,7 @@ export default function CadastroProduto() {
                 </div>
 
                     <div className="imgproduto">
-                        <img id="imgdoproduto" src={imagemURL}></img>
+                        <img id="imgdoproduto" src={imagemURL} alt={nomeProduto}></img>
                     </div>
 
                     <div className="operacaoProduto">

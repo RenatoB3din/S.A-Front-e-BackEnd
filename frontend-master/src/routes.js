@@ -9,6 +9,7 @@ import InventoryMovement from './pages/InventoryMovement';
 import Venda from './pages/Venda';
 import Greeting from './pages/Greeting';
 import RecuperarSenha from './pages/RecuperarSenha';
+import Relatorio from './pages/Relatorio';
 
 export default function Routes() {
     return (
@@ -21,6 +22,7 @@ export default function Routes() {
                 <Route path="/novofornecedor" component={CadastroFornecedor} />
                 <Route path="/newinventory" component={InventoryMovement} />
                 <Route path="/venda" component={Venda} />
+                <Route path="/relatorio" component={Relatorio} />
                 <Route path="/greeting" component={Greeting} />
             </Switch>
         </BrowserRouter>

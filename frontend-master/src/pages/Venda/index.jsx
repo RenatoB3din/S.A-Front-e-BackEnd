@@ -55,7 +55,7 @@ export default function Venda() {
         { label: 'Produtos', link: '/novoproduto'},     
         { label: 'Vendas', link: '/venda', active: true  },
         { label: 'Movimentar Inventário', link: '/newinventory' },
-        { label: 'Relatórios', link: '#contact-us' },
+        { label: 'Relatórios', link: '/relatorio' },
       ];
 
     return (

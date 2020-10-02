@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Iframe from 'react-iframe';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './styles.css';
 
 import api from '../../services/api';
@@ -15,6 +15,8 @@ export default function Logon(){
 
     
     function changeStuff(e) {
+        e.preventDefault();                 // Não atualiza a página ao dar submit
+
         const myIframe = document.getElementById('myId');
         myIframe.style.display = "block";
     }
@@ -69,7 +71,7 @@ export default function Logon(){
                     />
 
                     <div className="rec_senha">
-                        <a className="back-link" onClick={changeStuff}>Esqueceu sua senha?</a>
+                        <button className="back-link" onClick={changeStuff}>Esqueceu sua senha?</button>
                     </div>
                     <button className="button" type="submit">Entrar</button>
 
