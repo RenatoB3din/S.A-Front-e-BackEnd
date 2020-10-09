@@ -26,44 +26,7 @@ public class UserController {
         }
     }
 
-//    //ROTA PARA ALTERAR O USUARIO
-//    @PutMapping(path = "/{idUsuario}")
-//    public @ResponseBody
-//    ResponseEntity<Usuario> alterarUsuario(@PathVariable("idUsuario") Integer idUsuario,
-//                                           @RequestBody Usuario usuario) {
-//
-//        //LOCALIZA O USUARIO PELO ID PARA FAZER A ALTERACAO
-//        Optional<Usuario> usuarioData = userRepository.findById(idUsuario);
-//
-//        try{
-//            if (usuarioData.isPresent()) {
-//                Usuario alterarUsuario = usuarioData.get();
-//                alterarUsuario.setName(usuario.getName());
-//                alterarUsuario.setEmail(usuario.getEmail());
-//                alterarUsuario.setLogin(usuario.getLogin());
-//                alterarUsuario.setSenha(usuario.getSenha());
-//                alterarUsuario.setCpf(usuario.getCpf());
-//                return new ResponseEntity<>(userRepository.save(alterarUsuario), HttpStatus.OK);
-//            } else {
-//                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//            }
-//        }catch (Exception e){
-//            return new ResponseEntity<>(usuario, HttpStatus.EXPECTATION_FAILED);
-//        }
-//    }
-//
-//    //ROTA PARA DELETAR O USUARIO
-//    @DeleteMapping(path = "/{idUsuario}")
-//    public @ResponseBody
-//    ResponseEntity<HttpStatus> deletarUsuario(@PathVariable("idUsuario") Integer idUsuario){
-//        try{
-//            userRepository.deleteById(idUsuario);
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        }catch (Exception e){
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-//
+
 //    //ROTAS DE CONSULTAS
 //    //RETORNAR TODOS OS USUÁRIOS
 //    @GetMapping(path = "/")

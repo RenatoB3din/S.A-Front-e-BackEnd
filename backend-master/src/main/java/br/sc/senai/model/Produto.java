@@ -3,6 +3,7 @@ package br.sc.senai.model;
 import javax.persistence.*;
 import javax.print.DocFlavor;
 import javax.validation.constraints.Size;
+import java.sql.Blob;
 import java.util.Set;
 
 @Entity

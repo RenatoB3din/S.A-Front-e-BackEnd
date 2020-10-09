@@ -82,16 +82,14 @@ export default function CadastroFornecedor() {
             nomeContato,
             telefone,
             email,
-            fornecedorEnderecos: [{
-                cep,
-                logradouro,
-                complemento,
-                bairro,
-                localidade,
-                uf,
-                outroComplemento,
-                tipoEndereco 
-            }]
+            cep,
+            logradouro,
+            complemento,
+            bairro,
+            localidade,
+            uf,
+            outroComplemento,
+            tipoEndereco 
         };
 
         console.log(data)

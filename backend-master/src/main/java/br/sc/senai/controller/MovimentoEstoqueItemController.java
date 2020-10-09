@@ -3,6 +3,7 @@ package br.sc.senai.controller;
 import br.sc.senai.model.MovimentoEstoque;
 import br.sc.senai.model.MovimentoEstoqueItem;
 import br.sc.senai.model.Produto;
+import br.sc.senai.payload.response.JwtResponse;
 import br.sc.senai.repository.MovimentoEstoqueItemRepository;
 import br.sc.senai.repository.MovimentoEstoqueRepository;
 import br.sc.senai.repository.ProdutoRespository;
@@ -29,17 +30,17 @@ public class MovimentoEstoqueItemController {
 
     @PostMapping(path = "/register/moviment/{idMoviment}/product/{idProduct}")
     public @ResponseBody
-    ResponseEntity<MovimentoEstoqueItem> addMovimentoEstoqueItem(@PathVariable("idMoviment") Integer idMovimentoEstoque,
+    ResponseEntity<MovimentoEstoqueItem> addMovimentoEstoqueItem(@PathVariable("idMoviment") String nrNotaFiscal,
                                                                  @PathVariable("idProduct") Integer idProduto,
                                                                  @RequestBody MovimentoEstoqueItem movimentoEstoqueItem){
 
 
-        System.out.println(idMovimentoEstoque);
+        System.out.println(nrNotaFiscal);
         System.out.println(idProduto);
 
         try{
 
-            Optional<MovimentoEstoque> movimentoEstoqueData = movimentoEstoqueRepository.findById(idMovimentoEstoque);
+            Optional<MovimentoEstoque> movimentoEstoqueData = movimentoEstoqueRepository.findByNrNF(nrNotaFiscal);
             Optional<Produto> produtoData = produtoRespository.findById(idProduto);
 
             Enum tipoMovimento = movimentoEstoqueData.get().getTipoMovimento();
@@ -51,6 +52,8 @@ public class MovimentoEstoqueItemController {
                 novoItem.setProduto(produtoData.get());
                 novoItem.setQtde(movimentoEstoqueItem.getQtde());
                 novoItem.setValor(movimentoEstoqueItem.getValor());
+                novoItem.setValidade(movimentoEstoqueItem.getValidade());
+                novoItem.setLote(movimentoEstoqueItem.getLote());
 
                 produtoData.get().atualizaQuantidadeEstoque(movimentoEstoqueItem.getQtde(), tipoMovimento);
                 produtoData.get().setValorCompra(movimentoEstoqueItem.getValor());

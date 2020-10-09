@@ -34,22 +34,25 @@ public class Fornecedor {
     @Email
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "relfornecendereco",
-            joinColumns = @JoinColumn(name = "id_fornecedor"),
-            inverseJoinColumns = @JoinColumn(name = "id_endereco")
-    )
-    private Set<FornecedorEndereco> fornecedorEnderecos = new HashSet<FornecedorEndereco>();
+    private String cep;
+    private String logradouro;
+    private String complemento;
+    private String outroComplemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
 
-    // TODO: 25/07/2020 >>> Verificar uma forma para cadastrar o id do fornecedor em uma tabela sem ter a tabela de referência
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "tipo_endereco")
+    private EEndereco tipoEndereco;
+
 
     @OneToMany(mappedBy = "fornecedor")
     private Set<MovimentoEstoque> movimentoEstoques;
 
     public Fornecedor(){}
 
-    public Fornecedor(Integer id, String nomeFantasia, String razaoSocial, String cnpj, String nomeContato, String telefone, String email) {
+    public Fornecedor(Integer id, String nomeFantasia, String razaoSocial, String cnpj, String nomeContato, String telefone, String email, String cep, String logradouro, String complemento, String outroComplemento, String bairro, String localidade, String uf) {
         this.id = id;
         this.nomeFantasia = nomeFantasia;
         this.razaoSocial = razaoSocial;
@@ -57,6 +60,13 @@ public class Fornecedor {
         this.nomeContato = nomeContato;
         this.telefone = telefone;
         this.email = email;
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.complemento = complemento;
+        this.outroComplemento = outroComplemento;
+        this.bairro = bairro;
+        this.localidade = localidade;
+        this.uf = uf;
     }
 
     public Integer getId() {
@@ -115,12 +125,68 @@ public class Fornecedor {
         this.email = email;
     }
 
-    public Set<FornecedorEndereco> getFornecedorEnderecos() {
-        return fornecedorEnderecos;
+    public String getCep() {
+        return cep;
     }
 
-    public void setFornecedorEnderecos(Set<FornecedorEndereco> fornecedorEnderecos) {
-        this.fornecedorEnderecos = fornecedorEnderecos;
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getOutroComplemento() {
+        return outroComplemento;
+    }
+
+    public void setOutroComplemento(String outroComplemento) {
+        this.outroComplemento = outroComplemento;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getLocalidade() {
+        return localidade;
+    }
+
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public EEndereco getTipoEndereco() {
+        return tipoEndereco;
+    }
+
+    public void setTipoEndereco(EEndereco tipoEndereco) {
+        this.tipoEndereco = tipoEndereco;
     }
 
     public Set<MovimentoEstoque> getMovimentoEstoques() {

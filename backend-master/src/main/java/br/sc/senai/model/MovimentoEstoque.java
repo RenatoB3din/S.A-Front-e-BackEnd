@@ -1,11 +1,16 @@
 package br.sc.senai.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "momento_estoque")
+@Table(name = "momento_estoque",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "nr_notafiscal")
+        })
 public class MovimentoEstoque {
 
     @Id
@@ -15,6 +20,7 @@ public class MovimentoEstoque {
 
     @ManyToOne
     @JoinColumn(name = "id_fornecedor")
+    @JsonIgnore
     private Fornecedor fornecedor;
 
     @Column(name = "nr_notafiscal")
@@ -26,22 +32,23 @@ public class MovimentoEstoque {
     private String dataNotaFiscal;
 
     @Column(name = "img_notafiscal")
-    private String imgNotaFiscal;
+    private String imagemURL;
 
     @Enumerated(value = EnumType.STRING)
     private EMovimentaEstoque tipoMovimento;
 
     @OneToMany(mappedBy = "movimentoEstoque")
+    @JsonIgnore
     private Set<MovimentoEstoqueItem> movimentoEstoqueItem;
 
     public MovimentoEstoque() {
     }
 
-    public MovimentoEstoque(Fornecedor fornecedor, String nrNotaFiscal, String dataNotaFiscal, String imgNotaFiscal, EMovimentaEstoque tipoMovimento){
+    public MovimentoEstoque(Fornecedor fornecedor, String nrNotaFiscal, String dataNotaFiscal, String imagemURL, EMovimentaEstoque tipoMovimento){
         this.fornecedor = fornecedor;
         this.nrNotaFiscal = nrNotaFiscal;
         this.dataNotaFiscal = dataNotaFiscal;
-        this.imgNotaFiscal = imgNotaFiscal;
+        this.imagemURL = imagemURL;
         this.tipoMovimento = tipoMovimento;
     }
 
@@ -77,12 +84,12 @@ public class MovimentoEstoque {
         this.dataNotaFiscal = dataNotaFiscal;
     }
 
-    public String getImgNotaFiscal() {
-        return imgNotaFiscal;
+    public String getImagemURL() {
+        return imagemURL;
     }
 
-    public void setImgNotaFiscal(String imgNotaFiscal) {
-        this.imgNotaFiscal = imgNotaFiscal;
+    public void setImagemURL(String imagemURL) {
+        this.imagemURL = imagemURL;
     }
 
     public EMovimentaEstoque getTipoMovimento() {

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -16,6 +17,20 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoRespository produtoRespository;
+
+    @GetMapping("/register")
+    public @ResponseBody
+    ResponseEntity<Iterable<Produto>> getProdutos() {
+        try {
+            Iterable<Produto> produtos = produtoRespository.findAll();
+            if (((Collection<?>) produtos).size() == 0) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(produtos, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PostMapping("/register")
     public @ResponseBody

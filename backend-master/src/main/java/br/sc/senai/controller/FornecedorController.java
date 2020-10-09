@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -18,20 +19,29 @@ public class FornecedorController {
     @Autowired
     private FornecedorRepository fornecedorRepository;
 
+    @GetMapping("/register")
+    public @ResponseBody
+    ResponseEntity<Iterable<Fornecedor>> getFornecedor() {
+        try {
+            Iterable<Fornecedor> fornecedores = fornecedorRepository.findAll();
+            if (((Collection<?>) fornecedores).size() == 0) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(fornecedores, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping(path = "/register")
     public @ResponseBody
     ResponseEntity<Fornecedor> addFornecedor(@RequestBody Fornecedor fornecedor){
 
         try{
-
             Fornecedor novoFornecedor = fornecedorRepository.save(fornecedor);
-
             return new ResponseEntity<>(novoFornecedor, HttpStatus.CREATED);
-
         }catch (Exception e){
-
             System.out.println(e.getMessage());
-
             return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
         }
     }
@@ -55,6 +65,14 @@ public class FornecedorController {
                 editFornecedor.setNomeContato(fornecedor.getNomeContato());
                 editFornecedor.setTelefone(fornecedor.getTelefone());
                 editFornecedor.setEmail(fornecedor.getEmail());
+                editFornecedor.setCep(editFornecedor.getCep());
+                editFornecedor.setLogradouro(editFornecedor.getLogradouro());
+                editFornecedor.setComplemento(editFornecedor.getComplemento());
+                editFornecedor.setOutroComplemento(editFornecedor.getOutroComplemento());
+                editFornecedor.setBairro(editFornecedor.getBairro());
+                editFornecedor.setLocalidade(editFornecedor.getLocalidade());
+                editFornecedor.setUf(editFornecedor.getUf());
+                editFornecedor.setTipoEndereco(editFornecedor.getTipoEndereco());
 
                 return new ResponseEntity<>(fornecedorRepository.save(editFornecedor), HttpStatus.OK);
 

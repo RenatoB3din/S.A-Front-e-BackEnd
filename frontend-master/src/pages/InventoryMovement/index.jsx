@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BsUpload } from 'react-icons/bs'
 
 import api from '../../services/api';
@@ -9,12 +9,14 @@ import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
 
 export default function InventoryMovement() {
-    const [nf, setNf] = useState('');                              
-    const [tipomovimento, setTipomovimento] = useState('');
-    const [datanf, setDatanf] = useState('');
+    const [nrNotaFiscal, setNrNotaFiscal] = useState('');                              
+    const [tipoMovimento, setTipoMovimento] = useState('');
+    const [dataNotaFiscal, setDataNotaFiscal] = useState('');
+    const [fornecedores, setFornecedores] = useState([]);
     const [fornecedor, setFornecedor] = useState('');
+    const [produtos, setProdutos] = useState([]);
     const [produto, setProduto] = useState('');
-    const [quantidade, setQuantidade] = useState('');
+    const [qtde, setQtde] = useState('');
     const [valor, setValor] = useState('');
     const [lote, setLote] = useState('');
     const [validade, setValidade] = useState('');
@@ -22,28 +24,70 @@ export default function InventoryMovement() {
     const [imagemURL, setImagemUrl] = useState("");
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState("");
+    const [idMovement, setIdMovement] = useState("");
+
+    const token = localStorage.getItem('token');
+
+
+        useEffect(() => { 
+            const fetchData = async () => {
+            const result = await api.get('provider/register', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                } 
+            });
+
+            setFornecedores(result.data);
+        };
+        fetchData();
+        }, []);
+
+        useEffect(() => { 
+                const fetchData = async () => {
+                const result = await api.get('product/register', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    } 
+                 });
+                
+                setProdutos(result.data);
+            };
+        fetchData();
+        }, []);
 
 
 
-    // useEffect(() => {
-    //     api.get('inventorytemporary')
-    //     .then(response => {
-    //         setProdutos(response.data);
-    //     })
-    // })
 
-    function Reset(e) {
-        e.preventDefault();
-        
-        setNf('');
-        setTipomovimento('');
-        setDatanf('');
+
+    function PreencherListaProduto() {
+        if (produtos.length !== 0) {
+            return produtos.map(produto => (
+                <option 
+                key={produto.idProduto}
+                value={produto.idProduto}
+                >{produto.nomeProduto}
+                </option>
+            )) 
+        }
+    }
+    
+    function PreencherLista() {
+        if (fornecedores.length !== 0) {
+            return fornecedores.map(fornecedor => (
+                <option 
+                    key={fornecedor.id}
+                    value={fornecedor.id}
+                    >{fornecedor.nomeFantasia}
+                </option>
+            )) 
+        }
+    }
+
+    function Reset() {      
+        setNrNotaFiscal('');
+        setTipoMovimento('');
+        setDataNotaFiscal('');
         setFornecedor('');
-        setProduto('');
-        setQuantidade('');
-        setValor('');
-        setLote('');
-        setValidade('');
      }
 
 
@@ -97,26 +141,64 @@ export default function InventoryMovement() {
         e.preventDefault();                 // Não atualiza a página ao dar submit
 
         const data = {                      // Dados armazanados via input para o POST!
-            nf,
-            tipomovimento,
-            datanf,
-            fornecedor,
-            produto,
-            quantidade,
-            valor,
-            lote,
-            validade,
+            nrNotaFiscal,
+            tipoMovimento,
+            dataNotaFiscal,
             imagemURL
         };
 
+        document.getElementById("select_Fornecedor").disabled = true;
+        document.getElementById("select_tpMov").disabled = true;
+        document.getElementById("input_dtnf").disabled = true;
+        document.getElementById("input_nf").disabled = true;
+        document.getElementById("img_nf").disabled = true;
+        document.getElementById("select_produto").disabled = false;
+        document.getElementById("input_valor").disabled = false;
+        document.getElementById("input_qntd").disabled = false;
+        document.getElementById("input_validade").disabled = false;
+        document.getElementById("input_lote").disabled = false;
+
         try{
-            await api.post('inventory', data);               // POST na API com o ENDPOINT
+            const response = await api.post(`stockMovement/register/provider/${fornecedor}`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });      
 
 
          } catch (err) {
             alert('Erro no cadastro, tente novamente.');
          }
     }
+
+
+    async function handleInventoryItems(e) {
+        e.preventDefault();                 // Não atualiza a página ao dar submit
+
+        const data = {                      // Dados armazanados via input para o POST!
+            produto,
+            valor,
+            qtde,
+            lote,
+            validade
+        };
+
+        console.log(data);
+
+  
+
+        try{
+            await api.post(`stockMoviment/register/moviment/${nrNotaFiscal}/product/${produto}`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });      
+        } catch (err) {
+            alert('Erro no cadastro, tente novamente.');
+         }
+    }
+
+
 
     let links = [
         { label: 'Usuário', link: '/register' },
@@ -141,25 +223,20 @@ export default function InventoryMovement() {
 
                 <fieldset>
                     <legend>Tipo de Movimento</legend>
-                        <select 
-                            value={tipomovimento}
-                            onChange={e => setTipomovimento(e.target.value)}
+                        <select id="select_tpMov"
+                            value={tipoMovimento}
+                            onChange={e => setTipoMovimento(e.target.value)}
                         >
                             <option value="" disabled ></option>
 
                             <option                  
-                                value="Compra"
-                                >Compra
+                                value="MOV_COMPRA"
+                                >Compra do Fornecedor
                             </option>
 
                             <option
-                                value="DevolucaooFornecedor"
-                                >Devolução Fornecedor
-                            </option>
-
-                            <option
-                                value="DevolucaoCliente"
-                                >Devolução Cliente
+                                value="MOV_DEVOLUCAO_FORNECEDOR"
+                                >Devolução para o Fornecedor
                             </option>
                         </select>
                 </fieldset>
@@ -167,21 +244,21 @@ export default function InventoryMovement() {
                 <div className="input-group">
                     <fieldset style={{ width: 200 }}>
                         <legend>Número da NF</legend>
-                            <input 
+                            <input id="input_nf"
                                 type="number"
                                 placeholder="Nota Fiscal "
-                                value={nf}
-                                onChange={e => setNf(e.target.value)}
+                                value={nrNotaFiscal}
+                                onChange={e => setNrNotaFiscal(e.target.value)}
                             />       
                     </fieldset>
 
                     <fieldset style={{ width: 200 }} >
                         <legend>Data da NF</legend>
-                            <input 
+                            <input id="input_dtnf"
                                 type="date" 
                                 style={{ width: 280 }} 
-                                value={datanf}
-                                onChange={e => setDatanf(e.target.value)}
+                                value={dataNotaFiscal}
+                                onChange={e => setDataNotaFiscal(e.target.value)}
                             />
                     </fieldset>
 
@@ -197,57 +274,48 @@ export default function InventoryMovement() {
 
                     <fieldset style={{ width: 0}}>
                         <button id="btn_upload" onClick={handleUpdate}> <BsUpload/> </button> 
-                        </fieldset>
+                    </fieldset>
                 </div>
                         
                     <fieldset>
                         <legend>Fornecedor</legend>
-                        <select 
+                        <select id="select_Fornecedor"
                             value={fornecedor}
                             onChange={e => setFornecedor(e.target.value)}
-                        >
-                            <option value="" disabled ></option>
+                        >   
+                            <option value=""></option>
 
-                            <option                  
-                                value="FornecedorA"
-                                >Fornecedor A
-                            </option>
 
-                            <option
-                                value="FornecedorB"
-                                >Fornecedor B
-                            </option>
+                            {PreencherLista()}
 
-                            <option
-                                value="FornecedorC"
-                                >Fornecedor C
-                            </option>    
+    
                         </select>
                     </fieldset>
+
+
+                        <div className="operacaoProduto">
+                            <button id="btn_tpMov" type="submit">CONFIRMAR TIPO DE MOVIMENTO</button>
+                        </div>
+                </form>
+
+
+
+
+                <form onSubmit={handleInventoryItems}>
 
                 <div className="input-group">
                     <fieldset>
                         <legend>Produto</legend>
                         <select 
+                            id="select_produto"
+                            disabled
                             value={produto}
                             onChange={e => setProduto(e.target.value)}
                             >
-                        <option value="" disabled ></option>
+                            
+                            <option value=""></option>
 
-                        <option                  
-                            value="ProdutoA"
-                            >Produto A
-                        </option>
-
-                        <option
-                            value="ProdutoB"
-                            >Produto B
-                        </option>
-
-                        <option
-                            value="ProdutoC"
-                            >Produto C
-                        </option>  
+                            {PreencherListaProduto()}
 
                         </select>
                     </fieldset>
@@ -255,11 +323,13 @@ export default function InventoryMovement() {
                         <fieldset style={{ width: 180 }} >
                             <legend>Quantidade de Produtos</legend>
                             <input 
+                                id="input_qntd"
+                                disabled
                                 type="number" 
                                 style={{ width: 180 }} 
                                 placeholder="Quantidade"
-                                value={quantidade}
-                                onChange={e => setQuantidade(e.target.value)}
+                                value={qtde}
+                                onChange={e => setQtde(e.target.value)}
                                 />
                         </fieldset>
                     </div>
@@ -269,6 +339,8 @@ export default function InventoryMovement() {
                         <fieldset>
                             <legend>Valor Unitário</legend>
                             <input 
+                                id="input_valor"
+                                disabled
                                 type="number" 
                                 placeholder="Valor: R$ 000,00"
                                 value={valor}
@@ -279,6 +351,8 @@ export default function InventoryMovement() {
                         <fieldset style={{ width: 220 }}>
                             <legend>Lote</legend>
                             <input 
+                                id="input_lote"
+                                // disabled
                                 type="number"
                                 style={{ width: 220 }} 
                                 placeholder="Lote"
@@ -289,22 +363,21 @@ export default function InventoryMovement() {
 
                         <fieldset style={{ width: 220 }} >
                             <legend>Validade</legend>
-                                <input 
+                                <input id="input_validade"
+                                    disabled
                                     type="date"
                                     style={{ width: 220 }} 
                                     value={validade}
                                     onChange={e => setValidade(e.target.value)}
                                     />
                         </fieldset>
-                        
-
                     </div>
-                        <div className="operacaoProduto">
-                            <button id="btn_add" type="submit">Movimentar Inventário</button>
 
-                            <button id="btn_cancel" onClick={Reset} >Cancelar Operação</button>
-                        </div>
-
+                    <div className="operacaoProduto">
+                            <button id="btn_add" type="submit">Realizar Movimento</button>
+                            <button id="btn_cancel" onClick={Reset}>Cancelar Movimento</button>
+                    </div>
+                    
                 </form>
              
                 </section>
