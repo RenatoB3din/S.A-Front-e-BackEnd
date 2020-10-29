@@ -23,7 +23,7 @@ public class Fornecedor {
     @Size(min = 3, max = 100)
     private String razaoSocial;
 
-    @Size(min = 11, max = 14)
+    @Size(min = 11, max = 18)
     private String cnpj;
 
     @Column(name = "nome_contato")
@@ -35,11 +35,17 @@ public class Fornecedor {
     private String email;
 
     private String cep;
+
     private String logradouro;
+
     private String complemento;
+
     private String outroComplemento;
+
     private String bairro;
+
     private String localidade;
+
     private String uf;
 
     @Enumerated(value = EnumType.STRING)

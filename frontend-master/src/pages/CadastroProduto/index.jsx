@@ -26,6 +26,10 @@ export default function CadastroProduto() {
     const history = useHistory();
     const token = localStorage.getItem('token');
 
+    if(token === null){
+        history.push('/');
+    }
+
 
     function gerarCodigo(e) {
         e.preventDefault();

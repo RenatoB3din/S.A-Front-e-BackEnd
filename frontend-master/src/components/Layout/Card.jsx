@@ -12,7 +12,7 @@ export default props => {
         <div className="Card" style={cardStyle}>
             <div className="Title"><strong>{props.titulo}</strong></div>
             <div className="Url"> <img src={props.url}/> </div>
-            <div className="Preco"><h2>Preço:</h2><h2 id="h3valor">R${props.preco},00</h2></div>
+            <div className="Preco"><h2>Preço:</h2><h2 id="h3valor">R${props.preco}</h2></div>
         </div>
     )
 }

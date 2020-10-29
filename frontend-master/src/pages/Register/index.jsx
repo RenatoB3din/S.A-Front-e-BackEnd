@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import {mask, unMask} from "remask";
 
 import api from '../../services/api';
 import './styles.css';
@@ -19,6 +20,11 @@ export default function Register() {
     const [role, setRole] = useState('');
 
     const history = useHistory();
+
+
+    const MascararCNPJ = ev => {
+        setCpf(mask(ev.target.value, ['999.999.999-99']))
+    };
 
     function reset() {
         setName('');
@@ -107,7 +113,7 @@ export default function Register() {
                         <input 
                             placeholder="CPF"
                             value={cpf}
-                            onChange={e => setCpf(e.target.value)}
+                            onChange={MascararCNPJ}
                         />
                         <select 
                             name="perfil" 

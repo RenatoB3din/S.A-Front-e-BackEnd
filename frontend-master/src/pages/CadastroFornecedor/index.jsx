@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import apiexterna from '../../services/apiexterna';
 import './styles.css';
+import {mask, unMask} from "remask";
+
 
 import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
@@ -33,6 +35,30 @@ export default function CadastroFornecedor() {
 
     const history = useHistory();
     const token = localStorage.getItem('token');
+    const pattern = '99999-999';
+
+        const MascararCNPJ = ev => {
+            setCnpj(mask(ev.target.value, ['99.999.999/9999-99']))
+        };
+
+        const MascararCEP = ev => {
+            setQuery(mask(ev.target.value, pattern))
+        };
+
+        const MascararTEL = ev => {
+            const originalValue = unMask(ev.target.value);
+            const maskedValue = mask(originalValue, [
+                '(99)9999-9999',
+                '(99)9 9999-9999'
+            ]);
+            setTelefone(maskedValue);
+        };
+
+    if(token === null){
+        history.push('/');
+    }  
+
+
 
     function Reset() {
         setNomeFantasia('');
@@ -52,7 +78,7 @@ export default function CadastroFornecedor() {
 
         
             useEffect(() => { 
-                if(query.length === 8) {
+                if(query.length === 9) {
                     const fetchData = async () => {
                     const result = await apiexterna.get(url);
                 
@@ -160,10 +186,9 @@ export default function CadastroFornecedor() {
                             type="text"
                             placeholder="CNPJ"
                             value={cnpj}
-                            onChange={e => setCnpj(e.target.value)}
+                            onChange={MascararCNPJ}
                         />  
                     </fieldset> 
-
 
                     <h2>Endereço</h2>
 
@@ -171,9 +196,10 @@ export default function CadastroFornecedor() {
                     <fieldset >
                     <legend>CEP</legend>
                         <input 
-                            type="number"
+                            type="text"
                             value={query}
-                            onChange={event => setQuery(event.target.value)}
+                            // onChange={event => setQuery(event.target.value)}
+                            onChange={MascararCEP}
                         />  
                     </fieldset> 
 
@@ -305,10 +331,10 @@ export default function CadastroFornecedor() {
                     <fieldset style={{ width: 380 }}>
                     <legend>Telefone </legend>
                         <input 
-                            type="number"
+                            type="text"
                             placeholder="Telefone do Responsável"
                             value={telefone}
-                            onChange={e => setTelefone(e.target.value)}
+                            onChange={MascararTEL}
                         />  
                     </fieldset> 
 

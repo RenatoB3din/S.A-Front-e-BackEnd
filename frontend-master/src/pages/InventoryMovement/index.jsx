@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BsUpload } from 'react-icons/bs'
+import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
 import './styles.css';
@@ -25,8 +26,13 @@ export default function InventoryMovement() {
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState("");
     const [idMovement, setIdMovement] = useState("");
+    const history = useHistory();
 
     const token = localStorage.getItem('token');
+
+        if(token === null){
+            history.push('/');
+        }
 
 
         useEffect(() => { 
@@ -84,9 +90,9 @@ export default function InventoryMovement() {
     }
 
     function Reset() {      
-        setNrNotaFiscal('');
-        setTipoMovimento('');
-        setDataNotaFiscal('');
+        setProduto('');
+        setQtde('');
+        setValor('');
         setFornecedor('');
      }
 
@@ -352,7 +358,7 @@ export default function InventoryMovement() {
                             <legend>Lote</legend>
                             <input 
                                 id="input_lote"
-                                // disabled
+                                disabled
                                 type="number"
                                 style={{ width: 220 }} 
                                 placeholder="Lote"
@@ -374,8 +380,8 @@ export default function InventoryMovement() {
                     </div>
 
                     <div className="operacaoProduto">
-                            <button id="btn_add" type="submit">Realizar Movimento</button>
-                            <button id="btn_cancel" onClick={Reset}>Cancelar Movimento</button>
+                            <button id="btn_add" type="submit">Confirmar Produto</button>
+                            <button id="btn_cancel" onClick={Reset}>Novo Movimento</button>
                     </div>
                     
                 </form>
