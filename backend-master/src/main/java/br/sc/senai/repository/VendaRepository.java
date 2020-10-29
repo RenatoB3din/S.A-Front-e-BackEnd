@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface VendaRepository extends CrudRepository<Venda, Integer> {
-        @Query(value = "SELECT v FROM Venda v WHERE m.nrCupomFiscal = :nrCupomFiscal")
-        Optional<Venda> findByNrCupomFiscal(@Param("nrCupomFiscal") String nrCupomFiscal);
+//        @Query(value = "SELECT v FROM Venda v WHERE m.nrCupomFiscal = :nrCupomFiscal")
+//        Optional<Venda> findByNrCupomFiscal(@Param("nrCupomFiscal") String nrCupomFiscal);
 }
