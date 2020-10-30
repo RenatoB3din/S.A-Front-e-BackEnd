@@ -90,7 +90,7 @@ CADASTRO DE VENDA ITEM >> http://localhost:8080/sales/register/sales/{idSales}/p
 {</br>
 &emsp;&emsp;"nrItemVenda":1,</br>
 &emsp;&emsp;"qtde":2,</br>
-&emsp;&emsp;"valorUnitario":25,</br>
+&emsp;&emsp;"valorUntario":25,</br>
 &emsp;&emsp;"valorDesconto": 5</br>
 }</br>
 
