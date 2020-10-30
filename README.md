@@ -86,6 +86,13 @@ CADASTRO DE VENDA >> http://localhost:8080/sales/register</br>
 &emsp;&emsp;"tipoMovimento":"MOV_VENDA"</br>
 }</br>
 
+CADASTRO DE VENDA ITEM >> http://localhost:8080/sales/register/sales/{idSales}/product/{idProduct}</br>
+{</br>
+&emsp;&emsp;"nrItemVenda":1,</br>
+&emsp;&emsp;"qtde":2,</br>
+&emsp;&emsp;"valorUnitario":25,</br>
+&emsp;&emsp;"valorDesconto": 5</br>
+}</br>
 
 </p>
 
