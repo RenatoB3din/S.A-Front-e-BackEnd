@@ -77,6 +77,22 @@ Obs.: da forma que está hoje, cada vez que é inserido um item na movimentaçã
 &emsp;&emsp;"qtde":400</br>
 }</br>
 
+CADASTRO DE VENDA >> http://localhost:8080/sales/register</br>
+{</br>
+&emsp;&emsp;"dataVenda":"30/10/2020",</br>
+&emsp;&emsp;"nomeCliente":"Leo Lemos",</br>
+&emsp;&emsp;"cpfCnpj": "00742215903",</br>
+&emsp;&emsp;"nomeVendedor":"RB3d1n",</br>
+&emsp;&emsp;"tipoMovimento":"MOV_VENDA"</br>
+}</br>
+
+CADASTRO DE VENDA ITEM >> http://localhost:8080/sales/register/sales/{idSales}/product/{idProduct}</br>
+{</br>
+&emsp;&emsp;"nrItemVenda":1,</br>
+&emsp;&emsp;"qtde":2,</br>
+&emsp;&emsp;"valorUntario":25,</br>
+&emsp;&emsp;"valorDesconto": 5</br>
+}</br>
 
 </p>
 
