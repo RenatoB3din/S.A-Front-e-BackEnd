@@ -26,7 +26,7 @@ public class SignupRequest {
     private String password;
 
     @NotBlank
-    @Size(min = 4, max = 11)
+    @Size(min = 14, max = 14)
     private String cpf;
 
     public String getCpf() {

@@ -7,6 +7,7 @@ import { MdAddCircleOutline } from 'react-icons/md'
 import './styles.css';
 import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
+import Modal from '../../components/Modal/Modal';
 
 import { useHistory } from 'react-router-dom';
 
@@ -22,6 +23,12 @@ export default function CadastroProduto() {
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState("");
     const [percentualSobreVenda, setPercentualSobreVenda] = useState('');
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+
+
+ 
 
     const history = useHistory();
     const token = localStorage.getItem('token');
@@ -103,6 +110,7 @@ export default function CadastroProduto() {
     async function lidarComCadastroProduto(e) {
         e.preventDefault();
 
+            
            
             const data = {
                 codBarras,
@@ -124,6 +132,8 @@ export default function CadastroProduto() {
                     }
                 });  
                 
+                setIsModalVisible(true)
+
                 history.push('/novoproduto');
 
                 Reset();
@@ -155,6 +165,12 @@ export default function CadastroProduto() {
         <div className="content">
             <section>
                 <h1>CADASTRO DE PRODUTO</h1>
+                
+                {isModalVisible ? 
+                    <Modal onClose={() => setIsModalVisible(false) }>
+                        Realizado com sucesso!
+                    </Modal>
+                : null}
 
                 <form onSubmit={lidarComCadastroProduto}>
 

@@ -34,7 +34,7 @@ public class User {
     private String password;
 
     @NotBlank
-    @Size(max = 11)
+    @Size(max = 14)
     private String cpf;
 
     @ManyToMany(fetch = FetchType.LAZY)

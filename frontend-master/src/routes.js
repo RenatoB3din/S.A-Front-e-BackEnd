@@ -11,6 +11,7 @@ import Greeting from './pages/Greeting';
 import RecuperarSenha from './pages/RecuperarSenha';
 import Relatorio from './pages/Relatorio';
 
+
 export default function Routes() {
     return (
         <BrowserRouter>
