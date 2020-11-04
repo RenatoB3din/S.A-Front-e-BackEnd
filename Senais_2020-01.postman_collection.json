@@ -65,7 +65,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgxMDIxNjksImV4cCI6MTU5ODE4ODU2OX0.1xP-cfyyXtQlJXXG_sncz-6QWzTEgrk92oFxHQui0UuugytRX9tBt-_lhtwKQRhRfQt6sPZWI6zJM3_fQoKQjQ",
 								"description": ""
 							},
 							{
@@ -216,7 +216,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgxMDIxNjksImV4cCI6MTU5ODE4ODU2OX0.1xP-cfyyXtQlJXXG_sncz-6QWzTEgrk92oFxHQui0UuugytRX9tBt-_lhtwKQRhRfQt6sPZWI6zJM3_fQoKQjQ",
 								"description": ""
 							},
 							{
@@ -228,7 +228,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"cdgProduto\":\"cdgProduto\",\n\t\"nomeProduto\":\"nomeProduto 4\",\n\t\"descricaoProduto\":\"descricaoProduto 4\",\n\t\"codBarras\": \"1234567890004\",\n\t\"unidade\":\"unidade\",\n\t\"percentualSobreVenda\":2,\n\t\"imagemURL\":\"imagemURL 2\"\n}"
+							"raw": "{\n\t\"cdgProduto\":\"cdgProduto 2\",\n\t\"nomeProduto\":\"nomeProduto 2\",\n\t\"descricaoProduto\":\"descricaoProduto 2\",\n\t\"codBarras\": \"1234567890002\",\n\t\"unidade\":\"unidade\",\n\t\"percentualSobreVenda\":2,\n\t\"imagemURL\":\"imagemURL 2\"\n}"
 						},
 						"description": ""
 					},
@@ -310,7 +310,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjY4MTMsImV4cCI6MTU5ODE1MzIxM30.ka0ihgg86CduaN1nXMvQOoijhvQdguBMB2oF6ZdSfyAEyrpVZxoc-lMcPEe2tkeUa09D2jGfM9Z01LVEsrKO-A",
 								"description": ""
 							},
 							{
@@ -321,7 +321,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nrNotaFiscal\":\"0000006\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+							"raw": "{\n\t\"nrNotaFiscal\":\"0000003\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal 3\",\n\t\"tipoMovimento\":\"MOV_VENDA\"\n}"
 						},
 						"description": ""
 					},
@@ -346,7 +346,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nrNotaFiscal\":\"0000006\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+							"raw": "{\n\t\"nrNotaFiscal\":\"0000002\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal 2\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
 						},
 						"description": ""
 					},
@@ -371,7 +371,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nrNotaFiscal\":\"0000006\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+							"raw": "{\n\t\"nrNotaFiscal\":\"0000006\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_DEVOLUCAO_FORNECEDOR\"\n}"
 						},
 						"description": ""
 					},
@@ -396,7 +396,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nrNotaFiscal\":\"0000006\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+							"raw": "{\n\t\"nrNotaFiscal\":\"0000006\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_DEVOLUCAO_CLIENTE\"\n}"
 						},
 						"description": ""
 					},
@@ -421,7 +421,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nrNotaFiscal\":\"0000006\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal\",\n\t\"tipoMovimento\":\"MOV_COMPRA\"\n}"
+							"raw": "{\n\t\"nrNotaFiscal\":\"0000003\",\n\t\"dataNotaFiscal\":\"28/07/2020\",\n\t\"imgNotaFiscal\":\"imgNotaFiscal 3\",\n\t\"tipoMovimento\":\"MOV_INVENTARIO_ESTOQUE\"\n}"
 						},
 						"description": ""
 					},
@@ -430,12 +430,12 @@
 				{
 					"name": "REGISTRAR_MOVIMENTO_ESTOQUE_ITEM",
 					"request": {
-						"url": "http://localhost:8080/stockMoviment/register/moviment/2/product/4",
+						"url": "http://localhost:8080/stockMoviment/register/moviment/9/product/6",
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjA3MDMsImV4cCI6MTU5ODE0NzEwM30.zEJBQ6SFkjVMxO9L8AODGRxtLBUkjKeueeLN6DV0WHEFfMdwCrooiKZGU4QmNj7Xw8AFMM9n-mizda4uky0OZw",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE1OTgwNjY4MTMsImV4cCI6MTU5ODE1MzIxM30.ka0ihgg86CduaN1nXMvQOoijhvQdguBMB2oF6ZdSfyAEyrpVZxoc-lMcPEe2tkeUa09D2jGfM9Z01LVEsrKO-A",
 								"description": ""
 							},
 							{
@@ -446,7 +446,38 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"valor\":25.5,\n    \"qtde\":50\n}"
+							"raw": "{\n    \"valor\":15,\n    \"qtde\":45\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Venda",
+			"description": "",
+			"item": [
+				{
+					"name": "http://localhost:8080/sales/register",
+					"request": {
+						"url": "http://localhost:8080/sales/register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYjNkaW4iLCJpYXQiOjE2MDQwNTA0OTEsImV4cCI6MTYwNDEzNjg5MX0.VZKMW3kAsWsnRUKkfTMoaMf66dge5LAaepKgrVjxCp1ZefCWqondnQLjj3WIIju4RePjId3mtnv2HGcK8Hz9Iw",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"dataVenda\":\"30/10/2020\",\n\t\"nomeCliente\":\"Leo Lemos\",\n\t\"cpfCnpj\": \"00742215903\",\n\t\"nomeVendedor\":\"RB3d1n\",\n\t\"tipoMovimento\":\"MOV_VENDA\"\n}"
 						},
 						"description": ""
 					},
