@@ -18,6 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @NotBlank
     @Size(max = 60)
     private String name;
 

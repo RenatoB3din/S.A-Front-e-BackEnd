@@ -3,13 +3,14 @@ package br.sc.senai.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "momento_estoque",
+@Table(name = "movimento_estoque",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "nr_notafiscal")
+                @UniqueConstraint(columnNames = "nrNotaFiscal"),
         })
 public class MovimentoEstoque {
 
@@ -23,10 +24,11 @@ public class MovimentoEstoque {
     @JsonIgnore
     private Fornecedor fornecedor;
 
-    @Column(name = "nr_notafiscal")
+    @NotBlank
     @Size(max = 15)
     private String nrNotaFiscal;
 
+    @NotBlank
     @Column(name = "dt_notafiscal")
     @Size(max = 10)
     private String dataNotaFiscal;
@@ -36,6 +38,7 @@ public class MovimentoEstoque {
 
     @Enumerated(value = EnumType.STRING)
     private EMovimentaEstoque tipoMovimento;
+
 
     @OneToMany(mappedBy = "movimentoEstoque")
     @JsonIgnore

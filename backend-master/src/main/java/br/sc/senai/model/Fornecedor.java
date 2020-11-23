@@ -2,12 +2,17 @@ package br.sc.senai.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "fornecedor")
+@Table(name = "fornecedor",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "razaoSocial"),
+                @UniqueConstraint(columnNames = "cnpj")
+        })
 public class Fornecedor {
 
     @Id
@@ -15,38 +20,52 @@ public class Fornecedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank
     @Column(name = "nome_fantasia")
     @Size(min = 3, max = 100)
     private String nomeFantasia;
 
-    @Column(name = "razao_social")
+    @NotBlank
     @Size(min = 3, max = 100)
     private String razaoSocial;
 
+    @NotBlank
     @Size(min = 11, max = 18)
     private String cnpj;
 
-    @Column(name = "nome_contato")
+    @NotBlank
+    @Column(name = "responsavel_fornecedor")
     private String nomeContato;
 
+    @NotBlank
+    @Column(name = "telefone_fornecedor")
     private String telefone;
 
+    @NotBlank
+    @Column(name = "email_fornecedor")
     @Email
     private String email;
 
+    @NotBlank
     private String cep;
 
+    @NotBlank
     private String logradouro;
 
+    @NotBlank
     private String complemento;
 
     private String outroComplemento;
 
+    @NotBlank
     private String bairro;
 
+    @NotBlank
     private String localidade;
 
+    @NotBlank
     private String uf;
+
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "tipo_endereco")

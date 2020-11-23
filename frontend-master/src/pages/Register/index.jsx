@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {mask, unMask} from "remask";
+import {mask} from "remask";
 
 import api from '../../services/api';
 import './styles.css';
@@ -87,22 +87,26 @@ export default function Register() {
                 
                 <form onSubmit={handleRegister}>
                     <input 
+                        id="usuarioNome"
                         placeholder="Nome Completo"
                         value={name}
                         onChange={e => setName(e.target.value)}
                     />
                     <input 
+                        id="usuarioUsername"
                         placeholder="Usuário"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
                     />
                     <input 
+                        id="usuarioSenha"
                         type="password" 
                         placeholder="Senha"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                     />
                     <input 
+                        id="usuarioEmail"
                         type="email" 
                         placeholder="E-mail"
                         value={email}
@@ -111,11 +115,13 @@ export default function Register() {
 
                     <div className="input-group">
                         <input 
+                            id="usuarioCPF"
                             placeholder="CPF"
                             value={cpf}
                             onChange={MascararCNPJ}
                         />
                         <select 
+                            id="usuarioPerfil"
                             name="perfil" 
                             style={{ width: 180 }}
                             value={role}

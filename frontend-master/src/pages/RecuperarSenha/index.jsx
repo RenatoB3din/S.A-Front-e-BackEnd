@@ -29,6 +29,7 @@ export default function RecuperarSenha(){
             <fieldset>
                 <legend>Email</legend>
                     <input 
+                        id="recuperarSenha"
                         type="text"
                     />           
             </fieldset>

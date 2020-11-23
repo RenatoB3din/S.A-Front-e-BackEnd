@@ -3,11 +3,15 @@ package br.sc.senai.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "venda")
+@Table(name = "venda",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "nrCupomFiscal"),
+        })
 public class Venda {
 
     @Id
@@ -15,28 +19,37 @@ public class Venda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idVenda;
 
-    @Column(name = "nr_cupomfiscal")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer nrCupomFiscal;
+    @NotBlank
+    @Size(max = 15)
+    private String nrCupomFiscal;
 
+    @NotBlank
     @Column(name = "dt_venda")
     @Size(max = 10)
     private String dataVenda;
 
-    @Column(name= "nome_cliente")
+    @NotBlank
+    @Column(name= "nome_cliente_venda")
     @Size(max = 75)
     private String nomeCliente;
 
-    @Column(name= "cpf_cnpj")
+    @NotBlank
+    @Column(name= "cpf_cnpj_venda")
     @Size(max = 18)
     private String cpfCnpj;
 
-    @Column(name= "nome_vendedor")
+    @NotBlank
+    @Column(name= "nome_vendedor_venda")
     @Size(max = 75)
     private String nomeVendedor;
 
+
     @Enumerated(value = EnumType.STRING)
     private EMovimentaEstoque tipoMovimento;
+
+
+    @Enumerated(value = EnumType.STRING)
+    private ETipoPagamento tipoPagamento;
 
     @OneToMany(mappedBy = "venda")
     @JsonIgnore
@@ -46,13 +59,15 @@ public class Venda {
 
     }
 
-    public Venda(Integer idVenda, String dataVenda, String nomeCliente, String cpfCnpj, String nomeVendedor, EMovimentaEstoque tipoMovimento) {
+    public Venda(Integer idVenda, String dataVenda, String nrCupomFiscal, String nomeCliente, String cpfCnpj, String nomeVendedor, EMovimentaEstoque tipoMovimento, ETipoPagamento tipoPagamento) {
         this.idVenda = idVenda;
         this.dataVenda = dataVenda;
         this.nomeCliente = nomeCliente;
         this.cpfCnpj = cpfCnpj;
         this.nomeVendedor = nomeVendedor;
         this.tipoMovimento = tipoMovimento;
+        this.tipoPagamento = tipoPagamento;
+        this.nrCupomFiscal = nrCupomFiscal;
     }
 
     public Integer getIdVenda() {
@@ -63,16 +78,20 @@ public class Venda {
         this.idVenda = idVenda;
     }
 
-    public Integer getNrCupomFiscal() {
+    public String getNrCupomFiscal() {
         return nrCupomFiscal;
     }
 
-    public void setNrCupomFiscal(Integer nrCupomFiscal) {
+    public void setNrCupomFiscal(String nrCupomFiscal) {
         this.nrCupomFiscal = nrCupomFiscal;
     }
 
     public String getDataVenda() {
         return dataVenda;
+    }
+
+    public void setDataVenda(String dataVenda) {
+        this.dataVenda = dataVenda;
     }
 
     public String getNomeCliente() {
@@ -99,16 +118,20 @@ public class Venda {
         this.nomeVendedor = nomeVendedor;
     }
 
-    public void setDataVenda(String dataVenda) {
-        this.dataVenda = dataVenda;
-    }
-
     public EMovimentaEstoque getTipoMovimento() {
         return tipoMovimento;
     }
 
     public void setTipoMovimento(EMovimentaEstoque tipoMovimento) {
         this.tipoMovimento = tipoMovimento;
+    }
+
+    public ETipoPagamento getTipoPagamento() {
+        return tipoPagamento;
+    }
+
+    public void setTipoPagamento(ETipoPagamento tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
     }
 
     public Set<VendaItem> getVendaItem() {

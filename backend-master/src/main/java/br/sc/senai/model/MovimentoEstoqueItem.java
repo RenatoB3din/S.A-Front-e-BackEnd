@@ -1,15 +1,17 @@
 package br.sc.senai.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "movimento_estoque_item")
 public class MovimentoEstoqueItem {
 
     @Id
-    @Column(name = "id_movimento_sestoque_item")
+    @Column(name = "id_movimento_estoque_item")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMovimentoEstoqueItem;
 
@@ -29,6 +31,7 @@ public class MovimentoEstoqueItem {
 
     private Double lote;
 
+    @NotBlank
     private String validade;
 
     public MovimentoEstoqueItem() {

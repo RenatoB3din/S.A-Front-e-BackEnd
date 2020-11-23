@@ -1,6 +1,7 @@
 package br.sc.senai.controller;
 
 import br.sc.senai.model.Produto;
+import br.sc.senai.repository.MovimentoEstoqueItemRepository;
 import br.sc.senai.repository.ProdutoRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,9 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoRespository produtoRespository;
+
+    @Autowired
+    private MovimentoEstoqueItemRepository movimentoItemRepository;
 
     @GetMapping("/register")
     public @ResponseBody

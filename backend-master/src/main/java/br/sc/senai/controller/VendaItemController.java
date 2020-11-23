@@ -25,19 +25,16 @@ public class VendaItemController {
     @Autowired
     private ProdutoRespository produtoRespository;
 
-    @PostMapping(path = "/register/sales/{idSales}/product/{idProduct}")
+    @PostMapping(path = "/register/{idSales}/product/{idProduct}")
     public @ResponseBody
-    ResponseEntity<VendaItem> addVendaItem(@PathVariable("idSales") Integer idSales,
+    ResponseEntity<VendaItem> addVendaItem(@PathVariable("idSales") String nrCupomFiscal,
                                            @PathVariable("idProduct") Integer idProduto,
                                            @RequestBody VendaItem vendaItem){
 
 
-        System.out.println(idSales);
-        System.out.println(idProduto);
-
         try{
 
-            Optional<Venda> vendaData = vendaRepository.findById(idSales);
+            Optional<Venda> vendaData = vendaRepository.finByCupom(nrCupomFiscal);
             Optional<Produto> produtoData = produtoRespository.findById(idProduto);
 
             Enum tipoMovimento = vendaData.get().getTipoMovimento();
@@ -48,13 +45,13 @@ public class VendaItemController {
                 novoItem.setVenda(vendaData.get());
                 novoItem.setProduto(produtoData.get());
                 novoItem.setQtde(vendaItem.getQtde());
-                novoItem.setValorUntario(vendaItem.getValorUntario());
-                novoItem.setValorTotalBruto(vendaItem.getValorTotalBruto());
+                novoItem.setValorUnitario(vendaItem.getValorUnitario());
                 novoItem.setValorDesconto(vendaItem.getValorDesconto());
-                novoItem.setValorTotal(vendaItem.getValorTotalBruto() - vendaItem.getValorDesconto());
+                novoItem.setValorTotalBruto(vendaItem.getQtde() * vendaItem.getValorUnitario());
 
+                novoItem.atualizaValorVenda(novoItem.getValorTotalBruto(), novoItem.getValorDesconto());
                 produtoData.get().atualizaQuantidadeEstoque(vendaItem.getQtde(), tipoMovimento);
-                produtoData.get().atualizaValorVenda(vendaItem.getValorUntario());
+//
 
                 vendaItemRepository.save(novoItem);
 
@@ -63,6 +60,7 @@ public class VendaItemController {
             } else {
 
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
             }
 
         }catch (Exception e){

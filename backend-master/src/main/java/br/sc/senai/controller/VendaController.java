@@ -29,6 +29,8 @@ public class VendaController {
             novaVenda.setCpfCnpj(venda.getCpfCnpj());
             novaVenda.setNomeVendedor(venda.getNomeVendedor());
             novaVenda.setTipoMovimento(venda.getTipoMovimento());
+            novaVenda.setNrCupomFiscal(venda.getNrCupomFiscal());
+            novaVenda.setTipoPagamento(venda.getTipoPagamento());
 
             vendaRepository.save(novaVenda);
 

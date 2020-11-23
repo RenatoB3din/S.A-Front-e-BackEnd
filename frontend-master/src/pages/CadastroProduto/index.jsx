@@ -89,12 +89,21 @@ export default function CadastroProduto() {
                     })
                 }
                 );
+
+                const createImg = setInterval(function(){ 
+                    document.getElementById("testeimagem").style.display = "block";
+                    clearInterval(createImg); 
+                }, 3000);
+
+
+
         } else {
             setError("Erro, favor escolher uma imagem para Upload");
         }
     };
     
-    function Reset() {
+    function Reset(e) {
+    e.preventDefault();
         setCodBarras('');
         setNomeProduto('');
         setDescricaoProduto('');
@@ -104,14 +113,28 @@ export default function CadastroProduto() {
         setImagemUrl('');
         setImage(null);
         setCont(0);
+
+        document.getElementById("testeimagem").style.display = "none";
      }
+
+     function ResetResultOk() {
+            setCodBarras('');
+            setNomeProduto('');
+            setDescricaoProduto('');
+            setUnidade('');
+            setPercentualSobreVenda('');
+            setCdgProduto('');
+            setImagemUrl('');
+            setImage(null);
+            setCont(0);
+    
+            document.getElementById("testeimagem").style.display = "none";
+         }
     
     
     async function lidarComCadastroProduto(e) {
         e.preventDefault();
 
-            
-           
             const data = {
                 codBarras,
                 nomeProduto,
@@ -131,12 +154,15 @@ export default function CadastroProduto() {
                         Authorization: `Bearer ${token}`,
                     }
                 });  
-                
+
                 setIsModalVisible(true)
 
                 history.push('/novoproduto');
 
-                Reset();
+                ResetResultOk();
+
+
+                
 
             } catch (err) {
                     alert('Erro no cadastro, tente novamente.');
@@ -167,7 +193,7 @@ export default function CadastroProduto() {
                 <h1>CADASTRO DE PRODUTO</h1>
                 
                 {isModalVisible ? 
-                    <Modal onClose={() => setIsModalVisible(false) }>
+                    <Modal scrolling="no" onClose={() => setIsModalVisible(false) }>
                         Realizado com sucesso!
                     </Modal>
                 : null}
@@ -181,7 +207,9 @@ export default function CadastroProduto() {
                 <legend>Nome do Produto</legend>
                     <input 
                         type="text"
+                        id="nomeProduto"
                         placeholder="Nome Produto "
+                        maxlength="22"
                         value={nomeProduto}
                         onChange={e => setNomeProduto(e.target.value)}
                     />  
@@ -191,6 +219,7 @@ export default function CadastroProduto() {
                 <legend>Código do Produto</legend>
                     <input 
                         disabled
+                        id="cdgProduto"
                         type="text"
                         placeholder=""
                         value={cdgProduto}
@@ -208,6 +237,7 @@ export default function CadastroProduto() {
                 <fieldset >
                 <legend>Código de barras do Produto</legend>
                     <input 
+                        id="cdgBarras"
                         type="number"
                         placeholder="Código de Barras"
                         value={codBarras}
@@ -215,32 +245,14 @@ export default function CadastroProduto() {
                     />  
                 </fieldset> 
 
-                <fieldset style={{ width: 180 }}>
-                <legend>Unidade</legend>
-                    <select
-                        value={unidade}
-                        onChange={e => setUnidade(e.target.value)}
-                    >
-                            <option value="" disabled ></option>
-
-                            <option                  
-                                value="UnidadeA"
-                                >Unidade A
-                            </option>
-
-                            <option
-                                value="UnidadeB"
-                                >Unidade B
-                            </option>
-                    </select>
-                </fieldset>
-
                 </div>
 
                 <div className="input-group">
                 <fieldset>
                 <legend>Descrição do Produto</legend>
                     <textarea 
+                        id="descProduto"
+                        maxlength="22"
                         style={{ resize: "none" }} 
                         value={descricaoProduto}
                         onChange={e => setDescricaoProduto(e.target.value)}
@@ -275,7 +287,7 @@ export default function CadastroProduto() {
 
                 </div>
 
-                    <div className="imgproduto">
+                    <div id="testeimagem" className="imgproduto">
                         <img id="imgdoproduto" src={imagemURL} alt={nomeProduto}></img>
                     </div>
 

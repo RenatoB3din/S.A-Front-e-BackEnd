@@ -25,7 +25,6 @@ export default function InventoryMovement() {
     const [imagemURL, setImagemUrl] = useState("");
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState("");
-    const [idMovement, setIdMovement] = useState("");
     const history = useHistory();
 
     const token = localStorage.getItem('token');
@@ -89,12 +88,37 @@ export default function InventoryMovement() {
         }
     }
 
-    function Reset() {      
+    function ResetProduto() {      
         setProduto('');
         setQtde('');
         setValor('');
+        setLote('');
+        setValidade('');
+    }
+
+    function ResetAll(e) {      
+        e.preventDefault();
+        setNrNotaFiscal('');
+        setTipoMovimento('');
+        setDataNotaFiscal('');
         setFornecedor('');
-     }
+        setProduto('');
+        setQtde('');
+        setValor('');
+        setLote('');
+        setImagemUrl('');
+
+        document.getElementById("select_Fornecedor").disabled = false;
+        document.getElementById("select_tpMov").disabled = false;
+        document.getElementById("input_dtnf").disabled = false;
+        document.getElementById("input_nf").disabled = false;
+        document.getElementById("img_nf").disabled = false;
+        document.getElementById("select_produto").disabled = true;
+        document.getElementById("input_valor").disabled = true;
+        document.getElementById("input_qntd").disabled = true;
+        document.getElementById("input_validade").disabled = true;
+        document.getElementById("input_lote").disabled = true;
+    }
 
 
     const handChange = e => {
@@ -165,7 +189,7 @@ export default function InventoryMovement() {
         document.getElementById("input_lote").disabled = false;
 
         try{
-            const response = await api.post(`stockMovement/register/provider/${fornecedor}`, data, {
+             await api.post(`stockMovement/register/provider/${fornecedor}`, data, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
@@ -201,7 +225,9 @@ export default function InventoryMovement() {
             });      
         } catch (err) {
             alert('Erro no cadastro, tente novamente.');
-         }
+        }
+
+        ResetProduto();
     }
 
 
@@ -381,7 +407,7 @@ export default function InventoryMovement() {
 
                     <div className="operacaoProduto">
                             <button id="btn_add" type="submit">Confirmar Produto</button>
-                            <button id="btn_cancel" onClick={Reset}>Novo Movimento</button>
+                            <button id="btn_cancel" onClick={ResetAll}>Novo Movimento</button>
                     </div>
                     
                 </form>

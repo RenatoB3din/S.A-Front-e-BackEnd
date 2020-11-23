@@ -3,6 +3,7 @@ package br.sc.senai.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "venda_item")
@@ -11,49 +12,65 @@ public class VendaItem {
     @Id
     @Column(name = "id_venda_item")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idVenaItem;
+    private Integer idVendaItem;
 
     @ManyToOne
     @JoinColumn(name = "id_venda")
     @JsonIgnore
     private Venda venda;
 
-    private Integer nrItemVenda;
-
     @ManyToOne
     @JoinColumn(name = "id_produto")
     @JsonIgnore
     private Produto produto;
 
+    @Column(name = "qtde_item_venda")
     private Double qtde;
 
-    private Double valorUntario;
-
-    private Double valorTotalBruto;
-
+    @Column(name = "valor_item_venda")
+    private Double valorUnitario;
+    
+    @Column(name = "valordesconto_item_venda")
     private Double valorDesconto;
 
+    @Column(name = "valorTot_venda")
     private Double valorTotal;
+
+    @Column(name = "valorbruto_item_venda")
+    private Double valorTotalBruto;
+
+    private String messageError;
+
 
     public VendaItem(){
 
     }
 
-    public VendaItem(Integer idVenaItem, Venda venda, Integer nrItemVenda, Produto produto, Double qtde, Double valorUntario) {
-        this.idVenaItem = idVenaItem;
+    public VendaItem(Integer idVendaItem, Venda venda, Produto produto, Double qtde, Double valorUnitario, Double valorTotalBruto, Double valorDesconto, Double valorTotal) {
+        this.idVendaItem = idVendaItem;
         this.venda = venda;
-        this.nrItemVenda = nrItemVenda;
         this.produto = produto;
         this.qtde = qtde;
-        this.valorUntario = valorUntario;
+        this.valorUnitario = valorUnitario;
+        this.valorTotalBruto = valorTotalBruto;
+        this.valorDesconto = valorDesconto;
+        this.valorTotal = valorTotalBruto - valorDesconto;
     }
 
-    public Integer getIdVenaItem() {
-        return idVenaItem;
+    public String getMessageError() {
+        return messageError;
     }
 
-    public void setIdVenaItem(Integer idVenaItem) {
-        this.idVenaItem = idVenaItem;
+    public void setMessageError(String messageError) {
+        this.messageError = messageError;
+    }
+
+    public Integer getIdVendaItem() {
+        return idVendaItem;
+    }
+
+    public void setIdVendaItem(Integer idVendaItem) {
+        this.idVendaItem = idVendaItem;
     }
 
     public Venda getVenda() {
@@ -62,14 +79,6 @@ public class VendaItem {
 
     public void setVenda(Venda venda) {
         this.venda = venda;
-    }
-
-    public Integer getNrItemVenda() {
-        return nrItemVenda;
-    }
-
-    public void setNrItemVenda(Integer nrItemVenda) {
-        this.nrItemVenda = nrItemVenda;
     }
 
     public Produto getProduto() {
@@ -88,12 +97,12 @@ public class VendaItem {
         this.qtde = qtde;
     }
 
-    public Double getValorUntario() {
-        return valorUntario;
+    public Double getValorUnitario() {
+        return valorUnitario;
     }
 
-    public void setValorUntario(Double valorUntario) {
-        this.valorUntario = valorUntario;
+    public void setValorUnitario(Double valorUnitario) {
+        this.valorUnitario = valorUnitario;
     }
 
     public Double getValorTotalBruto() {
@@ -118,5 +127,10 @@ public class VendaItem {
 
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public double atualizaValorVenda(double valorTotalBruto, double valorDesconto) {
+        this.valorTotal = (valorTotalBruto - valorDesconto);
+        return valorTotal;
     }
 }

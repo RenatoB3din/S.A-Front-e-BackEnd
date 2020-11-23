@@ -1,13 +1,19 @@
 package br.sc.senai.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import javax.print.DocFlavor;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.sql.Blob;
 import java.util.Set;
 
 @Entity
-@Table(name = "produto")
+@Table(name = "produto",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "cdgProduto"),
+        })
 public class Produto {
 
     @Id
@@ -15,31 +21,32 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProduto;
 
-    @Column(name = "codigo_produto")
+    @NotBlank
     @Size(max = 20)
     private String cdgProduto;
 
+    @NotBlank
     @Column(name = "nome_produto")
     @Size(max = 70)
     private String nomeProduto;
 
+    @NotBlank
     @Column(name = "descricao_produto")
     @Size(max = 150)
     private String descricaoProduto;
 
+    @NotBlank
     @Column(name = "cod_barras")
     @Size(max = 13)
     private String codBarras;
 
-    @Column(name = "unidade")
-    @Size(max = 15)
-    private String unidade;
-
     @Column(name = "perc_sobre_venda")
     private Double percentualSobreVenda;
 
+    @NotBlank
     @Column(name = "img_url")
     private String imagemURL;
+
 
     @Column(name = "qtd_estoque_atual", precision = 10)
     private double qtdEstoqueAtual;
@@ -50,22 +57,37 @@ public class Produto {
     @Column(name = "valor_compra", precision = 10)
     private double valorCompra;
 
-    @OneToMany(mappedBy = "produto")
+
+    @OneToMany(mappedBy = "produto",orphanRemoval=true)
+    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<MovimentoEstoqueItem> movimentoEstoqueItem;
+
+
+    @OneToMany(mappedBy = "venda")
+    private Set<VendaItem> vendaItem;
 
     public Produto() {
     }
 
-    public Produto(String nomeProduto, String cdgProduto, String descricaoProduto, String codBarras, String unidade, Double percentualSobreVenda, String imagemURL) {
+    public Produto(String nomeProduto, String cdgProduto, String descricaoProduto, String codBarras, Double percentualSobreVenda, String imagemURL) {
         this.nomeProduto = nomeProduto;
         this.cdgProduto = cdgProduto;
         this.descricaoProduto = descricaoProduto;
         this.codBarras = codBarras;
-        this.unidade = unidade;
         this.percentualSobreVenda = percentualSobreVenda;
         this.imagemURL = imagemURL;
         this.valorCompra = 0D;
         this.valorVenda = 0D;
+    }
+
+
+
+    public Set<VendaItem> getVendaItem() {
+        return vendaItem;
+    }
+
+    public void setVendaItem(Set<VendaItem> vendaItem) {
+        this.vendaItem = vendaItem;
     }
 
     public Integer getIdProduto() {
@@ -108,24 +130,12 @@ public class Produto {
         this.codBarras = codBarras;
     }
 
-    public String getUnidadeo() {
-        return unidade;
-    }
-
-    public void setUnidade(String unidade) {
-        this.unidade = unidade;
-    }
-
     public Double getPercentualSobreVenda() {
         return percentualSobreVenda;
     }
 
     public void setPercentualSobreVenda(Double percentualSobreVenda) {
         this.percentualSobreVenda = percentualSobreVenda;
-    }
-
-    public String getUnidade() {
-        return unidade;
     }
 
     public String getImagemURL() {
@@ -140,7 +150,7 @@ public class Produto {
         return qtdEstoqueAtual;
     }
 
-    public void setQtdEstoqueAtual(double qtdEstoqueAtual, Enum tipoMovimento) {
+    public void setQtdEstoqueAtual(double qtdEstoqueAtual, Enum tipoMovimento) throws Exception {
         this.qtdEstoqueAtual = atualizaQuantidadeEstoque(qtdEstoqueAtual, tipoMovimento);
     }
 
@@ -174,7 +184,7 @@ public class Produto {
     }
 
     //ATUALIZA QUANTIDADE ESTOQUE
-    public double atualizaQuantidadeEstoque(Double quantidadeMovimento, Enum tipoMovimento) {
+    public double atualizaQuantidadeEstoque(Double quantidadeMovimento, Enum tipoMovimento) throws Exception {
 
         String tpMovimentoEstoque = tipoMovimento.toString();
 
@@ -186,8 +196,7 @@ public class Produto {
 
             } else {
 
-                // TODO: 22/08/2020 >> Colocar uma excessão
-                System.out.println("Estoque ficará negativo");
+                throw new Exception("Estoque insuficiente");
 
             }
 

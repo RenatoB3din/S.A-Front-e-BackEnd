@@ -163,6 +163,7 @@ export default function CadastroFornecedor() {
                     <fieldset >
                     <legend>Nome Fantasia</legend>
                         <input 
+                            id="fornecedorNomeFantasia"
                             type="text"
                             placeholder="Nome Fantasia"
                             value={nomeFantasia}
@@ -173,6 +174,7 @@ export default function CadastroFornecedor() {
                     <fieldset >
                     <legend>Razão Social</legend>
                         <input 
+                            id="fornecedorRazaoSocial"
                             type="text"
                             placeholder="Razão Social"
                             value={razaoSocial}
@@ -183,6 +185,7 @@ export default function CadastroFornecedor() {
                     <fieldset >
                     <legend>CNPJ</legend>
                         <input 
+                            id="fornecedorCNPJ"
                             type="text"
                             placeholder="CNPJ"
                             value={cnpj}
@@ -196,6 +199,7 @@ export default function CadastroFornecedor() {
                     <fieldset >
                     <legend>CEP</legend>
                         <input 
+                            id="fornecedorCEP"
                             type="text"
                             value={query}
                             // onChange={event => setQuery(event.target.value)}
@@ -203,7 +207,7 @@ export default function CadastroFornecedor() {
                         />  
                     </fieldset> 
 
-                    <fieldset style={{ width: 150 }}>
+                    <fieldset style={{ width: 50 }}>
                         <button 
                         id="btn_cep"
                         type="button"
@@ -275,6 +279,7 @@ export default function CadastroFornecedor() {
                     <fieldset>
                     <legend>Complemento</legend>
                         <input 
+                            id="fornecedorComplemento"
                             type="text"
                             placeholder="Complemento"
                             value={outroComplemento}
@@ -285,6 +290,7 @@ export default function CadastroFornecedor() {
                     <fieldset style={{ width: 220 }}>
                     <legend>Tipo de Endereço</legend>
                         <select
+                            id="fornecedorTipoEndereco"
                             value={tipoEndereco}
                             onChange={e => setTipoEndereco(e.target.value)}
                         >
@@ -320,6 +326,7 @@ export default function CadastroFornecedor() {
                     <fieldset>
                     <legend>Nome </legend>
                         <input 
+                            id="fornecedorResponsavel"
                             type="text"
                             placeholder="Nome do Responsável"
                             value={nomeContato}
@@ -331,6 +338,7 @@ export default function CadastroFornecedor() {
                     <fieldset style={{ width: 380 }}>
                     <legend>Telefone </legend>
                         <input 
+                            id="fornecedorTelResponsavel"
                             type="text"
                             placeholder="Telefone do Responsável"
                             value={telefone}
@@ -341,6 +349,7 @@ export default function CadastroFornecedor() {
                     <fieldset>
                     <legend>E-mail </legend>
                         <input 
+                            id="fornecedorEmailResponsavel"
                             type="email"
                             placeholder="E-mail do Responsável"
                             value={email}

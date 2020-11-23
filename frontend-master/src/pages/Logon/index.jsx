@@ -59,11 +59,13 @@ export default function Logon(){
                     <h1>Faça seu logon</h1>
 
                     <input 
+                        id="loginUsername"
                         placeholder="Usuário" 
                         value={username}
                         onChange={e => setUsername(e.target.value)}
                     />
                     <input 
+                        id="loginSenha"
                         placeholder="Senha" 
                         type="password"
                         value={password}
@@ -71,9 +73,9 @@ export default function Logon(){
                     />
 
                     <div className="rec_senha">
-                        <button className="back-link" onClick={changeStuff}>Esqueceu sua senha?</button>
+                        <button id="esquecisenha" className="back-link" onClick={changeStuff}>Esqueceu sua senha?</button>
                     </div>
-                    <button className="button" type="submit">Entrar</button>
+                    <button id="loginBotao" className="button" type="submit">Entrar</button>
 
                 </form>
             </section>
