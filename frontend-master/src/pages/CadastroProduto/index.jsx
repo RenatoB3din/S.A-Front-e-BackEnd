@@ -8,6 +8,7 @@ import './styles.css';
 import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
 import Modal from '../../components/Modal/Modal';
+import ModalError from '../../components/Modal/ModalError';
 
 import { useHistory } from 'react-router-dom';
 
@@ -25,6 +26,7 @@ export default function CadastroProduto() {
     const [percentualSobreVenda, setPercentualSobreVenda] = useState('');
 
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalErrorVisible, setIsModalErrorVisible] = useState(false);
 
 
 
@@ -165,7 +167,7 @@ export default function CadastroProduto() {
                 
 
             } catch (err) {
-                    alert('Erro no cadastro, tente novamente.');
+                setIsModalErrorVisible(true)
              }
 
              
@@ -190,12 +192,18 @@ export default function CadastroProduto() {
         <div className="novoproduto-container">
         <div className="content">
             <section>
-                <h1>CADASTRO DE PRODUTO</h1>
+                <h1 className="tituloTela">CADASTRO DE PRODUTO</h1>
                 
                 {isModalVisible ? 
                     <Modal scrolling="no" onClose={() => setIsModalVisible(false) }>
                         Realizado com sucesso!
                     </Modal>
+                : null}
+
+                {isModalErrorVisible ? 
+                    <ModalError scrolling="no" onClose={() => setIsModalErrorVisible(false) }>
+                        Erro no cadastro, tente novamente
+                    </ModalError>
                 : null}
 
                 <form onSubmit={lidarComCadastroProduto}>
@@ -238,8 +246,9 @@ export default function CadastroProduto() {
                 <legend>Código de barras do Produto</legend>
                     <input 
                         id="cdgBarras"
-                        type="number"
+                        type="string"
                         placeholder="Código de Barras"
+                        maxLength="13"
                         value={codBarras}
                         onChange={e => setCodBarras(e.target.value)}
                     />  
@@ -252,7 +261,7 @@ export default function CadastroProduto() {
                 <legend>Descrição do Produto</legend>
                     <textarea 
                         id="descProduto"
-                        maxlength="22"
+                        maxlength="65"
                         style={{ resize: "none" }} 
                         value={descricaoProduto}
                         onChange={e => setDescricaoProduto(e.target.value)}
@@ -263,7 +272,7 @@ export default function CadastroProduto() {
                     <legend>Inflação do Produto</legend>
                         <input 
                             type="number"
-                            placeholder="0.0%"
+                            placeholder="0%"
                             value={percentualSobreVenda}
                             onChange={e => setPercentualSobreVenda(e.target.value)}
                         />  

@@ -8,6 +8,9 @@ import {mask, unMask} from "remask";
 
 import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
+import Modal from '../../components/Modal/Modal';
+import ModalError from '../../components/Modal/ModalError';
+import {BsSearch} from 'react-icons/bs'
 
 import { useHistory } from 'react-router-dom';
 
@@ -32,6 +35,9 @@ export default function CadastroFornecedor() {
     const [url, setUrl] = useState(
         `${query}/json/`,
     );
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalErrorVisible, setIsModalErrorVisible] = useState(false);
 
     const history = useHistory();
     const token = localStorage.getItem('token');
@@ -63,6 +69,7 @@ export default function CadastroFornecedor() {
     function Reset() {
         setNomeFantasia('');
         setRazaoSocial('');
+        setQuery('');
         setCnpj('');
         setCep('');
         setLogradouro('');
@@ -128,13 +135,16 @@ export default function CadastroFornecedor() {
                 }
             });      // POST na API com o ENDPOINT
 
+            setIsModalVisible(true)
+
             history.push('/novofornecedor');
 
-            Reset();
+
 
          } catch (err) {
-            alert('Erro no cadastro, tente novamente.');
+            setIsModalErrorVisible(true)
          }
+         Reset();
     }
 
     let links = [
@@ -154,7 +164,19 @@ export default function CadastroFornecedor() {
         <div className="novofornecedor-container">
         <div className="content">
             <section>
-                <h1>CADASTRO DE FORNECEDORES</h1>
+                <h1 className="tituloTela"> CADASTRO DE FORNECEDORES</h1>
+
+                {isModalVisible ? 
+                    <Modal scrolling="no" onClose={() => setIsModalVisible(false) }>
+                        Realizado com sucesso!
+                    </Modal>
+                : null}
+
+                {isModalErrorVisible ? 
+                    <ModalError scrolling="no" onClose={() => setIsModalErrorVisible(false) }>
+                        Erro no cadastro, tente novamente
+                    </ModalError>
+                : null}
 
                 <form id="cad_form" onSubmit={lidarComCadastroFornecedor}>
                 
@@ -166,6 +188,7 @@ export default function CadastroFornecedor() {
                             id="fornecedorNomeFantasia"
                             type="text"
                             placeholder="Nome Fantasia"
+                            maxLength="50"
                             value={nomeFantasia}
                             onChange={e => setNomeFantasia(e.target.value)}
                         />  
@@ -177,6 +200,7 @@ export default function CadastroFornecedor() {
                             id="fornecedorRazaoSocial"
                             type="text"
                             placeholder="Razão Social"
+                            maxLength="50"
                             value={razaoSocial}
                             onChange={e => setRazaoSocial(e.target.value)}
                         />  
@@ -207,7 +231,7 @@ export default function CadastroFornecedor() {
                         />  
                     </fieldset> 
 
-                    <fieldset style={{ width: 50 }}>
+                    <fieldset style={{ width: 0 }}>
                         <button 
                         id="btn_cep"
                         type="button"
@@ -215,7 +239,7 @@ export default function CadastroFornecedor() {
                         setUrl(`${query}/json/`)
                         }
                         >
-                            
+                            <BsSearch size={35}/>
                         </button>
                     </fieldset>
                     </div>
@@ -226,6 +250,7 @@ export default function CadastroFornecedor() {
                         <input 
                             type="text"
                             placeholder="Nome da Rua"
+                            maxLength="50"
                             value={logradouro}
                             onChange={e => setLogradouro(e.target.value)}
                         />  
@@ -236,6 +261,7 @@ export default function CadastroFornecedor() {
                         <input 
                             type="text"
                             placeholder="Número"
+                            maxLength="12"
                             value={complemento}
                             onChange={e => setComplemento(e.target.value)}
                         />  
@@ -249,6 +275,7 @@ export default function CadastroFornecedor() {
                         <input 
                             type="text"
                             placeholder="Bairro"
+                            maxLength="30"
                             value={bairro}
                             onChange={e => setBairro(e.target.value)}
                         />  
@@ -259,6 +286,7 @@ export default function CadastroFornecedor() {
                         <input 
                             type="text"
                             placeholder="Município"
+                            maxLength="30"
                             value={localidade}
                             onChange={e => setLocalidade(e.target.value)}
                         />  
@@ -269,6 +297,7 @@ export default function CadastroFornecedor() {
                         <input 
                             type="text"
                             placeholder="Estado"
+                            maxLength="2"
                             value={uf}
                             onChange={e => setUf(e.target.value)}
                         />  
@@ -282,6 +311,7 @@ export default function CadastroFornecedor() {
                             id="fornecedorComplemento"
                             type="text"
                             placeholder="Complemento"
+                            maxLength="50"
                             value={outroComplemento}
                             onChange={e => setOutroComplemento(e.target.value)}
                         />  
@@ -329,6 +359,7 @@ export default function CadastroFornecedor() {
                             id="fornecedorResponsavel"
                             type="text"
                             placeholder="Nome do Responsável"
+                            maxLength="50"
                             value={nomeContato}
                             onChange={e => setNomeContato(e.target.value)}
                         />  
@@ -352,6 +383,7 @@ export default function CadastroFornecedor() {
                             id="fornecedorEmailResponsavel"
                             type="email"
                             placeholder="E-mail do Responsável"
+                            maxLength="50"
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                         />  

@@ -57,7 +57,7 @@ public class MovimentoEstoqueItemController {
 
                 produtoData.get().atualizaQuantidadeEstoque(movimentoEstoqueItem.getQtde(), tipoMovimento);
                 produtoData.get().setValorCompra(movimentoEstoqueItem.getValor());
-                produtoData.get().atualizaValorVenda(movimentoEstoqueItem.getValor());
+                produtoData.get().atualizaValorVenda(movimentoEstoqueItem.getValor(),produtoData.get().getPercentualSobreVenda());
 
                 movimentoEstoqueItemRepository.save(novoItem);
 

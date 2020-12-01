@@ -9,6 +9,7 @@ import logoImg from '../../assets/logo.png';
 
 import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
+import ModalError from '../../components/Modal/ModalError';
 
 
 export default function Register() {
@@ -21,19 +22,12 @@ export default function Register() {
 
     const history = useHistory();
 
+    const [isModalErrorVisible, setIsModalErrorVisible] = useState(false);
+
 
     const MascararCNPJ = ev => {
         setCpf(mask(ev.target.value, ['999.999.999-99']))
     };
-
-    function reset() {
-        setName('');
-        setUsername('');
-        setPassword('');
-        setEmail('');
-        setCpf('');
-        setRole('');
-     }
 
     async function handleRegister(e) {
         e.preventDefault(); // Não atualiza a pág ao dar submit
@@ -48,16 +42,12 @@ export default function Register() {
         };
 
         try{
-            const response = await api.post('api/auth/signup', data);
-
-            console.log(`Seu Usuário é: ${response.data.id}`);
-
+            await api.post('api/auth/signup', data);
 
             history.push('/');
 
-            reset();
          } catch (err) {
-            alert('Erro no cadastro, tente novamente.');
+            setIsModalErrorVisible(true)
          }
     }
 
@@ -77,6 +67,13 @@ export default function Register() {
         </header>
         <div className="register-container">
             <div className="content">
+
+                {isModalErrorVisible ? 
+                    <ModalError scrolling="no" onClose={() => setIsModalErrorVisible(false) }>
+                        Houve um problema ao tentar efetuar o cadastro. 
+                    </ModalError>
+                : null}
+
                 <section>
                     <img src={logoImg} alt="logoSa" />
 
@@ -89,11 +86,13 @@ export default function Register() {
                     <input 
                         id="usuarioNome"
                         placeholder="Nome Completo"
+                        maxLength="40"
                         value={name}
                         onChange={e => setName(e.target.value)}
                     />
                     <input 
                         id="usuarioUsername"
+                        maxLength="25"
                         placeholder="Usuário"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
@@ -101,6 +100,7 @@ export default function Register() {
                     <input 
                         id="usuarioSenha"
                         type="password" 
+                        maxLength="20"
                         placeholder="Senha"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
@@ -108,6 +108,7 @@ export default function Register() {
                     <input 
                         id="usuarioEmail"
                         type="email" 
+                        maxLength="40"
                         placeholder="E-mail"
                         value={email}
                         onChange={e => setEmail(e.target.value)}

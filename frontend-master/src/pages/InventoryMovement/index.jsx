@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BsUpload } from 'react-icons/bs'
 import { useHistory } from 'react-router-dom';
+import { GrEdit } from 'react-icons/gr';
 
 import api from '../../services/api';
 import './styles.css';
@@ -8,6 +9,9 @@ import './styles.css';
 import { storage } from '../../components/Firebase/firebaseConfig';
 import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
+import Modal from '../../components/Modal/Modal';
+import ModalError from '../../components/Modal/ModalError';
+
 
 export default function InventoryMovement() {
     const [nrNotaFiscal, setNrNotaFiscal] = useState('');                              
@@ -26,6 +30,9 @@ export default function InventoryMovement() {
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState("");
     const history = useHistory();
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalErrorVisible, setIsModalErrorVisible] = useState(false);
 
     const token = localStorage.getItem('token');
 
@@ -120,7 +127,6 @@ export default function InventoryMovement() {
         document.getElementById("input_lote").disabled = true;
     }
 
-
     const handChange = e => {
         const file = e.target.files[0];
         if(file) {
@@ -167,6 +173,60 @@ export default function InventoryMovement() {
         }
     };
 
+
+    function Edit(e) {      
+        e.preventDefault();
+
+        document.getElementById("select_Fornecedor").disabled = false;
+        document.getElementById("select_tpMov").disabled = false;
+        document.getElementById("input_dtnf").disabled = false;
+        document.getElementById("input_nf").disabled = true;
+        document.getElementById("img_nf").disabled = false;
+        document.getElementById("select_produto").disabled = true;
+        document.getElementById("input_valor").disabled = true;
+        document.getElementById("input_qntd").disabled = true;
+        document.getElementById("input_validade").disabled = true;
+        document.getElementById("input_lote").disabled = true;
+
+        document.getElementById("btn_confirmEditMov").disabled = false;
+    }
+
+    async function EditTpMovimento(e) {
+        e.preventDefault();                 // Não atualiza a página ao dar submit
+
+        const data = {                      // Dados armazanados via input para o POST!
+            tipoMovimento,
+            dataNotaFiscal,
+            imagemURL,
+        };
+
+        try{
+             await api.put(`stockMovement/register/${nrNotaFiscal}/${fornecedor}`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });      
+
+            document.getElementById("select_Fornecedor").disabled = true;
+            document.getElementById("select_tpMov").disabled = true;
+            document.getElementById("input_dtnf").disabled = true;
+            document.getElementById("input_nf").disabled = true;
+            document.getElementById("img_nf").disabled = true;
+            document.getElementById("select_produto").disabled = false;
+            document.getElementById("input_valor").disabled = false;
+            document.getElementById("input_qntd").disabled = false;
+            document.getElementById("input_validade").disabled = false;
+            document.getElementById("input_lote").disabled = false;
+
+            document.getElementById("btn_confirmEditMov").disabled = true;
+
+
+         } catch (err) {
+            alert('Erro no cadastro, tente novamente.');
+         }
+    }
+
+
     async function handleInventory(e) {
         e.preventDefault();                 // Não atualiza a página ao dar submit
 
@@ -177,27 +237,32 @@ export default function InventoryMovement() {
             imagemURL
         };
 
-        document.getElementById("select_Fornecedor").disabled = true;
-        document.getElementById("select_tpMov").disabled = true;
-        document.getElementById("input_dtnf").disabled = true;
-        document.getElementById("input_nf").disabled = true;
-        document.getElementById("img_nf").disabled = true;
-        document.getElementById("select_produto").disabled = false;
-        document.getElementById("input_valor").disabled = false;
-        document.getElementById("input_qntd").disabled = false;
-        document.getElementById("input_validade").disabled = false;
-        document.getElementById("input_lote").disabled = false;
+
 
         try{
              await api.post(`stockMovement/register/provider/${fornecedor}`, data, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
-            });      
+            });  
+            
+            document.getElementById("select_Fornecedor").disabled = true;
+            document.getElementById("select_tpMov").disabled = true;
+            document.getElementById("input_dtnf").disabled = true;
+            document.getElementById("input_nf").disabled = true;
+            document.getElementById("img_nf").disabled = true;
+            document.getElementById("select_produto").disabled = false;
+            document.getElementById("input_valor").disabled = false;
+            document.getElementById("input_qntd").disabled = false;
+            document.getElementById("input_validade").disabled = false;
+            document.getElementById("input_lote").disabled = false;
 
+            document.getElementById("btn_tpMov").style.display = "none";
+            document.getElementById("btn_editMov").style.display = "inline-block";
+            document.getElementById("btn_confirmEditMov").style.display = "inline-block";
 
          } catch (err) {
-            alert('Erro no cadastro, tente novamente.');
+            setIsModalErrorVisible(true)
          }
     }
 
@@ -222,9 +287,11 @@ export default function InventoryMovement() {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
-            });      
+            });     
+            
+            setIsModalVisible(true)
         } catch (err) {
-            alert('Erro no cadastro, tente novamente.');
+            setIsModalErrorVisible(true)
         }
 
         ResetProduto();
@@ -249,7 +316,19 @@ export default function InventoryMovement() {
         <div className="movinventory-container">
         <div className="content">
             <section>
-                <h1>MOVIMENTAÇÃO DE ESTOQUE</h1>
+                <h1 className="tituloTela">MOVIMENTAÇÃO DE ESTOQUE</h1>
+
+                {isModalVisible ? 
+                    <Modal scrolling="no" onClose={() => setIsModalVisible(false) }>
+                        Realizado com sucesso!
+                    </Modal>
+                : null}
+
+                {isModalErrorVisible ? 
+                    <ModalError scrolling="no" onClose={() => setIsModalErrorVisible(false) }>
+                        Erro no cadastro, tente novamente
+                    </ModalError>
+                : null}
 
                 <form onSubmit={handleInventory}>
 
@@ -274,11 +353,12 @@ export default function InventoryMovement() {
                 </fieldset>
                     
                 <div className="input-group">
-                    <fieldset style={{ width: 200 }}>
+                    <fieldset style={{ width: 220 }}>
                         <legend>Número da NF</legend>
                             <input id="input_nf"
-                                type="number"
-                                placeholder="Nota Fiscal "
+                                type="string"
+                                placeholder="NF"
+                                maxLength="6"
                                 value={nrNotaFiscal}
                                 onChange={e => setNrNotaFiscal(e.target.value)}
                             />       
@@ -327,6 +407,8 @@ export default function InventoryMovement() {
 
                         <div className="operacaoProduto">
                             <button id="btn_tpMov" type="submit">CONFIRMAR TIPO DE MOVIMENTO</button>
+                            <button id="btn_confirmEditMov" onClick={EditTpMovimento} >EDITAR TIPO DE MOVIMENTO</button>
+                            <button id="btn_editMov" onClick={Edit}><GrEdit size={20}/></button>
                         </div>
                 </form>
 

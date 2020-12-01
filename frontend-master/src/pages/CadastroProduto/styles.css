@@ -23,7 +23,7 @@
 .novoproduto-container .content section h1 {
     display: flex;
     justify-content: center;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     font-size: 32px;
 }
 
@@ -95,7 +95,6 @@ h2 {
     padding-top: 20px;
     padding-bottom: 15px;
 }
-
 
 #img_produto {
     padding-left: 5px;

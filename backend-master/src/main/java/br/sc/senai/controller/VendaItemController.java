@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -24,6 +25,21 @@ public class VendaItemController {
 
     @Autowired
     private ProdutoRespository produtoRespository;
+
+    @GetMapping("/register")
+    public @ResponseBody
+    ResponseEntity<Iterable<VendaItem>> getVendasItems() {
+        try {
+            Iterable<VendaItem> vendasItems = vendaItemRepository.findAll();
+            if (((Collection<?>) vendasItems).size() == 0) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(vendasItems, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @PostMapping(path = "/register/{idSales}/product/{idProduct}")
     public @ResponseBody
@@ -45,9 +61,15 @@ public class VendaItemController {
                 novoItem.setVenda(vendaData.get());
                 novoItem.setProduto(produtoData.get());
                 novoItem.setQtde(vendaItem.getQtde());
-                novoItem.setValorUnitario(vendaItem.getValorUnitario());
+                novoItem.setNomeproduto(produtoData.get().getNomeProduto());
+                novoItem.setClientevenda(vendaData.get().getNomeCliente());
+                novoItem.setVendedorvenda(vendaData.get().getNomeVendedor());
+                novoItem.setCupomfiscalVenda(vendaData.get().getNrCupomFiscal());
+                novoItem.setTipopagamento(vendaData.get().getTipoPagamento());
+                novoItem.setDataVenda(vendaData.get().getDataVenda());
+                novoItem.setValorUnitario(produtoData.get().getValorVenda());
                 novoItem.setValorDesconto(vendaItem.getValorDesconto());
-                novoItem.setValorTotalBruto(vendaItem.getQtde() * vendaItem.getValorUnitario());
+                novoItem.setValorTotalBruto(vendaItem.getQtde() * produtoData.get().getValorVenda());
 
                 novoItem.atualizaValorVenda(novoItem.getValorTotalBruto(), novoItem.getValorDesconto());
                 produtoData.get().atualizaQuantidadeEstoque(vendaItem.getQtde(), tipoMovimento);

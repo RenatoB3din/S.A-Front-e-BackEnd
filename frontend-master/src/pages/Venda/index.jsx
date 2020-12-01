@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {mask, unMask} from "remask";
+import { GrEdit } from 'react-icons/gr';
 
 import api from '../../services/api';
 import './styles.css';
 
 import Menu from '../../components/Header/Menu';
 import logo from '../../components/Header/logo.png';
+import Modal from '../../components/Modal/Modal';
+import ModalError from '../../components/Modal/ModalError';
 
 export default function Venda() {
     const [nomeCliente, setNomeCliente] = useState('');
@@ -19,11 +22,15 @@ export default function Venda() {
     const [produtos, setProdutos] = useState([]);
     const [produto, setProduto] = useState('');
     
-    const [valorUnitario, setValorUnitario] = useState('');
+    // const [valorUnitario, setValorUnitario] = useState('');
     const [qtde, setQtde] = useState('');
     const [valorDesconto, setValorDesconto] = useState('');
 
     const history = useHistory();
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalErrorVisible, setIsModalErrorVisible] = useState(false);
+
     const token = localStorage.getItem('token');
 
     if(token === null){
@@ -68,7 +75,7 @@ export default function Venda() {
 
     function ResetVenda() {      
         setProduto('');
-        setValorUnitario('');
+        // setValorUnitario('');
         setQtde('');
         setValorDesconto('')
     }
@@ -82,7 +89,7 @@ export default function Venda() {
         setDataVenda('');
         setNrCupomFiscal('');
         setProduto('');
-        setValorUnitario('');
+        // setValorUnitario('');
         setQtde('');
         setValorDesconto('')
 
@@ -94,8 +101,58 @@ export default function Venda() {
         document.getElementById("select_tpPagamento").disabled = false;
         document.getElementById("select_produto").disabled = true;
         document.getElementById("input_qtde").disabled = true;
-        document.getElementById("input_valor").disabled = true;
+        // document.getElementById("input_valor").disabled = true;
         document.getElementById("input_desconto").disabled = true;
+    }
+
+    function Edit(e) {      
+        e.preventDefault();
+
+        document.getElementById("input_nomeCliente").disabled = false;
+        document.getElementById("input_cpfCnpj").disabled = false;
+        document.getElementById("input_vendedor").disabled = false;
+        document.getElementById("input_cupomFiscal").disabled = true;
+        document.getElementById("input_dtVenda").disabled = false;
+        document.getElementById("select_tpPagamento").disabled = false;
+
+        document.getElementById("btn_confirmEditMov").disabled = false;
+    }
+
+    async function EditTpVenda(e) {
+        e.preventDefault(); 
+
+        const data = {
+            nomeCliente,
+            cpfCnpj,
+            nomeVendedor,
+            tipoPagamento,
+            dataVenda
+        }
+
+
+
+        try{
+            await api.put(`sales/register/${nrCupomFiscal}`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            });  
+            
+            document.getElementById("input_nomeCliente").disabled = true;
+            document.getElementById("input_cpfCnpj").disabled = true;
+            document.getElementById("input_vendedor").disabled = true;
+            document.getElementById("input_cupomFiscal").disabled = true;
+            document.getElementById("input_dtVenda").disabled = true;
+            document.getElementById("select_tpPagamento").disabled = true;
+            document.getElementById("select_produto").disabled = false;
+            document.getElementById("input_qtde").disabled = false;
+            // document.getElementById("input_valor").disabled = false;
+            document.getElementById("input_desconto").disabled = false;
+
+            document.getElementById("btn_confirmEditMov").disabled = true;
+         }catch (err) {
+            alert('Erro ao tentar editar, tente novamente.');
+         }
     }
 
 
@@ -112,16 +169,7 @@ export default function Venda() {
             tipoMovimento
         };
 
-        document.getElementById("input_nomeCliente").disabled = true;
-        document.getElementById("input_cpfCnpj").disabled = true;
-        document.getElementById("input_vendedor").disabled = true;
-        document.getElementById("input_cupomFiscal").disabled = true;
-        document.getElementById("input_dtVenda").disabled = true;
-        document.getElementById("select_tpPagamento").disabled = true;
-        document.getElementById("select_produto").disabled = false;
-        document.getElementById("input_qtde").disabled = false;
-        document.getElementById("input_valor").disabled = false;
-        document.getElementById("input_desconto").disabled = false;
+
 
         try{
             await api.post('sales/register', data, {
@@ -130,9 +178,24 @@ export default function Venda() {
                 }
             });      
 
+            document.getElementById("input_nomeCliente").disabled = true;
+            document.getElementById("input_cpfCnpj").disabled = true;
+            document.getElementById("input_vendedor").disabled = true;
+            document.getElementById("input_cupomFiscal").disabled = true;
+            document.getElementById("input_dtVenda").disabled = true;
+            document.getElementById("select_tpPagamento").disabled = true;
+            document.getElementById("select_produto").disabled = false;
+            document.getElementById("input_qtde").disabled = false;
+            // document.getElementById("input_valor").disabled = false;
+            document.getElementById("input_desconto").disabled = false;
+
+            document.getElementById("btn_tpMov").style.display = "none";
+            document.getElementById("btn_editMov").style.display = "inline-block";
+            document.getElementById("btn_confirmEditMov").style.display = "inline-block";
+
 
          }catch (err) {
-            alert('Erro no cadastro, tente novamente.');
+            setIsModalErrorVisible(true)
          }
     }
 
@@ -142,7 +205,7 @@ export default function Venda() {
         const data = {
             produto,
             qtde,
-            valorUnitario,
+            // valorUnitario,
             valorDesconto
         };
 
@@ -151,12 +214,12 @@ export default function Venda() {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
-            });      
+            });    
+            
+            setIsModalVisible(true)
 
          } catch (Exception) {
-            alert('Quantidade indisponível em estoque');
-            console.log(Exception);
-            console.log(data);
+            setIsModalErrorVisible(true)
          }
 
          ResetVenda();
@@ -180,7 +243,20 @@ export default function Venda() {
         <div className="novoproduto-container">
         <div className="content">
             <section>
-            <h1>REGISTRO DE VENDAS</h1>
+            <h1 className="tituloTela">REGISTRO DE VENDAS</h1>
+
+                {isModalVisible ? 
+                    <Modal scrolling="no" onClose={() => setIsModalVisible(false) }>
+                        Realizado com sucesso!
+                    </Modal>
+                : null}
+
+                {isModalErrorVisible ? 
+                    <ModalError scrolling="no" onClose={() => setIsModalErrorVisible(false) }>
+                        Erro no cadastro, tente novamente
+                    </ModalError>
+                : null}
+
                 <form onSubmit={lidarComVenda}>
                 <div className="input-group">
                 <fieldset >
@@ -268,6 +344,8 @@ export default function Venda() {
 
                 <div className="operacaoProduto">
                     <button id="btn_tpMov" type="submit">CONFIRMAR TIPO DE VENDA</button>
+                    <button id="btn_confirmEditMov" onClick={EditTpVenda} >EDITAR TIPO DE VENDA</button>
+                    <button id="btn_editMov" onClick={Edit}><GrEdit size={20}/></button>
                 </div>
                 </form>
 
@@ -312,7 +390,7 @@ export default function Venda() {
                     />  
                 </fieldset> 
 
-                <fieldset>
+                {/* <fieldset>
                 <legend>Valor Unitário</legend>
                     <input  
                         id="input_valor"
@@ -322,10 +400,10 @@ export default function Venda() {
                         value={valorUnitario}
                         onChange={e => setValorUnitario(e.target.value)}
                     />  
-                </fieldset> 
+                </fieldset>  */}
 
                 <fieldset>
-                <legend>Valor Desconto</legend>
+                <legend>Valor Desconto (R$)</legend>
                     <input 
                         id="input_desconto"
                         type="number"
@@ -338,7 +416,7 @@ export default function Venda() {
                 </div>
 
                 <div className="operacaoProduto">
-                            <button id="btn_add" type="submit">Vender do Produto</button>
+                            <button id="btn_add" type="submit">Vender Produto</button>
                             <button id="btn_cancel" onClick={ResetAll}>Nova Venda</button>
                     </div>
                     

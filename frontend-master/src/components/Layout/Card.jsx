@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "./Card.css";
 import api from '../../services/api';
 import Modal from '../../components/Modal/Modal';
-import { useHistory } from 'react-router-dom';
+
 
 
 export default props => {
@@ -12,7 +12,6 @@ export default props => {
     const [radio, setRadio] = useState('');
 
     const token = localStorage.getItem('token');
-    const history = useHistory();
 
     const cardStyle = {
         backgroundColor: props.color || '#F00',
@@ -45,7 +44,7 @@ export default props => {
                 setIsModalVisible(false)
             }
         } catch (err) {
-            await alert('Tudo OK');
+            await alert('ERRO AO REMOVER O PRODUTO');
         }
     }
 
@@ -58,19 +57,27 @@ export default props => {
         <div className="Card" style={cardStyle}>
             {isModalVisible ? 
                 <Modal scrolling="no" onClose={() => setIsModalVisible(false) }>
-                    <form onSubmit={excluir}>
-                        <input type="radio" 
-                            checked={radio === "true"}
-                            value="true"
-                            onChange={(e)=>{setRadio(e.target.value)}}/> 
+                    <div className="headerDelete">
+                        <p>Você deseja excluir este produto?</p>
+                    </div>
+                    <form className="formExcluir" onSubmit={excluir}>
+                        
+                        <div className="input-group">
+                            <input type="radio" 
+                                checked={radio === "true"}
+                                value="true"
+                                onChange={(e)=>{setRadio(e.target.value)}}/> <p>Sim</p>
 
-                        <input type="radio" 
-                            checked={radio === "false"}
-                            value="false"
-                            onChange={(e)=>{setRadio(e.target.value);/*console.log(radio)*/}}/> 
-                        <br/>
+                            <input type="radio" 
+                                checked={radio === "false"}
+                                value="false"
+                                onChange={(e)=>{setRadio(e.target.value);/*console.log(radio)*/}}/> <p>Não</p>
+                            <br/>
+                        </div>
 
-                        <button type="submit">Confirmar Exclusão</button>
+                        <div className="btnExcluir">
+                            <button type="submit">Confirmar Exclusão</button>
+                        </div>
 
                     </form>
                 </Modal>

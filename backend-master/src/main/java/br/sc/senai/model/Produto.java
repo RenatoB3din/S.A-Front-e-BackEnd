@@ -58,12 +58,13 @@ public class Produto {
     private double valorCompra;
 
 
-    @OneToMany(mappedBy = "produto",orphanRemoval=true)
+    @OneToMany(mappedBy = "produto", orphanRemoval=true)
     @Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<MovimentoEstoqueItem> movimentoEstoqueItem;
 
 
-    @OneToMany(mappedBy = "venda")
+    @OneToMany(mappedBy = "produto", orphanRemoval=true)
+    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<VendaItem> vendaItem;
 
     public Produto() {
@@ -170,8 +171,8 @@ public class Produto {
         this.valorCompra = valorCompra;
     }
 
-    public double atualizaValorVenda(double valorCompra) {
-        this.valorVenda = valorCompra + (valorCompra * 0.2);
+    public double atualizaValorVenda(double valorCompra, double percentualSobreVenda) {
+        this.valorVenda = valorCompra + (valorCompra * percentualSobreVenda/100);
         return valorVenda;
     }
 

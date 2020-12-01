@@ -24,6 +24,24 @@ public class VendaItem {
     @JsonIgnore
     private Produto produto;
 
+    @Column(name = "nome_produto_vendido")
+    private String nomeproduto;
+
+    @Column(name = "nome_cliente_venda")
+    private String clientevenda;
+
+    @Column(name = "nome_vendedor_venda")
+    private String vendedorvenda;
+
+    @Column(name = "nr_cupomfiscal_da_venda")
+    private String cupomfiscalVenda;
+
+    @Column(name = "tipopagamento_venda")
+    private Enum tipopagamento;
+
+    @Column(name = "data_venda")
+    private String dataVenda;
+
     @Column(name = "qtde_item_venda")
     private Double qtde;
 
@@ -55,6 +73,54 @@ public class VendaItem {
         this.valorTotalBruto = valorTotalBruto;
         this.valorDesconto = valorDesconto;
         this.valorTotal = valorTotalBruto - valorDesconto;
+    }
+
+    public String getClientevenda() {
+        return clientevenda;
+    }
+
+    public void setClientevenda(String clientevenda) {
+        this.clientevenda = clientevenda;
+    }
+
+    public String getVendedorvenda() {
+        return vendedorvenda;
+    }
+
+    public void setVendedorvenda(String vendedorvenda) {
+        this.vendedorvenda = vendedorvenda;
+    }
+
+    public String getCupomfiscalVenda() {
+        return cupomfiscalVenda;
+    }
+
+    public void setCupomfiscalVenda(String cupomfiscalVenda) {
+        this.cupomfiscalVenda = cupomfiscalVenda;
+    }
+
+    public Enum getTipopagamento() {
+        return tipopagamento;
+    }
+
+    public void setTipopagamento(Enum tipopagamento) {
+        this.tipopagamento = tipopagamento;
+    }
+
+    public String getDataVenda() {
+        return dataVenda;
+    }
+
+    public void setDataVenda(String dataVenda) {
+        this.dataVenda = dataVenda;
+    }
+
+    public String getNomeproduto() {
+        return nomeproduto;
+    }
+
+    public void setNomeproduto(String nomeproduto) {
+        this.nomeproduto = nomeproduto;
     }
 
     public String getMessageError() {

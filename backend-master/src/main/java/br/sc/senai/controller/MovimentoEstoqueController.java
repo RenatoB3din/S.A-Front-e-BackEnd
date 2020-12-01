@@ -2,6 +2,7 @@ package br.sc.senai.controller;
 
 import br.sc.senai.model.Fornecedor;
 import br.sc.senai.model.MovimentoEstoque;
+import br.sc.senai.model.Venda;
 import br.sc.senai.repository.FornecedorRepository;
 import br.sc.senai.repository.MovimentoEstoqueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,35 @@ public class MovimentoEstoqueController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping("/register/{nrCupomFiscal}/{idProvider}")
+    public @ResponseBody
+    ResponseEntity<MovimentoEstoque> editMovimento(@PathVariable("nrCupomFiscal") String nrNotaFiscal,
+                                                   @PathVariable("idProvider") Integer idFornecedor,
+                                    @RequestBody MovimentoEstoque movimentoEstoque){
+
+        Optional<MovimentoEstoque> movimentoData = movimentoEstoqueRepository.findByNrNF(nrNotaFiscal);
+        Optional<Fornecedor> fornecedorData = fornecedorRepository.findById(idFornecedor);
+
+        try{
+            if (movimentoData.isPresent() && fornecedorData.isPresent()){
+
+                MovimentoEstoque editMovimento = movimentoData.get();
+                editMovimento.setTipoMovimento(movimentoEstoque.getTipoMovimento());
+                editMovimento.setDataNotaFiscal(movimentoEstoque.getDataNotaFiscal());
+                editMovimento.setImagemURL(movimentoEstoque.getImagemURL());
+                editMovimento.setFornecedor(fornecedorData.get());
+
+                return new ResponseEntity<>(movimentoEstoqueRepository.save(editMovimento), HttpStatus.OK);
+
+            }else{
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
 
     @PostMapping(path = "/register/provider/{idProvider}")
     public @ResponseBody
